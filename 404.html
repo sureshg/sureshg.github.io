@@ -1,32 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The page you are requested is not available!!</title>
+    <link rel="icon" href="favicon.ico" type="image/png"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f5f9; /* Light theme background color */
+            color: #333333; /* Light theme text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
 
-	<title>The page you are requested is not available!!</title>
+        .container {
+            background-color: #ffffff; /* Light theme profile background color */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
 
-	<link rel="icon" href="favicon.ico" type="image/png" />
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1e1e1e; /* Dark theme background color */
+                color: #f0f0f0; /* Dark theme text color */
+            }
 
-	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/themes/indigo-white.css">
-	<!-- <link rel="stylesheet" href="css/themes/green-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/red-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/grey-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-indigo.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-blue.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-grey.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-red.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/yellow-black.css"> -->
+            .container {
+                background-color: #212121; /* Dark theme profile background color */
+            }
+        }
+    </style>
 </head>
+
 <body>
-	<main>
-		<div class="tagline"><i class="fas fa-feather-alt"></i> The page you are requested is not available!!</div>
-		<!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-	</main>
+<div class="container">
+    <h1>Not Found!</h1>
+    <p>The page you are requesting is not available.</p>
+</div>
 </body>
+
 </html>
