@@ -1,42 +1,225 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suresh's Home Page</title>
+    <link rel="icon" href="favicon.ico" type="image/png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-theme-bg: #f5f5f5;
+            --light-theme-text: #333333;
+            --light-theme-icon: #666666;
+            --light-theme-icon-text: #333333;
+            --light-theme-selection: #e0e0e0;
+            --light-theme-profile-bg: #f0f0f0;
+            --dark-theme-bg: #1e1e2e;
+            --dark-theme-text: #e0e0e0;
+            --dark-theme-icon: #42a5f5;
+            --dark-theme-icon-text: #bbdefb;
+            --dark-theme-selection: #3949ab;
+            --dark-theme-profile-bg: #212a40;
+        }
 
-	<title>Suresh's Home Page</title>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-theme-bg);
+            color: var(--light-theme-text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-	<link rel="icon" href="favicon.ico" type="image/png" />
-	
-	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/themes/white-indigo.css">
-	<!-- link rel="stylesheet" href="css/themes/indigo-white.css" -->
-	<!-- <link rel="stylesheet" href="css/themes/green-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/red-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/grey-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-blue.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-grey.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-red.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/yellow-black.css"> -->
-	<!-- https://github.com/flexdinesh/dev-landing-page -->
+        .profile {
+            background-color: var(--light-theme-profile-bg);
+            border-radius: 8px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--light-theme-text);
+        }
+
+        p {
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--light-theme-text);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 30px;
+            color: var(--light-theme-icon);
+            transition: transform 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--light-theme-icon-text);
+        }
+
+        .social-icons a::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .social-icons a:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            cursor: pointer;
+            color: var(--light-theme-text);
+        }
+
+        .theme-switcher i {
+            font-size: 24px;
+        }
+
+        .dark-theme {
+            background-color: var(--dark-theme-bg);
+            color: var(--dark-theme-text);
+        }
+
+        .dark-theme .profile {
+            background-color: var(--dark-theme-profile-bg);
+        }
+
+        .dark-theme h1,
+        .dark-theme p {
+            color: var(--dark-theme-text);
+        }
+
+        .dark-theme .social-icons a {
+            color: var(--dark-theme-icon);
+        }
+
+        .dark-theme .social-icons a:hover {
+            color: var(--dark-theme-icon-text);
+        }
+
+        .dark-theme .theme-switcher i {
+            color: var(--dark-theme-text);
+        }
+
+        /* Text selection color */
+        ::selection {
+            background-color: var(--light-theme-selection);
+            color: var(--light-theme-text);
+        }
+
+        .dark-theme ::selection {
+            background-color: var(--dark-theme-selection);
+            color: var(--dark-theme-text);
+        }
+    </style>
 </head>
+
 <body>
-	<main>
-		<div class="intro">Hello, I'm Suresh!</div>
-		<div class="tagline">Developer | OSS | Java21 | Kotlin Multiplatform (JVM & JS) | OpenJDK | GraalVM | Jetbrains Compose Multiplatform</div>
-		<!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-		<div class="icons-social">
-			<a target="_blank" href="https://github.suresh.dev"><i class="fab fa-github"></i></a>
-			<a target="_blank" href="https://twitter.suresh.dev"><i class="fab fa-twitter"></i></a>
-			<a target="_blank" href="https://reddit.suresh.dev"><i class="fab fa-reddit"></i></a>
-			<a target="_blank" href="https://stackoverflow.com/story/sureshg"><i class="fab fa-stack-overflow"></i></a>
-			<a target="_blank" href="https://in.suresh.dev"><i class="fab fa-linkedin"></i></a>
-			<a target="_blank" href="https://keybase.io/suresh"><i class="fab fa-keybase"></i></a>		
-        </div>
-	</main>
+<div class="theme-switcher" onclick="toggleTheme()" title="Toggle Theme">
+    <i id="theme-icon" class="fas fa-moon"></i>
+</div>
+<div class="profile">
+    <div class="profile-photo">
+        <img src="profile-photo.jpg" alt="Profile Photo">
+    </div>
+    <h1>Suresh</h1>
+    <p>
+     Developer | OSS | Java21 | Kotlin Multiplatform (JVM, WASM, JS) | OpenJDK | GraalVM | Jetbrains Compose Web
+    </p>
+    <div class="social-icons">
+        <a target="_blank" href="https://github.suresh.dev" rel="noopener noreferrer" title="Github" ><i class="fab fa-github"></i></a>
+        <a target="_blank" href="https://twitter.suresh.dev" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a target="_blank" href="https://reddit.suresh.dev" rel="noopener noreferrer" title="Reddit"><i class="fab fa-reddit"></i></a>
+        <a target="_blank" href="https://stackoverflow.com/story/sureshg" rel="noopener noreferrer" title="Stack Overflow" ><i class="fab fa-stack-overflow"></i></a>
+        <a target="_blank" href="https://in.suresh.dev" rel="noopener noreferrer" title="LinkedIn" ><i class="fab fa-linkedin"></i></a>
+        <a target="_blank" href="https://keybase.io/suresh" rel="noopener noreferrer" title="Keybase" ><i class="fab fa-keybase"></i></a>
+    </div>
+</div>
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.getElementById('theme-icon');
+
+        themeIcon.classList.toggle('fa-sun');
+        themeIcon.classList.toggle('fa-moon');
+        body.classList.toggle('dark-theme');
+    }
+</script>
 </body>
+
 </html>
