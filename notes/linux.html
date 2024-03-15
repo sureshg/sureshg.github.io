@@ -1,9 +1,9 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html lang="en-US" data-preset="vivid" data-primary-color="#1B9F8E"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2024-03-15T12:08:04.259196"><title>Linux | Suresh's Tech Notes</title><script type="application/json" id="virtual-toc-data">[{"id":"command-line-tools","level":0,"title":"Command Line Tools","anchor":"#command-line-tools"},{"id":"proc-filesystem","level":0,"title":"Proc FileSystem","anchor":"#proc-filesystem"},{"id":"curl","level":0,"title":"Curl","anchor":"#curl"},{"id":"dig","level":0,"title":"DIG","anchor":"#dig"},{"id":"ssh","level":0,"title":"SSH","anchor":"#ssh"},{"id":"wireshark","level":0,"title":"Wireshark","anchor":"#wireshark"},{"id":"tcpdump","level":0,"title":"TCPDump","anchor":"#tcpdump"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="frontend/app.css" rel="stylesheet"><link rel="manifest" href="site.webmanifest"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="icon-192.png"><link rel="icon" type="image/png" sizes="16x16" href="icon-192.png"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x150.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Linux | Suresh's Tech Notes"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Suresh's Tech Notes Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://suresh.dev/notes/1.0/linux.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@sur3shg"><meta name="twitter:title" content="Linux | Suresh's Tech Notes"><meta name="twitter:description" content=""><meta name="twitter:creator" content="@sur3shg"><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+<html lang="en-US" data-preset="vivid" data-primary-color="#1B9F8E"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2024-03-15T16:33:11.391556"><title>Linux | Suresh's Tech Notes</title><script type="application/json" id="virtual-toc-data">[{"id":"command-line-tools","level":0,"title":"Command Line Tools","anchor":"#command-line-tools"},{"id":"proc-filesystem","level":0,"title":"Proc FileSystem","anchor":"#proc-filesystem"},{"id":"curl","level":0,"title":"Curl","anchor":"#curl"},{"id":"dig","level":0,"title":"DIG","anchor":"#dig"},{"id":"ssh","level":0,"title":"SSH","anchor":"#ssh"},{"id":"wireshark","level":0,"title":"Wireshark","anchor":"#wireshark"},{"id":"tcpdump","level":0,"title":"TCPDump","anchor":"#tcpdump"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="frontend/app.css" rel="stylesheet"><link rel="manifest" href="site.webmanifest"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="icon-192.png"><link rel="icon" type="image/png" sizes="16x16" href="icon-192.png"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x150.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Linux | Suresh's Tech Notes"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Suresh's Tech Notes Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://suresh.dev/notes/linux.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@sur3shg"><meta name="twitter:title" content="Linux | Suresh's Tech Notes"><meta name="twitter:description" content=""><meta name="twitter:creator" content="@sur3shg"><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "WebPage",
-    "@id": "https://suresh.dev/notes/1.0/linux.html#webpage",
-    "url": "https://suresh.dev/notes/1.0/linux.html",
+    "@id": "https://suresh.dev/notes/linux.html#webpage",
+    "url": "https://suresh.dev/notes/linux.html",
     "name": "Linux | Suresh's Tech Notes",
     "description": "",
     "image": "",
@@ -13,7 +13,7 @@
     "@id": "https://suresh.devnotes/#website",
     "url": "https://suresh.devnotes/",
     "name": "Suresh's Tech Notes Help"
-}</script><!-- End Schema.org --></head><body data-id="Linux" data-main-title="Linux" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Suresh's Tech Notes 1.0 Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Linux" id="Linux.md">Linux</h1><ul class="list _bullet" id="i2m1opj_970"><li class="list__item" id="i2m1opj_971"><p id="i2m1opj_972"><span id="i2m1opj_973">Linux</span></p><ul class="list _bullet" id="i2m1opj_974"><li class="list__item" id="i2m1opj_975"><p><a href="#command-line-tools" id="i2m1opj_976" data-tooltip="Java Virtual Threads - c5m">Command Line Tools</a></p></li><li class="list__item" id="i2m1opj_977"><p><a href="#proc-filesystem" id="i2m1opj_978" data-tooltip="Checking the Init system">Proc FileSystem</a></p></li><li class="list__item" id="i2m1opj_979"><p><a href="#curl" id="i2m1opj_980" data-tooltip="Get round trip time">Curl</a></p></li><li class="list__item" id="i2m1opj_981"><p><a href="#ssh" id="i2m1opj_982" data-tooltip="Port Forwarding">SSH</a></p></li><li class="list__item" id="i2m1opj_983"><p><a href="#wireshark" id="i2m1opj_984" data-tooltip="Download wirkshark">Wireshark</a></p></li><li class="list__item" id="i2m1opj_985"><p><a href="#tcpdump" id="i2m1opj_986" data-tooltip="TCPDump # HTTP traffic including req &amp; res headers and message body from a particular source. $ tcpdump -A -s 0 'src example.com and tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)' # All incoming HTTP GET traffic $ tcpdump -i any…">TCPDump</a></p></li></ul></li></ul><section class="chapter"><h2 id="command-line-tools" data-toc="command-line-tools">Command Line Tools</h2><ul class="list _bullet" id="i2m1opj_987"><li class="list__item" id="i2m1opj_988"><section class="chapter"><h3 id="process-threads-cpu-and-memory-usage" data-toc="process-threads-cpu-and-memory-usage">Process threads, cpu and memory usage.</h3><div class="code-block" data-lang="bash">
+}</script><!-- End Schema.org --></head><body data-id="Linux" data-main-title="Linux" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Suresh's Tech Notes  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Linux" id="Linux.md">Linux</h1><ul class="list _bullet" id="k95qm5_2"><li class="list__item" id="k95qm5_3"><p id="k95qm5_4"><span id="k95qm5_5">Linux</span></p><ul class="list _bullet" id="k95qm5_6"><li class="list__item" id="k95qm5_7"><p><a href="#command-line-tools" id="k95qm5_8" data-tooltip="Java Virtual Threads - c5m">Command Line Tools</a></p></li><li class="list__item" id="k95qm5_9"><p><a href="#proc-filesystem" id="k95qm5_10" data-tooltip="Checking the Init system">Proc FileSystem</a></p></li><li class="list__item" id="k95qm5_11"><p><a href="#curl" id="k95qm5_12" data-tooltip="Get round trip time">Curl</a></p></li><li class="list__item" id="k95qm5_13"><p><a href="#ssh" id="k95qm5_14" data-tooltip="Port Forwarding">SSH</a></p></li><li class="list__item" id="k95qm5_15"><p><a href="#wireshark" id="k95qm5_16" data-tooltip="Download wirkshark">Wireshark</a></p></li><li class="list__item" id="k95qm5_17"><p><a href="#tcpdump" id="k95qm5_18" data-tooltip="TCPDump # HTTP traffic including req &amp; res headers and message body from a particular source. $ tcpdump -A -s 0 'src example.com and tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)' # All incoming HTTP GET traffic $ tcpdump -i any…">TCPDump</a></p></li></ul></li></ul><section class="chapter"><h2 id="command-line-tools" data-toc="command-line-tools">Command Line Tools</h2><ul class="list _bullet" id="k95qm5_19"><li class="list__item" id="k95qm5_20"><section class="chapter"><h3 id="process-threads-cpu-and-memory-usage" data-toc="process-threads-cpu-and-memory-usage">Process threads, cpu and memory usage.</h3><div class="code-block" data-lang="bash">
 # Show process threads and it's CPU usage
 $ ps  -p  &lt;pid&gt; \
       -T \
@@ -35,7 +35,7 @@ $ ls /proc/&lt;pid&gt;/task
 
 # Show all threads using top
 $ top -H -p &lt;pid&gt;
-</div></section></li><li class="list__item" id="i2m1opj_990"><section class="chapter"><h3 id="sysctl" data-toc="sysctl">Sysctl</h3><div class="code-block" data-lang="bash">
+</div></section></li><li class="list__item" id="k95qm5_22"><section class="chapter"><h3 id="sysctl" data-toc="sysctl">Sysctl</h3><div class="code-block" data-lang="bash">
 # /etc/sysctl.conf
 fs.file-max=10485760
 fs.nr_open=10485760
@@ -65,7 +65,7 @@ net.ipv4.tcp_max_tw_buckets = 1440000
 # /etc/security/limits.conf (set max open file descriptors)
 * soft nofile 8000000
 * hard nofile 9000000
-</div><ul class="list _bullet" id="i2m1opj_992"><li class="list__item" id="i2m1opj_993"><p id="i2m1opj_994"><a href="https://github.com/ebarlas/project-loom-c5m#experiments" id="i2m1opj_995" data-external="true" rel="noopener noreferrer"><span class="control" id="i2m1opj_996">Java Virtual Threads - c5m</span></a></p></li><li class="list__item" id="i2m1opj_997"></li></ul><p id="i2m1opj_998">See <a href="http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections" id="i2m1opj_999" data-external="true" rel="noopener noreferrer">2M websocket connections</a></p><ul class="list _bullet" id="i2m1opj_1000"><li class="list__item" id="i2m1opj_1001"><p id="i2m1opj_1002">See <a href="https://www.linangran.com/?p=547" id="i2m1opj_1003" data-external="true" rel="noopener noreferrer">Tuning HA Proxy for 300K connections</a></p></li><li class="list__item" id="i2m1opj_1004"><p id="i2m1opj_1005">See <a href="https://tweaked.io/guide/kernel/" id="i2m1opj_1006" data-external="true" rel="noopener noreferrer">Kernel Tuning params</a></p></li><li class="list__item" id="i2m1opj_1007"></li></ul><p id="i2m1opj_1008">See <a href="http://veithen.github.io/2014/01/01/how-tcp-backlog-works-in-linux.html" id="i2m1opj_1009" data-external="true" rel="noopener noreferrer">How TCP backlog works in Linux</a></p><ul class="list _bullet" id="i2m1opj_1010"><li class="list__item" id="i2m1opj_1011"><p>See <a href="http://www.fromdual.com/huge-amount-of-time-wait-connections" id="i2m1opj_1012" data-external="true" rel="noopener noreferrer">TCP TIME_WAIT config</a></p></li></ul><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="k95qm5_24"><li class="list__item" id="k95qm5_25"><p id="k95qm5_26"><a href="https://github.com/ebarlas/project-loom-c5m#experiments" id="k95qm5_27" data-external="true" rel="noopener noreferrer"><span class="control" id="k95qm5_28">Java Virtual Threads - c5m</span></a></p></li><li class="list__item" id="k95qm5_29"></li></ul><p id="k95qm5_30">See <a href="http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections" id="k95qm5_31" data-external="true" rel="noopener noreferrer">2M websocket connections</a></p><ul class="list _bullet" id="k95qm5_32"><li class="list__item" id="k95qm5_33"><p id="k95qm5_34">See <a href="https://www.linangran.com/?p=547" id="k95qm5_35" data-external="true" rel="noopener noreferrer">Tuning HA Proxy for 300K connections</a></p></li><li class="list__item" id="k95qm5_36"><p id="k95qm5_37">See <a href="https://tweaked.io/guide/kernel/" id="k95qm5_38" data-external="true" rel="noopener noreferrer">Kernel Tuning params</a></p></li><li class="list__item" id="k95qm5_39"></li></ul><p id="k95qm5_40">See <a href="http://veithen.github.io/2014/01/01/how-tcp-backlog-works-in-linux.html" id="k95qm5_41" data-external="true" rel="noopener noreferrer">How TCP backlog works in Linux</a></p><ul class="list _bullet" id="k95qm5_42"><li class="list__item" id="k95qm5_43"><p>See <a href="http://www.fromdual.com/huge-amount-of-time-wait-connections" id="k95qm5_44" data-external="true" rel="noopener noreferrer">TCP TIME_WAIT config</a></p></li></ul><div class="code-block" data-lang="bash">
  # Can also set it using sysctl commands
  sysctl -w fs.file-max=12000500
  sysctl -w fs.nr_open=20000500
@@ -76,7 +76,7 @@ net.ipv4.tcp_max_tw_buckets = 1440000
  sysctl -w net.core.wmem_max=16384
  sysctl -w net.core.somaxconn=1024
  ulimit -n 20000000
-</div></section></li><li class="list__item" id="i2m1opj_1014"><p id="i2m1opj_1015">Netstat</p><div class="code-block" data-lang="bash">
+</div></section></li><li class="list__item" id="k95qm5_46"><p id="k95qm5_47">Netstat</p><div class="code-block" data-lang="bash">
 # Find all TCP/UDP listening port's PID
 $ netstat -tunalp
 
@@ -88,9 +88,9 @@ $ lsof -i :8080
 
 # Socket stats
 $ ss -s
-</div></li><li class="list__item" id="i2m1opj_1017"><p id="i2m1opj_1018">XArgs</p><div class="code-block" data-lang="bash">
+</div></li><li class="list__item" id="k95qm5_49"><p id="k95qm5_50">XArgs</p><div class="code-block" data-lang="bash">
 sudo -S pgrep -f tomcat  | xargs -n 1  -I {}  sh -c 'echo &quot;Killing process pid: {}&quot; &amp;&amp;  sudo kill -9 {} &amp;&amp; echo Done.'
-</div></li></ul></section><section class="chapter"><h2 id="proc-filesystem" data-toc="proc-filesystem"><a href="https://dashdash.io/5/proc" id="i2m1opj_1021" data-external="true" rel="noopener noreferrer">Proc FileSystem</a></h2><ul class="list _bullet" id="i2m1opj_1022"><li class="list__item" id="i2m1opj_1023"><p id="i2m1opj_1024">Checking the Init system</p><div class="code-block" data-lang="bash">
+</div></li></ul></section><section class="chapter"><h2 id="proc-filesystem" data-toc="proc-filesystem"><a href="https://dashdash.io/5/proc" id="k95qm5_53" data-external="true" rel="noopener noreferrer">Proc FileSystem</a></h2><ul class="list _bullet" id="k95qm5_54"><li class="list__item" id="k95qm5_55"><p id="k95qm5_56">Checking the Init system</p><div class="code-block" data-lang="bash">
 case &quot;$(cat /proc/1/comm)&quot; in
     init)    echo Init ;;
     systemd) echo SystemD ;;
@@ -100,7 +100,7 @@ esac
 
 # OR
 $ ps --no-headers -o comm 1 | grep -q 'systemd'
-</div></li></ul></section><section class="chapter"><h2 id="curl" data-toc="curl">Curl</h2><ul class="list _bullet" id="i2m1opj_1026"><li class="list__item" id="i2m1opj_1027"><p id="i2m1opj_1028">Get round trip time</p><div class="code-block" data-lang="bash">
+</div></li></ul></section><section class="chapter"><h2 id="curl" data-toc="curl">Curl</h2><ul class="list _bullet" id="k95qm5_58"><li class="list__item" id="k95qm5_59"><p id="k95qm5_60">Get round trip time</p><div class="code-block" data-lang="bash">
 $ curl -X GET \
        -o /dev/null  \
        -I -w &quot;Connect: %{time_connect}s, Transfer: %{time_starttransfer}s, Total: %{time_total}s&quot; \
@@ -114,7 +114,7 @@ $  while true ;do curl \
       -s \
       -w 'Total: %{time_total}s\n' \
 ;done
-</div></li><li class="list__item" id="i2m1opj_1030"><p id="i2m1opj_1031">Download latest release from Github</p><div class="code-block" data-lang="bash">
+</div></li><li class="list__item" id="k95qm5_62"><p id="k95qm5_63">Download latest release from Github</p><div class="code-block" data-lang="bash">
 # Download the latest release from Github
 $ LOCATION=$(curl -s https://api.github.com/repos/jvm-profiling-tools/async-profiler/releases/latest \
     | grep -i &quot;browser_download_url&quot; \
@@ -123,7 +123,7 @@ $ LOCATION=$(curl -s https://api.github.com/repos/jvm-profiling-tools/async-prof
     | sed 's/,$//'       \
     | sed 's/&quot;//g' )     \
     ; curl --progress-bar -L -o ${HOME}/install/tools/converter.jar ${LOCATION}
-</div></li><li class="list__item" id="i2m1opj_1033"><p id="i2m1opj_1034">Download a file with retry</p><div class="code-block" data-lang="bash">
+</div></li><li class="list__item" id="k95qm5_65"><p id="k95qm5_66">Download a file with retry</p><div class="code-block" data-lang="bash">
 # -fsSLO
 $ curl --fail \
       --silent \
@@ -139,7 +139,7 @@ $ curl --fail \
       --max-time 10 \
       --request GET \
 https://search.maven.org/remotecontent?filepath=org/jetbrains/kotlin/kotlin-stdlib/1.7.0/kotlin-stdlib-1.7.0.jar
-</div></li></ul></section><section class="chapter"><h2 id="dig" data-toc="dig">DIG</h2><ul class="list _bullet" id="i2m1opj_1036"><li class="list__item" id="i2m1opj_1037"><p id="i2m1opj_1038">Commands</p><div class="code-block" data-lang="bash">
+</div></li></ul></section><section class="chapter"><h2 id="dig" data-toc="dig">DIG</h2><ul class="list _bullet" id="k95qm5_68"><li class="list__item" id="k95qm5_69"><p id="k95qm5_70">Commands</p><div class="code-block" data-lang="bash">
 # Find all nameserver IPs for a TLD
 $ for i in $(dig ns suresh.dev +short); do echo -n &quot;$i &quot; &amp;&amp; dig $i +short; done
 
@@ -148,7 +148,7 @@ $ dig +trace compute.suresh.dev
 
 # Trace using specific resolver
 $ dig @a.root-servers.net +trace compute.suresh.dev
-</div></li></ul></section><section class="chapter"><h2 id="ssh" data-toc="ssh">SSH</h2><ul class="list _bullet" id="i2m1opj_1040"><li class="list__item" id="i2m1opj_1041"><p id="i2m1opj_1042">Port Forwarding</p><div class="code-block" data-lang="bash">
+</div></li></ul></section><section class="chapter"><h2 id="ssh" data-toc="ssh">SSH</h2><ul class="list _bullet" id="k95qm5_72"><li class="list__item" id="k95qm5_73"><p id="k95qm5_74">Port Forwarding</p><div class="code-block" data-lang="bash">
 # Local Port(2345) Forwarding
 ssh -v user@ip -L 2345:ip:5432
 # ssh -v ooadmin@100.64.0.32 -L 2345:100.64.0.32:5432
@@ -156,13 +156,13 @@ ssh -v user@ip -L 2345:ip:5432
 # Remote Port Forwarding
 ssh -v  -R  :8091:localip:remoteport  user@remoteip
 # ssh -v  -R  :8091:172.28.170.95:3000  app@10.242.182.199
-</div></li></ul></section><section class="chapter"><h2 id="wireshark" data-toc="wireshark">Wireshark</h2><ul class="list _bullet" id="i2m1opj_1044"><li class="list__item" id="i2m1opj_1045"><p id="i2m1opj_1046">Download <a href="https://www.wireshark.org/download.html" id="i2m1opj_1047" data-external="true" rel="noopener noreferrer">wirkshark</a></p></li><li class="list__item" id="i2m1opj_1048"><p id="i2m1opj_1049">Install <code class="code" id="i2m1opj_1050">tcpdump</code> on remote host (say <code class="code" id="i2m1opj_1051">10.9.210.101</code>)</p><div class="code-block" data-lang="bash">
+</div></li></ul></section><section class="chapter"><h2 id="wireshark" data-toc="wireshark">Wireshark</h2><ul class="list _bullet" id="k95qm5_76"><li class="list__item" id="k95qm5_77"><p id="k95qm5_78">Download <a href="https://www.wireshark.org/download.html" id="k95qm5_79" data-external="true" rel="noopener noreferrer">wirkshark</a></p></li><li class="list__item" id="k95qm5_80"><p id="k95qm5_81">Install <code class="code" id="k95qm5_82">tcpdump</code> on remote host (say <code class="code" id="k95qm5_83">10.9.210.101</code>)</p><div class="code-block" data-lang="bash">
 $ ssh user@10.9.210.101 &quot;sudo yum install -y tcpdump&quot;
-</div></li><li class="list__item" id="i2m1opj_1053"><p id="i2m1opj_1054">Start packet capture</p><div class="code-block" data-lang="bash">
+</div></li><li class="list__item" id="k95qm5_85"><p id="k95qm5_86">Start packet capture</p><div class="code-block" data-lang="bash">
 $ ssh user@10.9.210.101 &quot;sudo /usr/sbin/tcpdump -s0 -w - 'port 22'&quot; | wireshark -k -i -
 # or for 8080
 $ ssh user@remote-host &quot;sudo /usr/sbin/tcpdump -s0 -w - 'port 8080'&quot; | wireshark -k -i -
-</div><ul class="list _bullet" id="i2m1opj_1056"><li class="list__item" id="i2m1opj_1057"><p>See <a href="https://kaischroed.wordpress.com/2013/01/28/howto-use-wireshark-over-ssh/" id="i2m1opj_1058" data-external="true" rel="noopener noreferrer">Wireshark Over SSH</a></p></li><li class="list__item" id="i2m1opj_1059"><p>See <a href="https://serverfault.com/a/530020/184962" id="i2m1opj_1060" data-external="true" rel="noopener noreferrer">Using Unix Named Pipe</a></p></li></ul></li></ul></section><section class="chapter"><h2 id="tcpdump" data-toc="tcpdump"><a href="https://www.tcpdump.org/" id="i2m1opj_1062" data-external="true" rel="noopener noreferrer">TCPDump</a></h2><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="k95qm5_88"><li class="list__item" id="k95qm5_89"><p>See <a href="https://kaischroed.wordpress.com/2013/01/28/howto-use-wireshark-over-ssh/" id="k95qm5_90" data-external="true" rel="noopener noreferrer">Wireshark Over SSH</a></p></li><li class="list__item" id="k95qm5_91"><p>See <a href="https://serverfault.com/a/530020/184962" id="k95qm5_92" data-external="true" rel="noopener noreferrer">Using Unix Named Pipe</a></p></li></ul></li></ul></section><section class="chapter"><h2 id="tcpdump" data-toc="tcpdump"><a href="https://www.tcpdump.org/" id="k95qm5_94" data-external="true" rel="noopener noreferrer">TCPDump</a></h2><div class="code-block" data-lang="bash">
 # HTTP traffic including req &amp; res headers and message body from a particular source.
 $ tcpdump -A -s 0 'src example.com and tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)'
 
@@ -186,4 +186,4 @@ $ tcpdump -i lo
 
 # Print packet in ASCII
 $ tcpdump -v -i lo -A
-</div><ul class="list _bullet" id="i2m1opj_1064"><li class="list__item" id="i2m1opj_1065"><p>https://danielmiessler.com/study/tcpdump/</p></li></ul></section><div class="last-modified">Last modified: 15 March 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="jvm-profiling.html" class="navigation-links__prev">JVM Profiling</a><a href="kotlin.html" class="navigation-links__next">Kotlin</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="frontend/app.js"></script></body></html>
+</div><ul class="list _bullet" id="k95qm5_96"><li class="list__item" id="k95qm5_97"><p>https://danielmiessler.com/study/tcpdump/</p></li></ul></section><div class="last-modified">Last modified: 15 March 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="jvm-profiling.html" class="navigation-links__prev">JVM Profiling</a><a href="kotlin.html" class="navigation-links__next">Kotlin</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="frontend/app.js"></script></body></html>

@@ -81,7 +81,7 @@ $ strings -a app | grep -i com.oracle.svm.core.VM
 
 {src="kotlin/App.kt" lang="kotlin" validate="true" }
 
-Download <res resource-id="movie-data" id="movie-data" instance="openjdk-playground"/>
+Download <res resource-id="movie-data" id="movie-data"  instance="n" />
 
 ### Misc
 
