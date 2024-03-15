@@ -1,0 +1,606 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="vivid" data-primary-color="#1B9F8E"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2024-03-15T12:08:04.262052"><title>OpenJDK | Suresh's Tech Notes</title><script type="application/json" id="virtual-toc-data">[{"id":"java-commands","level":0,"title":"Java Commands","anchor":"#java-commands"},{"id":"ides-and-tools","level":0,"title":"IDEs and Tools","anchor":"#ides-and-tools"},{"id":"networking-security","level":0,"title":"Networking \u0026 Security","anchor":"#networking-security"},{"id":"gradle-kotlin-dsl","level":0,"title":"Gradle Kotlin DSL","anchor":"#gradle-kotlin-dsl"},{"id":"maven","level":0,"title":"Maven","anchor":"#maven"},{"id":"microservices-starters","level":0,"title":"Microservices Starters","anchor":"#microservices-starters"},{"id":"misc","level":0,"title":"Misc","anchor":"#misc"},{"id":"mac-os","level":0,"title":"Mac OS","anchor":"#mac-os"},{"id":"openjdk-build","level":0,"title":"OpenJDK Build","anchor":"#openjdk-build"},{"id":"oracle-a1-flex","level":0,"title":"Oracle A1 Flex","anchor":"#oracle-a1-flex"},{"id":"native-image","level":0,"title":"Native-Image","anchor":"#native-image"},{"id":"blogs","level":0,"title":"Blogs","anchor":"#blogs"},{"id":"awesome-svgs","level":0,"title":"Awesome Svgs","anchor":"#awesome-svgs"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="frontend/app.css" rel="stylesheet"><link rel="manifest" href="site.webmanifest"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="icon-192.png"><link rel="icon" type="image/png" sizes="16x16" href="icon-192.png"><meta name="msapplication-TileImage" content="mstile-144x144.png"><meta name="msapplication-square70x70logo" content="mstile-70x70.png"><meta name="msapplication-square150x150logo" content="mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="mstile-310x150.png"><meta name="msapplication-square310x310logo" content="mstile-310x150.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="OpenJDK | Suresh's Tech Notes"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Suresh's Tech Notes Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://suresh.dev/notes/1.0/openjdk.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@sur3shg"><meta name="twitter:title" content="OpenJDK | Suresh's Tech Notes"><meta name="twitter:description" content=""><meta name="twitter:creator" content="@sur3shg"><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "https://suresh.dev/notes/1.0/openjdk.html#webpage",
+    "url": "https://suresh.dev/notes/1.0/openjdk.html",
+    "name": "OpenJDK | Suresh's Tech Notes",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "https://suresh.devnotes/#website",
+    "url": "https://suresh.devnotes/",
+    "name": "Suresh's Tech Notes Help"
+}</script><!-- End Schema.org --></head><body data-id="OpenJDK" data-main-title="OpenJDK" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Suresh's Tech Notes 1.0 Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="OpenJDK" id="OpenJDK.md">OpenJDK</h1><ul class="list _bullet" id="lc5os1_3345"><li class="list__item" id="lc5os1_3346"><p><span id="lc5os1_3347">OpenJDK</span></p><ul class="list _bullet" id="lc5os1_3348"><li class="list__item" id="lc5os1_3349"><p><a href="#java-commands" id="lc5os1_3350" data-tooltip="$ mkdir -p src/{main,test}/{java,resources} $ javac --enable-preview -release 23 Foo.java $ java --enable-preview Foo JEP12 Preview Features Gradle - Enabling Java preview features $ java --list-modules $ java --describe-module java.se $ java --show-module-resolution java.base #…">Java Commands</a></p><ul class="list _bullet" id="lc5os1_3351"><li class="list__item" id="lc5os1_3352"><p><a href="#1-create-source-code-structure" id="lc5os1_3353" data-tooltip="$ mkdir -p src/{main,test}/{java,resources}">1. Create Source Code Structure</a></p></li><li class="list__item" id="lc5os1_3354"><p><a href="#2-preview-features" id="lc5os1_3355" data-tooltip="$ javac --enable-preview -release 23 Foo.java $ java --enable-preview Foo JEP12 Preview Features Gradle - Enabling Java preview features">2. Preview features</a></p></li><li class="list__item" id="lc5os1_3356"><p><a href="#3-java-platform-module-systems-jpms" id="lc5os1_3357" data-tooltip="$ java --list-modules $ java --describe-module java.se $ java --show-module-resolution java.base # Replace upgradeable modules in the runtime image $ java --upgrade-module-path $DIR Java Compiler Upgradeable module">3. Java Platform Module Systems (JPMS)</a></p></li><li class="list__item" id="lc5os1_3358"><p><a href="#4-disassembles-a-class" id="lc5os1_3359" data-tooltip="$ javap -p -v &lt;classfile&gt; # Show the class version $ javap -p -v build.classes.kotlin.main.App | grep version Javap Pastebin">4. Disassembles a class</a></p></li><li class="list__item" id="lc5os1_3360"><p><a href="#5-app-cds" id="lc5os1_3361" data-tooltip="# Before JDK 18 if [ ! -f app.jsa ]; then java -XX:ArchiveClassesAtExit=app.jsa -jar app.jar else java -XX:ShareArchiveFile=app.jsa -jar app.jar fi # Since JDK 19, auto generate the CDS archive $ java -XX:+AutoCreateSharedArchive -XX:SharedArchiveFile=app.jsa -jar app.jar # Create…">5. App CDS</a></p></li><li class="list__item" id="lc5os1_3362"><p><a href="#6-show-java-vmproperty-settings" id="lc5os1_3363" data-tooltip="$ java --version $ java -Xinternalversion $ java -XshowSettings:all --version # Show all Javac linter options $ javac --help-lint # Show all system properties $ java -XshowSettings:properties --version # VM extra options $ java -XX:+UnlockExperimentalVMOptions…">6. Show Java VMProperty Settings</a></p></li><li class="list__item" id="lc5os1_3364"><p><a href="#7-scan-deprecated-apis" id="lc5os1_3365" data-tooltip="# Print dependency summary $ jdeps -summary app.jar # Check the dependencies on JDK internal APIs $ jdeps --jdk-internals --classpath libs.jar app.jar # List of module dependences to be used in JLink $ jdeps --ignore-missing-deps --print-module-deps app.jar # List all service…">7. Scan deprecated APIs</a></p></li><li class="list__item" id="lc5os1_3366"><p><a href="#8-jpms" id="lc5os1_3367" data-tooltip="# Start ModuleMainClass $ java -m jdk.httpserver -b 127.0.0.1 # Compile all modules at once (Start from the main module) $ javac --enable-preview \ --release 23 \ -parameters \ // Optional, Generate metadata for reflection on method parameters --add-modules ALL-MODULE-PATH \ //…">8. JPMS</a></p></li><li class="list__item" id="lc5os1_3368"><p><span id="lc5os1_3369">9. JVMCI (Graal) Compiler</span></p></li><li class="list__item" id="lc5os1_3370"><p><a href="#10-jshell" id="lc5os1_3371" data-tooltip="# JShell with preview feature enabled $ jshell --enable-preview $ jshell --show-version --enable-preview --enable-native-access --startup JAVASE --feedback concise # Use custom startup script $ jshell --enable-preview --startup DEFAULT --startup ~/calc.repl # Query system…">10. JShell</a></p></li><li class="list__item" id="lc5os1_3372"><p><a href="#11-virtual-thread-config" id="lc5os1_3373" data-tooltip="# Virtual Thread's Default ForkJoinPool scheduler config. The scheduler is based on ForkJoinPool # and it's setup to spin up additional underlying carrier threads to help when there are virtual # threads blocked in Object.wait. The default maximum is 256. $ java…">11. Virtual Thread config</a></p></li><li class="list__item" id="lc5os1_3374"><p><a href="#12-generics" id="lc5os1_3375" data-tooltip="GenericsFAQ How we got Generics we have">12. Generics</a></p></li><li class="list__item" id="lc5os1_3376"><p><a href="#13-java-temp-config" id="lc5os1_3377" data-tooltip="$ echo &quot;-------- TMP PATH for $OSTYPE --------&quot; $ MKTEMP_PATH=&quot;$(dirname &quot;$(mktemp -u)&quot;)/&quot; $ JAVA_TMP_DIR=&quot;$(java -XshowSettings:properties -version 2&gt;&amp;1 | awk 'tolower($0) ~ /java.io.tmpdir/{print $NF}')/&quot; $ JAVA_FILE_ENC=&quot;$(echo…">13. Java TEMP Config</a></p></li></ul></li><li class="list__item" id="lc5os1_3378"><p><a href="#ides-and-tools" id="lc5os1_3379" data-tooltip="IntelliJ Selection Modes">IDEs and Tools</a></p></li><li class="list__item" id="lc5os1_3380"><p><span id="lc5os1_3381">Networking &amp; Security</span></p><ul class="list _bullet" id="lc5os1_3382"><li class="list__item" id="lc5os1_3383"><p><a href="#1-allow-unsafe-server-cert-change" id="lc5os1_3384" data-tooltip="1. Allow Unsafe Server Cert Change # This is Unsafe. Don't use in prod. -Djdk.tls.allowUnsafeServerCertChange=true -Dsun.security.ssl.allowUnsafeRenegotiation=true">1. Allow Unsafe Server Cert Change</a></p></li><li class="list__item" id="lc5os1_3385"><p><a href="#2-debugging-tls" id="lc5os1_3386" data-tooltip="https://docs.oracle.com/en/java/javase/20/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4D421910-C36D-40A2-8BA2-7D42CCBED3C6">2. Debugging TLS</a></p></li><li class="list__item" id="lc5os1_3387"><p><a href="#3-java-networking-properties" id="lc5os1_3388" data-tooltip="HTTP">3. Java Networking Properties</a></p></li><li class="list__item" id="lc5os1_3389"><p><a href="#4-http-client-properties" id="lc5os1_3390" data-tooltip="4. HTTP Client Properties -Djdk.internal.httpclient.disableHostnameVerification -Djdk.httpclient.HttpClient.log=headers -Djdk.internal.httpclient.debug=false -Djdk.tls.client.protocols=&quot;TLSv1.2&quot;">4. HTTP Client Properties</a></p></li></ul></li><li class="list__item" id="lc5os1_3391"><p><a href="#gradle-kotlin-dsl" id="lc5os1_3392" data-tooltip="Gradle Kotlin DSL Samples Gradle Kotlin DSL Primer Migrating Guide to Kotlin DSL Building Kotlin JVM Libraries 2. Name Abbrevation $ ./gradlew --console=plain \ --continuous \ --dry-run \ --no-daemon \ -Dauthor=Suresh \ -Pmyprop=myvalue \ cle dU 3. Create new Java SourceSet…">Gradle Kotlin DSL</a></p><ul class="list _bullet" id="lc5os1_3393"><li class="list__item" id="lc5os1_3394"><p><a href="#1-docs" id="lc5os1_3395" data-tooltip="Gradle Kotlin DSL Samples Gradle Kotlin DSL Primer Migrating Guide to Kotlin DSL Building Kotlin JVM Libraries">1. Docs</a></p></li><li class="list__item" id="lc5os1_3396"><p><a href="#2-name-abbrevation" id="lc5os1_3397" data-tooltip="2. Name Abbrevation $ ./gradlew --console=plain \ --continuous \ --dry-run \ --no-daemon \ -Dauthor=Suresh \ -Pmyprop=myvalue \ cle dU">2. Name Abbrevation</a></p></li><li class="list__item" id="lc5os1_3398"><p><a href="#3-create-new-java-sourceset" id="lc5os1_3399" data-tooltip="3. Create new Java SourceSet sourceSets { create(&quot;java15&quot;) { java { srcDirs(&quot;src/main/java15&quot;) } } } // OR can also do val graal by sourceSets.creating // &quot;graalCompileOnly&quot;(&quot;org.graalvm.nativeimage:svm:21.2.0&quot;) //…">3. Create new Java <code class="code" id="lc5os1_3400">SourceSet</code></a></p></li><li class="list__item" id="lc5os1_3401"><p><a href="#4-custom-sourceset-directories" id="lc5os1_3402" data-tooltip="sourceSets { main { java { setSrcDirs(listOf(&quot;src&quot;)) } } test { java { setSrcDirs(listOf(&quot;test&quot;)) } } }">4. Custom SourceSet directories</a></p></li><li class="list__item" id="lc5os1_3403"><p><a href="#5-kotlin-sourcesets" id="lc5os1_3404" data-tooltip="kotlin { sourceSets { main { kotlin.srcDirs(&quot;...&quot;) } test { kotlin.srcDirs(&quot;...&quot;) } create(&quot;java11&quot;) { kotlin.srcDirs(&quot;src/main/java11&quot;) } val test by creating {} } } // Change kotlin src dir kotlin { sourceSets { main {…">5. Kotlin SourceSets</a></p></li><li class="list__item" id="lc5os1_3405"><p><a href="#6-compile-classpath" id="lc5os1_3406" data-tooltip="sourceSets.main.get().compileClasspath // kotlin.sourceSets.main.get().kotlin">6. Compile classpath</a></p></li><li class="list__item" id="lc5os1_3407"><p><span id="lc5os1_3408">7. Configure/Create Tasks</span></p></li><li class="list__item" id="lc5os1_3409"><p><a href="#8-enabling-java-preview-feature" id="lc5os1_3410" data-tooltip="8. Enabling Java preview feature tasks.withType&lt;JavaCompile&gt;.configureEach { options.compilerArgs.add(&quot;--enable-preview&quot;) } tasks.withType&lt;Test&gt;.configureEach { jvmArgs(&quot;--enable-preview&quot;) } tasks.withType&lt;JavaExec&gt;.configureEach {…">8. Enabling Java preview feature</a></p></li><li class="list__item" id="lc5os1_3411"><p><a href="#9-reproducible-builds" id="lc5os1_3412" data-tooltip="9. Reproducible builds withType&lt;AbstractArchiveTask&gt;().configureEach { isPreserveFileTimestamps = false isReproducibleFileOrder = true } reproducible-builds.org https://github.com/jvm-repo-rebuild/reproducible-central">9. Reproducible builds</a></p></li><li class="list__item" id="lc5os1_3413"><p><a href="#10-multi-release-jar" id="lc5os1_3414" data-tooltip="10. Multi Release Jar // See https://github.com/melix/mrjar-gradle for more on multi release jars val mrVersion = &quot;11&quot; if (JavaVersion.current().isJava11Compatible) { sourceSets { create(&quot;java$mrVersion&quot;) { java { srcDirs(&quot;src/main/java$mrVersion&quot;) } }…">10. Multi Release Jar</a></p></li><li class="list__item" id="lc5os1_3415"><p><a href="#11-dependencies" id="lc5os1_3416" data-tooltip="# Direct dependencies $ ./gradlew -q dependencies --configuration implementation # Transitive dependencies $ ./gradlew -q dependencies --configuration runtimeClasspath # Dependencies insight for a dependency group. $ ./gradlew -q dependencyInsight --configuration runtimeClasspath…">11. Dependencies</a></p></li><li class="list__item" id="lc5os1_3417"><p><a href="#12-update-wrapper-and-others" id="lc5os1_3418" data-tooltip="$ ./gradlew wrapper --gradle-version=7.5.1 --distribution-type=bin # Set system properties or tool options $ JAVA_TOOL_OPTIONS=-Dhttps.protocols=TLSv1.2 ./gradlew build # Displays the properties $ ./gradlew properties # Gradle run with arguments $ ./gradlew run…">12. Update Wrapper and others</a></p></li><li class="list__item" id="lc5os1_3419"><p><a href="#13-gradle-versions" id="lc5os1_3420" data-tooltip="https://services.gradle.org/versions">13. Gradle Versions</a></p></li></ul></li><li class="list__item" id="lc5os1_3421"><p><a href="#maven" id="lc5os1_3422" data-tooltip="Maven 1. Public Maven Repositories https://mvnrepository.com/repos https://maven.google.com/web/index.html 2. Create a Project $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4…">Maven</a></p><ul class="list _bullet" id="lc5os1_3423"><li class="list__item" id="lc5os1_3424"><p><a href="#1-public-maven-repositories" id="lc5os1_3425" data-tooltip="1. Public Maven Repositories https://mvnrepository.com/repos https://maven.google.com/web/index.html">1. Public Maven Repositories</a></p></li><li class="list__item" id="lc5os1_3426"><p><a href="#2-create-a-project" id="lc5os1_3427" data-tooltip="2. Create a Project $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false">2. Create a Project</a></p></li><li class="list__item" id="lc5os1_3428"><p><a href="#3-enabling-java-preview-feature" id="lc5os1_3429" data-tooltip="3. Enabling Java preview feature &lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt; &lt;version&gt;3.6.2&lt;/version&gt; &lt;configuration&gt;…">3. Enabling Java preview feature</a></p></li><li class="list__item" id="lc5os1_3430"><p><a href="#4-reproducible-builds" id="lc5os1_3431" data-tooltip="4. Reproducible Builds &lt;properties&gt; &lt;project.build.outputTimestamp&gt;2020-04-02T08:04:00Z&lt;/project.build.outputTimestamp&gt; &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt; &lt;/properties&gt;">4. Reproducible Builds</a></p></li><li class="list__item" id="lc5os1_3432"><p><a href="#5-maven-wrapper" id="lc5os1_3433" data-tooltip="5. Maven Wrapper $ mvn wrapper:wrapper -Dmaven=3.8.5">5. Maven Wrapper</a></p></li><li class="list__item" id="lc5os1_3434"><p><a href="#6-update-version-number" id="lc5os1_3435" data-tooltip="6. Update Version number $ ./mvnw versions:set -DnewVersion=1.0.1-SNAPSHOT -DprocessAllModules -DgenerateBackupPoms=false $ ./mvnw versions:revert // Rollback $ ./mvnw versions:commit">6. Update Version number</a></p></li><li class="list__item" id="lc5os1_3436"><p><a href="#7-dependency-tree" id="lc5os1_3437" data-tooltip="7. Dependency Tree # Show all orginal versions, not the resolved ones. $ ./mvnw dependency:tree $ ./mvnw dependency:tree -Ddetail=true $ ./mvnw dependency:tree -Dverbose -Dincludes=org.jetbrains.kotlin:kotlin-stdlib $ ./mvnw clean verify # Dependency and plugin updates $ ./mvnw…">7. Dependency Tree</a></p></li></ul></li><li class="list__item" id="lc5os1_3438"><p><a href="#microservices-starters" id="lc5os1_3439" data-tooltip="1. Micronaut $ curl https://launch.micronaut.io/demo.zip -o demo.zip $ unzip demo.zip -d demo &amp;&amp; cd demo &amp;&amp; ./gradlew run --continuous --watch-fs // OR $ curl…">Microservices Starters</a></p><ul class="list _bullet" id="lc5os1_3440"><li class="list__item" id="lc5os1_3441"><p><a href="#1-micronaut" id="lc5os1_3442" data-tooltip="1. Micronaut $ curl https://launch.micronaut.io/demo.zip -o demo.zip $ unzip demo.zip -d demo &amp;&amp; cd demo &amp;&amp; ./gradlew run --continuous --watch-fs // OR $ curl…">1. Micronaut</a></p></li><li class="list__item" id="lc5os1_3443"><p><a href="#2-springboot" id="lc5os1_3444" data-tooltip="2. SpringBoot $ curl https://start.spring.io/starter.zip \ -d dependencies=devtools,web \ -d type=gradle-project \ -d language=kotlin \ -d javaVersion=11 \ -d packaging=jar \ -d platformVersion=2.2.6.RELEASE \ -d name=helloworld \ -d groupId=dev.suresh \ -d artifactId=helloworld \…">2. SpringBoot</a></p></li><li class="list__item" id="lc5os1_3445"><p><a href="#3-gradle-initializr" id="lc5os1_3446" data-tooltip="3. Gradle Initializr $ curl 'https://gradle-initializr.cleverapps.io/starter?type=kotlin-application&amp;testFramework=&amp;dsl=kotlin&amp;gradleVersion=6.3&amp;archive=zip&amp;projectName=helloworld-kotlin&amp;packageName=dev.suresh&amp;generate-project=' --compressed -o…">3. Gradle Initializr</a></p></li><li class="list__item" id="lc5os1_3447"><p><a href="#4-maven-archetype-quickstart" id="lc5os1_3448" data-tooltip="4. Maven Archetype Quickstart $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false">4. Maven Archetype Quickstart</a></p></li></ul></li><li class="list__item" id="lc5os1_3449"><p><a href="#misc" id="lc5os1_3450" data-tooltip="Github Registry">Misc</a></p></li><li class="list__item" id="lc5os1_3451"><p><a href="#mac-os" id="lc5os1_3452" data-tooltip="Xcode uses Java env returned by /usr/libexec/java_home">Mac OS</a></p></li><li class="list__item" id="lc5os1_3453"><p><a href="#openjdk-build" id="lc5os1_3454" data-tooltip="OpenJDK Build $ sdk install java 23-open $ git clone https://github.com/openjdk/jdk.git $ cd jdk # $ make clean $ bash configure $ make images $ build/*/images/jdk/bin/java --version">OpenJDK Build</a></p></li><li class="list__item" id="lc5os1_3455"><p><a href="#oracle-a1-flex" id="lc5os1_3456" data-tooltip="Open Ports">Oracle A1 Flex</a></p></li><li class="list__item" id="lc5os1_3457"><p><a href="#native-image" id="lc5os1_3458" data-tooltip="Find GraalVm used to generate the native-image">Native-Image</a></p></li><li class="list__item" id="lc5os1_3459"><p><a href="#blogs" id="lc5os1_3460" data-tooltip="https://www.marcobehler.com/guides/jdbc https://www.marcobehler.com/guides/java-databases https://vladmihalcea.com/jdbc-driver-maven-dependency/ https://vladmihalcea.com/jdbc-driver-connection-url-strings/ Tools https://utteranc.es/ - Comments Widgets…">Blogs</a></p></li><li class="list__item" id="lc5os1_3461"><p><a href="#awesome-svgs" id="lc5os1_3462" data-tooltip="https://undraw.co/illustrations https://www.manypixels.co/gallery/ https://www.pixeltrue.com/free-illustrations https://www.svgbackgrounds.com/ https://icons.getbootstrap.com/ https://material.io/resources/icons/?style=baseline (not sag) https://fontawesome.com/v4.7.0/icons/ (not…">Awesome Svgs</a></p><ul class="list _bullet" id="lc5os1_3463"><li class="list__item" id="lc5os1_3464"><p><a href="#illustrations" id="lc5os1_3465" data-tooltip="https://undraw.co/illustrations https://www.manypixels.co/gallery/ https://www.pixeltrue.com/free-illustrations">Illustrations</a></p></li><li class="list__item" id="lc5os1_3466"><p><a href="#background" id="lc5os1_3467" data-tooltip="https://www.svgbackgrounds.com/">Background</a></p></li><li class="list__item" id="lc5os1_3468"><p><a href="#icons" id="lc5os1_3469" data-tooltip="https://icons.getbootstrap.com/ https://material.io/resources/icons/?style=baseline (not sag) https://fontawesome.com/v4.7.0/icons/ (not sag) https://simpleicons.org/ (Brand Icons - good one) https://github.com/microsoft/fluentui-system-icons https://tablericons.com/…">Icons</a></p></li><li class="list__item" id="lc5os1_3470"><p><a href="#emojis" id="lc5os1_3471" data-tooltip="https://emojipedia.org/search/ https://github.com/twitter/twemoji/tree/master/assets">Emojis</a></p></li><li class="list__item" id="lc5os1_3472"><p><a href="#awesome-list" id="lc5os1_3473" data-tooltip="https://github.com/vkarampinis/awesome-icons https://github.com/notlmn/awesome-icons https://github.com/ikatyang/emoji-cheat-sheet">Awesome List</a></p></li><li class="list__item" id="lc5os1_3474"><p><a href="#tools" id="lc5os1_3475" data-tooltip="https://jakearchibald.github.io/svgomg/ https://css-tricks.com/tools-for-optimizing-svg/ https://imageoptim.com/mac https://xmlgraphics.apache.org/batik/ https://github.com/svg/svgo-osx-folder-action $ pip3 install mkdocs-macros-plugin $ ./gradlew dokka $ cp docs/mkdocs.yml…">Tools</a></p></li></ul></li></ul></li></ul><section class="chapter"><h2 id="java-commands" data-toc="java-commands">Java Commands</h2><section class="chapter"><h3 id="1-create-source-code-structure" data-toc="1-create-source-code-structure">1. Create Source Code Structure</h3><div class="code-block" data-lang="bash">
+$ mkdir -p src/{main,test}/{java,resources}
+</div></section><section class="chapter"><h3 id="2-preview-features" data-toc="2-preview-features">2. Preview features</h3><div class="code-block" data-lang="bash">
+$ javac --enable-preview -release 23 Foo.java
+$ java  --enable-preview Foo
+</div><ul class="list _bullet" id="lc5os1_3478"><li class="list__item" id="lc5os1_3479"><p><a href="https://openjdk.java.net/jeps/12" id="lc5os1_3480" data-external="true" rel="noopener noreferrer">JEP12</a></p></li><li class="list__item" id="lc5os1_3481"><p><a href="https://docs.oracle.com/en/java/javase/20/language/preview-language-and-vm-features.html" id="lc5os1_3482" data-external="true" rel="noopener noreferrer">Preview Features</a></p></li><li class="list__item" id="lc5os1_3483"><p><a href="https://docs.gradle.org/current/userguide/building_java_projects.html#sec:feature_preview" id="lc5os1_3484" data-external="true" rel="noopener noreferrer">Gradle - Enabling Java preview features</a></p></li></ul></section><section class="chapter"><h3 id="3-java-platform-module-systems-jpms" data-toc="3-java-platform-module-systems-jpms">3. Java Platform Module Systems (JPMS)</h3><div class="code-block" data-lang="bash">
+$ java --list-modules
+$ java --describe-module java.se
+$ java --show-module-resolution java.base
+
+# Replace upgradeable modules in the runtime image
+$ java --upgrade-module-path $DIR
+</div><ul class="list _bullet" id="lc5os1_3486"><li class="list__item" id="lc5os1_3487"><p><a href="https://docs.oracle.com/en/java/javase/20/docs/api/java.compiler/module-summary.html" id="lc5os1_3488" data-external="true" rel="noopener noreferrer">Java Compiler Upgradeable module</a></p></li></ul></section><section class="chapter"><h3 id="4-disassembles-a-class" data-toc="4-disassembles-a-class">4. Disassembles a class</h3><div class="code-block" data-lang="bash">
+$ javap -p -v &lt;classfile&gt;
+
+# Show the class version
+$ javap -p -v build.classes.kotlin.main.App | grep version
+</div><ul class="list _bullet" id="lc5os1_3490"><li class="list__item" id="lc5os1_3491"><p><span class="control" id="lc5os1_3492"><a href="https://javap.yawk.at/" id="lc5os1_3493" data-external="true" rel="noopener noreferrer">Javap Pastebin</a></span></p></li></ul></section><section class="chapter"><h3 id="5-app-cds" data-toc="5-app-cds">5. App CDS</h3><div class="code-block" data-lang="bash">
+# Before JDK 18
+if [ ! -f app.jsa ]; then
+  java -XX:ArchiveClassesAtExit=app.jsa -jar app.jar
+else
+  java -XX:ShareArchiveFile=app.jsa -jar app.jar
+fi
+
+# Since JDK 19, auto generate the CDS archive
+$ java -XX:+AutoCreateSharedArchive -XX:SharedArchiveFile=app.jsa -jar app.jar
+
+# Create default CDS archive
+$ jlink-runtime/java -Xshare:dump [-XX:-UseCompressedOops]
+# Check if it worked, this will fail if it can't map the archive (lib/server/classes.jsa)
+$ jlink-runtime/java -Xshare:on --version
+</div><ul class="list _bullet" id="lc5os1_3495"><li class="list__item" id="lc5os1_3496"><p>https://ionutbalosin.com/2022/04/application-dynamic-class-data-sharing-in-hotspot-jvm</p></li><li class="list__item" id="lc5os1_3497"><p>https://dev.java/learn/class-data-sharing-and-application-class-data-sharing-in-hotspot</p></li><li class="list__item" id="lc5os1_3498"><p>https://mbien.dev/blog/entry/custom-java-runtimes-with-jlink</p></li></ul></section><section class="chapter"><h3 id="6-show-java-vmproperty-settings" data-toc="6-show-java-vmproperty-settings">6. Show Java VMProperty Settings</h3><div class="code-block" data-lang="bash">
+$ java --version
+$ java -Xinternalversion
+
+$ java -XshowSettings:all --version
+
+# Show all Javac linter options
+$ javac --help-lint
+
+# Show all system properties
+$ java -XshowSettings:properties --version
+
+# VM extra options
+$  java -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal --version
+
+# Java JIT compiler options
+$ java -Xcomp            forces compilation of methods on first invocation (slow startup)
+$ java -Xint             interpreted mode execution only (fast startup)
+$ java -Xmixed           mixed mode execution (default)
+</div><ul class="list _bullet" id="lc5os1_3500"><li class="list__item" id="lc5os1_3501"><p><a href="https://docs.oracle.com/en/java/javase/20/docs/specs/man/java.html" id="lc5os1_3502" data-external="true" rel="noopener noreferrer">Java Command Options*</a></p></li><li class="list__item" id="lc5os1_3503"><p><a href="https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html" id="lc5os1_3504" data-external="true" rel="noopener noreferrer">VM Options</a></p></li><li class="list__item" id="lc5os1_3505"><p><a href="https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-4.html#jvms-4.1-200-B.2" id="lc5os1_3506" data-external="true" rel="noopener noreferrer"><code class="code" id="lc5os1_3507">class</code> file format major versions</a></p></li></ul></section><section class="chapter"><h3 id="7-scan-deprecated-apis" data-toc="7-scan-deprecated-apis">7. Scan deprecated APIs</h3><div class="code-block" data-lang="bash">
+# Print dependency summary
+$ jdeps -summary  app.jar
+
+# Check the dependencies on JDK internal APIs
+$ jdeps --jdk-internals --classpath libs.jar app.jar
+
+# List of module dependences to be used in JLink
+$ jdeps --ignore-missing-deps --print-module-deps  app.jar
+
+# List all service providers
+$ jlink --suggest-providers java.security.Provider
+
+# List all jlink plugins
+$ jlink --list-plugins
+
+# Generate module-info
+$ jdeps --generate-module-info ./  app.jar
+
+# List all deprecated APIs for a release
+$ jdeprscan --for-removal --release 23 --list
+
+# Scan deprecated APIs
+$ jdeprscan --for-removal --release 23 app.jar
+</div><ul class="list _bullet" id="lc5os1_3509"><li class="list__item" id="lc5os1_3510"><p><a href="https://openjdk.java.net/jeps/320" id="lc5os1_3511" data-external="true" rel="noopener noreferrer">Java EE Maven artifacts</a></p></li></ul></section><section class="chapter"><h3 id="8-jpms" data-toc="8-jpms">8. JPMS</h3><div class="code-block" data-lang="bash">
+# Start ModuleMainClass
+$ java -m jdk.httpserver -b 127.0.0.1
+
+# Compile all modules at once (Start from the main module)
+$ javac  --enable-preview \
+         --release 23 \
+         -parameters  \    // Optional, Generate metadata for reflection on method parameters
+         --add-modules ALL-MODULE-PATH \  // Optional, Root modules to resolve in addition to the initial modules
+         --module-path ... \           // Optional, where to find application modules
+         --module-source-path &quot;src&quot; \  // Source files for multiple modules
+         -d classes  \
+         --module MainApp              // Compile only the specified module(s)
+
+# Package all modules (Create for all modules)
+$ jar --create \
+      --file mods/app.jar \
+      --main-class dev.suresh.MainKt \
+      --module-version 1.0 \    // Optional
+      -C app/ classes resources // Or *.class
+
+# Launch app
+$ java  --enable-preview \
+        --show-version \
+        --show-module-resolution \
+        --module-path mods \
+        --module app   // OR &lt;module&gt;/&lt;mainclass&gt;
+
+# Build native image from modular jars
+$ native-image \
+    -p base-module.jar:main-module.jar \
+    -m dev.suresh.Main
+
+# JavaFX 23 using jlink &amp; jpackage
+$ wget &quot;https://download.java.net/java/early_access/.../openjfx-xxx_macos-aarch64_bin-jmods.tar.gz&quot;
+$ tar -xvzf openjfx-xxx_macos-aarch64_bin-jmods.tar.gz
+
+$ jlink --output javafx-jdk \
+        --module-path $JAVA_HOME/jmods:javafx-jmods-23 \
+        --add-modules javafx.controls,java.desktop,java.logging
+#       --add-modules ALL-MODULE-PATH
+
+$ javafx-jdk/bin/java --list-modules
+
+$ jpackage --main-jar app.jar \
+           --runtime-image javafx-jdk \
+           --type app-image \
+           --name app \
+           --java-options &quot;-Xmx64m&quot; \
+           --arguments &quot;arg&quot; \
+           --icon app.ico \
+           --input app \
+           --dest bin
+</div><ul class="list _bullet" id="lc5os1_3513"><li class="list__item" id="lc5os1_3514"><p><a href="https://openjdk.java.net/projects/jigsaw/quick-start" id="lc5os1_3515" data-external="true" rel="noopener noreferrer">JPMS Quickstart</a></p></li><li class="list__item" id="lc5os1_3516"><p><a href="https://openjdk.java.net/projects/jigsaw/" id="lc5os1_3517" data-external="true" rel="noopener noreferrer">Docs and Resources</a></p></li><li class="list__item" id="lc5os1_3518"><p><a href="https://nipafx.dev/build-modules/" id="lc5os1_3519" data-external="true" rel="noopener noreferrer"><span class="control" id="lc5os1_3520">Java Modules Cheat Sheet</span></a></p></li><li class="list__item" id="lc5os1_3521"><p><a href="https://github.com/dlemmermann/JPackageScriptFX" id="lc5os1_3522" data-external="true" rel="noopener noreferrer">JPackage Scripts</a></p></li></ul></section><section class="chapter"><h3 id="9-jvmci-graal-compiler" data-toc="9-jvmci-graal-compiler">9. <a href="https://openjdk.java.net/jeps/317" id="lc5os1_3524" data-external="true" rel="noopener noreferrer">JVMCI (Graal) Compiler</a></h3><div class="code-block" data-lang="bash">
+$ java -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler
+
+# To see that Graal is actually being loaded
+$ java -Dgraal.ShowConfiguration=info
+</div><ul class="list _bullet" id="lc5os1_3526"><li class="list__item" id="lc5os1_3527"><p><a href="https://github.com/graalvm/graal-js-jdk11-maven-demo" id="lc5os1_3528" data-external="true" rel="noopener noreferrer">GraalJS OpenJDK Demo</a></p></li></ul></section><section class="chapter"><h3 id="10-jshell" data-toc="10-jshell">10. JShell</h3><div class="code-block" data-lang="bash">
+# JShell with preview feature enabled
+$ jshell --enable-preview
+$ jshell --show-version --enable-preview  --enable-native-access --startup JAVASE --feedback concise
+
+# Use custom startup script
+$ jshell --enable-preview --startup DEFAULT --startup ~/calc.repl
+
+# Query system properties/run java code
+$ fileEncoding=&quot;$(echo 'System.out.println(System.getProperty(&quot;file.encoding&quot;))' | jshell -s -)&quot;
+</div></section><section class="chapter"><h3 id="11-virtual-thread-config" data-toc="11-virtual-thread-config">11. Virtual Thread config</h3><div class="code-block" data-lang="bash">
+# Virtual Thread's Default ForkJoinPool scheduler config. The scheduler is based on ForkJoinPool
+# and it's setup to spin up additional underlying carrier threads to help when there are virtual
+# threads blocked in Object.wait. The default maximum is 256.
+
+$ java -Djdk.defaultScheduler.parallelism=4   // Default to Runtime.getRuntime().availableProcessors()
+       -Djdk.defaultScheduler.maxPoolSize=256 // max(parallelism, 256)
+
+# Trace pinned thread while holding monitors.
+$ java -Djdk.tracePinnedThreads=short|full
+</div></section><section class="chapter"><h3 id="12-generics" data-toc="12-generics">12. Generics</h3><ul class="list _bullet" id="lc5os1_3531"><li class="list__item" id="lc5os1_3532"><p><a href="http://www.angelikalanger.com/GenericsFAQ/JavaGenericsFAQ.html" id="lc5os1_3533" data-external="true" rel="noopener noreferrer">GenericsFAQ</a></p></li><li class="list__item" id="lc5os1_3534"><p><a href="https://cr.openjdk.java.net/~briangoetz/valhalla/erasure.html" id="lc5os1_3535" data-external="true" rel="noopener noreferrer">How we got Generics we have</a></p></li></ul></section><section class="chapter"><h3 id="13-java-temp-config" data-toc="13-java-temp-config">13. Java TEMP Config</h3><div class="code-block" data-lang="bash">
+$ echo &quot;-------- TMP PATH for $OSTYPE --------&quot;
+$ MKTEMP_PATH=&quot;$(dirname &quot;$(mktemp -u)&quot;)/&quot;
+$ JAVA_TMP_DIR=&quot;$(java -XshowSettings:properties -version 2&gt;&amp;1 | awk 'tolower($0) ~ /java.io.tmpdir/{print $NF}')/&quot;
+$ JAVA_FILE_ENC=&quot;$(echo 'System.out.println(System.getProperty(&quot;file.encoding&quot;))' | jshell -s -)&quot;
+
+$ echo &quot;MKTEMP_PATH    = $MKTEMP_PATH&quot;
+$ echo &quot;TMP            = $TMP&quot;
+$ echo &quot;TEMP           = $TEMP&quot;
+$ echo &quot;TMPDIR (Mac)   = $TMPDIR&quot;
+$ echo &quot;RUNNER_TEMP    = $RUNNER_TEMP&quot;
+$ echo &quot;JAVA_IO_TMPDIR = $JAVA_TMP_DIR&quot;
+$ echo &quot;JAVA_FILE_ENC  = $JAVA_FILE_ENC&quot;
+$ echo &quot;/TMP           = $(ls -l /tmp)&quot;
+</div></section></section><section class="chapter"><h2 id="ides-and-tools" data-toc="ides-and-tools">IDEs and Tools</h2><ul class="list _bullet" id="lc5os1_3537"><li class="list__item" id="lc5os1_3538"><p id="lc5os1_3539">IntelliJ Selection Modes</p><ul class="list _bullet" id="lc5os1_3540"><li class="list__item" id="lc5os1_3541"><p id="lc5os1_3542">All Actions - <kbd class="keystroke" id="lc5os1_3543" data-bypass="true"><span class="keystroke__value">CMD</span></kbd> + <kbd class="keystroke" id="lc5os1_3544" data-bypass="true"><span class="keystroke__value">SHIFT</span></kbd> + <kbd class="keystroke" id="lc5os1_3545" data-bypass="true"><span class="keystroke__value">A</span></kbd></p></li><li class="list__item" id="lc5os1_3546"><p id="lc5os1_3547">Select all occurrences - <kbd class="keystroke" id="lc5os1_3548" data-bypass="true"><span class="keystroke__value">CMD</span></kbd> + <kbd class="keystroke" id="lc5os1_3549" data-bypass="true"><span class="keystroke__value">CTRL</span></kbd> + <kbd class="keystroke" id="lc5os1_3550" data-bypass="true"><span class="keystroke__value">G</span></kbd></p></li><li class="list__item" id="lc5os1_3551"><p id="lc5os1_3552">Column selection mode - <kbd class="keystroke" id="lc5os1_3553" data-bypass="true"><span class="keystroke__value">CMD</span></kbd> + <kbd class="keystroke" id="lc5os1_3554" data-bypass="true"><span class="keystroke__value">SHIFT</span></kbd> + <kbd class="keystroke" id="lc5os1_3555" data-bypass="true"><span class="keystroke__value">8</span></kbd></p></li><li class="list__item" id="lc5os1_3556"><p id="lc5os1_3557">Multiple Cursors - <kbd class="keystroke" id="lc5os1_3558" data-bypass="true"><span class="keystroke__value">SHIFT</span></kbd> + <kbd class="keystroke" id="lc5os1_3559" data-bypass="true"><span class="keystroke__value">ALT</span></kbd> + <kbd class="keystroke" id="lc5os1_3560" data-bypass="true"><span class="keystroke__value">Left Click</span></kbd></p></li><li class="list__item" id="lc5os1_3561"><p id="lc5os1_3562">Multi Selection - <kbd class="keystroke" id="lc5os1_3563" data-bypass="true"><span class="keystroke__value">SHIFT</span></kbd> + <kbd class="keystroke" id="lc5os1_3564" data-bypass="true"><span class="keystroke__value">ALT</span></kbd> + Select as usual</p></li><li class="list__item" id="lc5os1_3565"><p id="lc5os1_3566">Caret Cloning - <kbd class="keystroke" id="lc5os1_3567" data-bypass="true"><span class="keystroke__value">SHIFT</span></kbd> + <kbd class="keystroke" id="lc5os1_3568" data-bypass="true"><span class="keystroke__value">ALT</span></kbd> + Middle click on end line</p></li><li class="list__item" id="lc5os1_3569"><p id="lc5os1_3570">Move line - <kbd class="keystroke" id="lc5os1_3571" data-bypass="true"><span class="keystroke__value">SHIFT</span></kbd> + <kbd class="keystroke" id="lc5os1_3572" data-bypass="true"><span class="keystroke__value">ALT</span></kbd> + <kbd class="keystroke" id="lc5os1_3573" data-bypass="true"><span class="keystroke__value">Arrow UP/DOWN</span></kbd></p></li></ul></li><li class="list__item" id="lc5os1_3574"><p id="lc5os1_3575">Plugin Version Update</p><div class="code-block" data-lang="bash">
+$ PLUGIN_VERSION=&quot;1.2.6.2594&quot;
+$ wget --content-disposition &quot;https://plugins.jetbrains.com/plugin/download?rel=true&amp;updateId=331908&quot;
+$ unzip github-copilot-intellij-${PLUGIN_VERSION}.zip
+$ cd github-copilot-intellij/lib
+$ jar -tvf github-copilot-intellij-${PLUGIN_VERSION}.jar | grep plugin.xml
+$ unzip github-copilot-intellij-${PLUGIN_VERSION}.jar
+# Change until-build=&quot;223.*&quot;
+$ vi META-INF/plugin.xml
+$ zip -r github-copilot-intellij-${PLUGIN_VERSION}.jar META-INF
+$ rm -rf META-INF
+$ cd ../../
+$ zip -r github-copilot-intellij-${PLUGIN_VERSION}.zip github-copilot-intellij/
+$ rm -rf github-copilot-intellij
+
+# Now upload github-copilot-intellij-${PLUGIN_VERSION}.zip (Preferences -&gt; Plugins -&gt; ⚙️ -&gt; Install Plugin from Disk)
+</div></li></ul><ul class="list _bullet" id="lc5os1_3577"><li class="list__item" id="lc5os1_3578"><p id="lc5os1_3579">IntelliJ Plugin Channels</p><ul class="list _bullet" id="lc5os1_3580"><li class="list__item" id="lc5os1_3581"><p>https://plugins.jetbrains.com/plugins/beta/list</p></li><li class="list__item" id="lc5os1_3582"><p>https://plugins.jetbrains.com/plugins/snapshots/org.jetbrains.compose.desktop.ide</p></li></ul></li></ul></section><section class="chapter"><h2 id="networking-security" data-toc="networking-security">Networking &amp; Security</h2><p id="lc5os1_3583"><a href="https://docs.oracle.com/en/java/javase/20/security/index.html" id="lc5os1_3584" data-external="true" rel="noopener noreferrer">🚨Security Developer&rsquo;s Guide</a></p><section class="chapter"><h3 id="1-allow-unsafe-server-cert-change" data-toc="1-allow-unsafe-server-cert-change">1. <a href="https://github.com/openjdk/jdk/blob/6a905b6546e288e86322ae978a1f594266aa368a/src/java.base/share/classes/sun/security/ssl/ClientHandshakeContext.java#L35-L76" id="lc5os1_3586" data-external="true" rel="noopener noreferrer">Allow Unsafe Server Cert Change</a></h3><div class="code-block" data-lang="bash">
+# This is Unsafe. Don't use in prod.
+-Djdk.tls.allowUnsafeServerCertChange=true
+-Dsun.security.ssl.allowUnsafeRenegotiation=true
+</div></section><section class="chapter"><h3 id="2-debugging-tls" data-toc="2-debugging-tls">2. Debugging TLS</h3><ul class="list _bullet" id="lc5os1_3588"><li class="list__item" id="lc5os1_3589"><p id="lc5os1_3590">https://docs.oracle.com/en/java/javase/20/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4D421910-C36D-40A2-8BA2-7D42CCBED3C6</p></li><li class="list__item" id="lc5os1_3591"><p id="lc5os1_3592">https://docs.oracle.com/en/java/javase/20/security/java-secure-socket-extension-jsse-reference-guide.html</p></li><li class="list__item" id="lc5os1_3593"><p id="lc5os1_3594">https://github.com/sureshg/InstallCerts/blob/master/src/main/kotlin/io/github/sureshg/extn/Certs.kt</p><div class="code-block" data-lang="bash">
+# Turn on all debugging
+$ java -Djavax.net.debug=all
+
+# Override HostsFileNameService
+$ java -Djdk.net.hosts.file=/etc/host/style/file
+
+# Force IPv4
+$ java -Djava.net.preferIPv4Stack=true
+
+# The entropy gathering device can also be specified with the system property
+$ java -Djava.security.egd=file:/dev/./urandom
+</div></li></ul></section><section class="chapter"><h3 id="3-java-networking-properties" data-toc="3-java-networking-properties">3. Java Networking Properties</h3><ul class="list _bullet" id="lc5os1_3596"><li class="list__item" id="lc5os1_3597"><p>http://htmlpreview.github.io/?https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/net/doc-files/net-properties.html</p></li><li class="list__item" id="lc5os1_3598"><p>https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/net/doc-files/net-properties.html</p></li><li class="list__item" id="lc5os1_3599"><p><a href="https://docs.oracle.com/en/java/javase/20/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73" id="lc5os1_3600" data-external="true" rel="noopener noreferrer">All Java Networking System Properties</a></p></li><li class="list__item" id="lc5os1_3601"><p>https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html</p></li></ul><div class="table-wrapper"><table class="wide" id="lc5os1_3602"><thead><tr class="ijRowHead" id="lc5os1_3603"><th id="lc5os1_3604"><p>Config</p></th><th id="lc5os1_3605"><p>Description</p></th></tr></thead><tbody><tr id="lc5os1_3606"><td id="lc5os1_3607"><p>http.proxyHost</p></td><td id="lc5os1_3608"><p>The host name of the proxy server</p></td></tr><tr id="lc5os1_3609"><td id="lc5os1_3610"><p>http.proxyPort</p></td><td id="lc5os1_3611"><p>The port number, the default value being <code class="code" id="lc5os1_3612">80</code></p></td></tr><tr id="lc5os1_3613"><td id="lc5os1_3614"><p>http.nonProxyHosts</p></td><td id="lc5os1_3615"></td></tr></tbody></table></div><ul class="list _bullet" id="lc5os1_3616"><li class="list__item" id="lc5os1_3617"><p id="lc5os1_3618"><span class="control" id="lc5os1_3619">HTTP</span></p><div class="code-block" data-lang="bash">
+# Use JAVA_TOOL_OPTIONS
+$ export JAVA_TOOL_OPTIONS=&quot;
+${JAVA_TOOL_OPTIONS}
+-Dhttp.useProxy=true
+-Dhttps.useProxy=true
+-Dhttp.proxyHost=172.10.10.1
+-Dhttp.proxyPort=8100
+-Dhttps.proxyHost=172.10.10.1
+-Dhttps.proxyPort=8100
+-Dhttp.nonProxyHosts='localhost|127.0.0.1|cdn.test.org|*-prod.app.com|slack.com'&quot;
+
+# OR use system properties
+$ java -Dhttp.proxyHost=webcache.example.com -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=”localhost|host.example.com” &lt;URL&gt;
+</div></li><li class="list__item" id="lc5os1_3621"><p id="lc5os1_3622"><span class="control" id="lc5os1_3623">Env vars</span></p><div class="code-block" data-lang="bash">
+export HTTP_PROXY=http://USERNAME:PASSWORD@10.0.1.1:8080/
+export HTTPS_PROXY=https://USERNAME:PASSWORD@10.0.0.1:8080/
+export NO_PROXY=master.hostname.example.com
+</div></li></ul></section><section class="chapter"><h3 id="4-http-client-properties" data-toc="4-http-client-properties">4. <a href="https://openjdk.java.net/groups/net/httpclient/#incubatingAPI" id="lc5os1_3626" data-external="true" rel="noopener noreferrer">HTTP Client</a> Properties</h3><div class="code-block" data-lang="bash">
+-Djdk.internal.httpclient.disableHostnameVerification
+-Djdk.httpclient.HttpClient.log=headers
+-Djdk.internal.httpclient.debug=false
+-Djdk.tls.client.protocols=&quot;TLSv1.2&quot;
+</div></section></section><section class="chapter"><h2 id="gradle-kotlin-dsl" data-toc="gradle-kotlin-dsl">Gradle Kotlin DSL</h2><section class="chapter"><h3 id="1-docs" data-toc="1-docs">1. Docs</h3><ul class="list _bullet" id="lc5os1_3628"><li class="list__item" id="lc5os1_3629"><p><a href="https://github.com/gradle/kotlin-dsl-samples/tree/master/samples" id="lc5os1_3630" data-external="true" rel="noopener noreferrer">Gradle Kotlin DSL Samples</a></p></li><li class="list__item" id="lc5os1_3631"><p><a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html" id="lc5os1_3632" data-external="true" rel="noopener noreferrer">Gradle Kotlin DSL Primer</a></p></li><li class="list__item" id="lc5os1_3633"><p><a href="https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/" id="lc5os1_3634" data-external="true" rel="noopener noreferrer">Migrating Guide to Kotlin DSL</a></p></li><li class="list__item" id="lc5os1_3635"><p><a href="https://guides.gradle.org/building-kotlin-jvm-libraries/" id="lc5os1_3636" data-external="true" rel="noopener noreferrer">Building Kotlin JVM Libraries</a></p></li></ul></section><section class="chapter"><h3 id="2-name-abbrevation" data-toc="2-name-abbrevation">2. <a href="https://docs.gradle.org/6.8/userguide/command_line_interface.html#sec:name_abbreviation" id="lc5os1_3638" data-external="true" rel="noopener noreferrer">Name Abbrevation</a></h3><div class="code-block" data-lang="bash">
+$ ./gradlew --console=plain \
+            --continuous \
+            --dry-run \
+            --no-daemon \
+            -Dauthor=Suresh \
+            -Pmyprop=myvalue \
+            cle dU
+</div></section><section class="chapter"><h3 id="3-create-new-java-sourceset" data-toc="3-create-new-java-sourceset">3. Create new Java <code class="code" id="lc5os1_3641">SourceSet</code></h3><div class="code-block" data-lang="kotlin">
+sourceSets {
+    create(&quot;java15&quot;) {
+        java {
+            srcDirs(&quot;src/main/java15&quot;)
+        }
+    }
+}
+
+// OR can also do
+val graal by sourceSets.creating
+// &quot;graalCompileOnly&quot;(&quot;org.graalvm.nativeimage:svm:21.2.0&quot;)
+// &quot;graalCompileOnly&quot;(&quot;org.graalvm.sdk:graal-sdk:21.2.0&quot;)
+// nativeImageCompileOnly(graal.output.classesDirs)
+</div><ul class="list _bullet" id="lc5os1_3643"><li class="list__item" id="lc5os1_3644"><p><a href="https://docs.gradle.org/current/userguide/building_java_projects.html#sec:java_source_sets" id="lc5os1_3645" data-external="true" rel="noopener noreferrer">SourceSet</a></p></li></ul></section><section class="chapter"><h3 id="4-custom-sourceset-directories" data-toc="4-custom-sourceset-directories">4. Custom SourceSet directories</h3><div class="code-block" data-lang="kotlin">
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf(&quot;src&quot;))
+        }
+    }
+    test {
+        java {
+            setSrcDirs(listOf(&quot;test&quot;))
+        }
+    }
+}
+</div></section><section class="chapter"><h3 id="5-kotlin-sourcesets" data-toc="5-kotlin-sourcesets">5. Kotlin SourceSets</h3><div class="code-block" data-lang="kotlin">
+kotlin {
+    sourceSets {
+        main {
+            kotlin.srcDirs(&quot;...&quot;)
+        }
+        test {
+            kotlin.srcDirs(&quot;...&quot;)
+        }
+        create(&quot;java11&quot;) {
+            kotlin.srcDirs(&quot;src/main/java11&quot;)
+        }
+
+        val test by creating {}
+    }
+}
+
+// Change kotlin src dir
+kotlin {
+    sourceSets {
+        main {
+            kotlin.srcDirs(&quot;src&quot;)
+            languageSettings.apply {
+                optIn(&quot;kotlin.ExperimentalStdlibApi&quot;)
+            }
+        }
+    }
+}
+
+// or
+sourceSets.main {
+    withConvention(KotlinSourceSet::class) {
+        kotlin.srcDirs(&quot;src/main/kotlin&quot;, &quot;src-gen/main/kotlin&quot;)
+    }
+}
+
+// Sources Jar
+val sourcesJar by tasks.registering(Jar::class) {
+    // kotlin.sourceSets.main.get().kotlin
+    from(sourceSets.main.get().allSource)
+    archiveClassifier = &quot;sources&quot;
+}
+</div></section><section class="chapter"><h3 id="6-compile-classpath" data-toc="6-compile-classpath">6. Compile classpath</h3><div class="code-block" data-lang="kotlin">
+sourceSets.main.get().compileClasspath
+// kotlin.sourceSets.main.get().kotlin
+</div></section><section class="chapter"><h3 id="7-configure-create-tasks" data-toc="7-configure-create-tasks">7. <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:containers" id="lc5os1_3650" data-external="true" rel="noopener noreferrer">Configure/Create Tasks</a></h3><ul class="list _bullet" id="lc5os1_3651"><li class="list__item" id="lc5os1_3652"><section class="chapter"><h4 id="eager" data-toc="eager">Eager</h4><div class="code-block" data-lang="kotlin">
+val p: Jar = getByName&lt;Jar&gt;(&quot;jar&quot;)       // Get existing task
+val q: Jar = create&lt;Jar&gt;(&quot;jar&quot;) {}       // Create new task
+val r: Jar by getting(Jar::class)        // Get task using property delegate
+val s: Copy by creating(Copy::class) {}  // Create task using property delegate
+</div></section></li><li class="list__item" id="lc5os1_3654"><section class="chapter"><h4 id="lazy-configuration-avoidance-api" data-toc="lazy-configuration-avoidance-api">Lazy (<a href="https://docs.gradle.org/current/userguide/task_configuration_avoidance.html" id="lc5os1_3656" data-external="true" rel="noopener noreferrer">Configuration Avoidance API</a>)</h4><div class="code-block" data-lang="kotlin">
+val t: TaskProvider&lt;Jar&gt; = named&lt;Jar&gt;(&quot;jar&quot;){}        // Get existing task
+val u: TaskProvider&lt;Jar&gt; = register&lt;Jar&gt;(&quot;jar&quot;){}     // Create new task
+val v: TaskProvider&lt;Jar&gt; by registering(Jar::class){} // Create task using property delegate
+val jar: TaskProvider&lt;Task&gt; by existing // Get task using property delegate
+
+val foo: FooTask by existing            // Take Task type from val (Kotlin 1.4)
+val bar: BarTask by registering {}      // Take Task type from val (Kotlin 1.4)
+</div></section></li></ul></section><section class="chapter"><h3 id="8-enabling-java-preview-feature" data-toc="8-enabling-java-preview-feature">8. <a href="https://docs.gradle.org/current/userguide/building_java_projects.html#sec:feature_preview" id="lc5os1_3659" data-external="true" rel="noopener noreferrer">Enabling Java preview feature</a></h3><div class="code-block" data-lang="kotlin">
+tasks.withType&lt;JavaCompile&gt;.configureEach {
+    options.compilerArgs.add(&quot;--enable-preview&quot;)
+}
+tasks.withType&lt;Test&gt;.configureEach {
+    jvmArgs(&quot;--enable-preview&quot;)
+}
+tasks.withType&lt;JavaExec&gt;.configureEach {
+    jvmArgs(&quot;--enable-preview&quot;)
+}
+</div></section><section class="chapter"><h3 id="9-reproducible-builds" data-toc="9-reproducible-builds">9. <a href="https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives" id="lc5os1_3662" data-external="true" rel="noopener noreferrer">Reproducible builds</a></h3><div class="code-block" data-lang="kotlin">
+withType&lt;AbstractArchiveTask&gt;().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+</div><ul class="list _bullet" id="lc5os1_3664"><li class="list__item" id="lc5os1_3665"><p><a href="https://reproducible-builds.org/docs/jvm/" id="lc5os1_3666" data-external="true" rel="noopener noreferrer">reproducible-builds.org</a></p></li><li class="list__item" id="lc5os1_3667"><p>https://github.com/jvm-repo-rebuild/reproducible-central</p></li></ul></section><section class="chapter"><h3 id="10-multi-release-jar" data-toc="10-multi-release-jar">10. <a href="https://blog.gradle.org/mrjars" id="lc5os1_3669" data-external="true" rel="noopener noreferrer">Multi Release Jar</a></h3><div class="code-block" data-lang="kotlin">
+// See https://github.com/melix/mrjar-gradle for more on multi release jars
+val mrVersion = &quot;11&quot;
+if (JavaVersion.current().isJava11Compatible) {
+    sourceSets {
+        create(&quot;java$mrVersion&quot;) {
+            java {
+                srcDirs(&quot;src/main/java$mrVersion&quot;)
+            }
+        }
+    }
+
+    tasks {
+        // For each source set, Gradle will automatically create a compile task.
+        val mrJavaCompile = named&lt;JavaCompile&gt;(&quot;compileJava${mrVersion}Java&quot;) {
+            sourceCompatibility = mrVersion
+            targetCompatibility = mrVersion
+            options.compilerArgs = listOf(&quot;--release&quot;, mrVersion)
+        }
+
+        named&lt;Jar&gt;(&quot;jar&quot;) {
+            into(&quot;META-INF/versions/$mrVersion&quot;) {
+                from(sourceSets.named(&quot;java$mrVersion&quot;).get().output)
+            }
+            manifest.attributes(
+                &quot;Multi-Release&quot; to &quot;true&quot;
+            )
+
+            dependsOn(mrJavaCompile)
+        }
+    }
+}
+</div></section><section class="chapter"><h3 id="11-dependencies" data-toc="11-dependencies">11. Dependencies</h3><div class="code-block" data-lang="bash">
+# Direct dependencies
+$ ./gradlew -q dependencies --configuration implementation
+# Transitive dependencies
+$ ./gradlew -q dependencies --configuration runtimeClasspath
+
+# Dependencies insight for a dependency group.
+$ ./gradlew -q dependencyInsight --configuration runtimeClasspath --dependency kotlin
+$ ./gradlew -q dependencyInsight --dependency log4j-core
+
+# Task Dependencies
+$ ./gradlew clean build --dry-run
+
+# Dependency updates
+$ ./gradlew clean dependencyUpdates -Drevision=release
+</div><ul class="list _bullet" id="lc5os1_3672"><li class="list__item" id="lc5os1_3673"><p><a href="https://stackoverflow.com/a/42058780/416868" id="lc5os1_3674" data-external="true" rel="noopener noreferrer">Refresh dependencies &amp; Caching</a></p></li></ul><div class="code-block" data-lang="bash">
+# Force Gradle to execute all tasks ignoring up-to-date checks
+$ ./gradlew clean build --rerun-tasks
+
+# Don't reuse outputs from previous builds (org.gradle.caching=false)
+$ ./gradlew clean build --no-build-cache
+
+# To refresh all dependencies in the dependency cache
+$ ./gradlew clean build --refresh-dependencies
+
+$ rm -rf ~/.gradle/caches
+
+# Build Config
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor(0, SECONDS)
+        cacheDynamicVersionsFor(0, SECONDS)
+    }
+}
+
+# Add dep update task for build-logic
+val allDepUpdates by
+    tasks.creating {
+      group = BasePlugin.BUILD_GROUP
+      description = &quot;Run 'dependencyUpdates' task for all ${rootProject.name} projects&quot;
+
+      dependsOn(rootProject.subprojects.map { &quot;:${it.name}:dependencyUpdates&quot; })
+      dependsOn(
+          rootProject.gradle.includedBuilds
+              .filter { it.name !in listOf(project.name) }
+              .map { it.task(&quot;:dependencyUpdates&quot;) })
+    }
+</div><ul class="list _bullet" id="lc5os1_3676"><li class="list__item" id="lc5os1_3677"><p><a href="https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html" id="lc5os1_3678" data-external="true" rel="noopener noreferrer">Debugging Dependencies</a></p></li><li class="list__item" id="lc5os1_3679"><p><a href="https://docs.gradle.org/current/userguide/dependency_resolution.html#sec:conflict-resolution" id="lc5os1_3680" data-external="true" rel="noopener noreferrer">Gradle Conflict Resolution</a></p></li></ul></section><section class="chapter"><h3 id="12-update-wrapper-and-others" data-toc="12-update-wrapper-and-others">12. Update Wrapper and others</h3><div class="code-block" data-lang="bash">
+$ ./gradlew wrapper --gradle-version=7.5.1 --distribution-type=bin
+
+# Set system properties or tool options
+$ JAVA_TOOL_OPTIONS=-Dhttps.protocols=TLSv1.2 ./gradlew build
+
+# Displays the properties
+$ ./gradlew properties
+
+# Gradle run with arguments
+$ ./gradlew run --args=&quot;&lt;JFR_FILE&gt;&quot;
+</div></section><section class="chapter"><h3 id="13-gradle-versions" data-toc="13-gradle-versions">13. Gradle Versions</h3><ul class="list _bullet" id="lc5os1_3682"><li class="list__item" id="lc5os1_3683"><p>https://services.gradle.org/versions</p></li></ul></section></section><section class="chapter"><h2 id="maven" data-toc="maven"><a href="https://search.maven.org/search?q=org.jetbrains.kotlin" id="lc5os1_3685" data-external="true" rel="noopener noreferrer">Maven</a></h2><section class="chapter"><h3 id="1-public-maven-repositories" data-toc="1-public-maven-repositories">1. <a href="https://www.deps.co/guides/public-maven-repositories/" id="lc5os1_3687" data-external="true" rel="noopener noreferrer">Public Maven Repositories</a></h3><ul class="list _bullet" id="lc5os1_3688"><li class="list__item" id="lc5os1_3689"><p>https://mvnrepository.com/repos</p></li><li class="list__item" id="lc5os1_3690"><p>https://maven.google.com/web/index.html</p></li></ul></section><section class="chapter"><h3 id="2-create-a-project" data-toc="2-create-a-project">2. <a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" id="lc5os1_3692" data-external="true" rel="noopener noreferrer">Create a Project</a></h3><div class="code-block" data-lang="bash">
+$ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+</div></section><section class="chapter"><h3 id="3-enabling-java-preview-feature" data-toc="3-enabling-java-preview-feature">3. <a href="https://blog.codefx.org/java/enable-preview-language-features/#Enabling-Previews-In-Tools" id="lc5os1_3695" data-external="true" rel="noopener noreferrer">Enabling Java preview feature</a></h3><div class="code-block" data-lang="markup">
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.6.2&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;release&gt;15&lt;/release&gt;
+                &lt;compilerArg&gt;--enable-preview&lt;/compilerArg&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+            &lt;configuration&gt;
+                &lt;argLine&gt;--enable-preview&lt;/argLine&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-failsafe-plugin&lt;/artifactId&gt;
+            &lt;configuration&gt;
+                &lt;argLine&gt;--enable-preview&lt;/argLine&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</div></section><section class="chapter"><h3 id="4-reproducible-builds" data-toc="4-reproducible-builds">4. <a href="https://maven.apache.org/guides/mini/guide-reproducible-builds.html" id="lc5os1_3698" data-external="true" rel="noopener noreferrer">Reproducible Builds</a></h3><div class="code-block" data-lang="markup">
+
+&lt;properties&gt;
+    &lt;project.build.outputTimestamp&gt;2020-04-02T08:04:00Z&lt;/project.build.outputTimestamp&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+&lt;/properties&gt;
+</div></section><section class="chapter"><h3 id="5-maven-wrapper" data-toc="5-maven-wrapper">5. <a href="https://maven.apache.org/wrapper/" id="lc5os1_3701" data-external="true" rel="noopener noreferrer">Maven Wrapper</a></h3><div class="code-block" data-lang="bash">
+$ mvn wrapper:wrapper -Dmaven=3.8.5
+</div></section><section class="chapter"><h3 id="6-update-version-number" data-toc="6-update-version-number">6. <a href="http://www.mojohaus.org/versions-maven-plugin/" id="lc5os1_3704" data-external="true" rel="noopener noreferrer">Update Version number</a></h3><div class="code-block" data-lang="bash">
+$ ./mvnw versions:set -DnewVersion=1.0.1-SNAPSHOT -DprocessAllModules -DgenerateBackupPoms=false
+$ ./mvnw versions:revert // Rollback
+$ ./mvnw versions:commit
+</div></section><section class="chapter"><h3 id="7-dependency-tree" data-toc="7-dependency-tree">7. <a href="https://search.maven.org/search?q=fc:kotlin.text.Regex" id="lc5os1_3707" data-external="true" rel="noopener noreferrer">Dependency Tree</a></h3><div class="code-block" data-lang="bash">
+# Show all orginal versions, not the resolved ones.
+$ ./mvnw dependency:tree
+$ ./mvnw dependency:tree -Ddetail=true
+$ ./mvnw dependency:tree -Dverbose -Dincludes=org.jetbrains.kotlin:kotlin-stdlib
+$ ./mvnw clean verify
+
+# Dependency and plugin updates
+$ ./mvnw clean versions:display-dependency-updates versions:display-plugin-updates
+
+# Search Artifacts by class
+https://search.maven.org/search?q=fc:kotlin.text.Regex
+</div></section></section><section class="chapter"><h2 id="microservices-starters" data-toc="microservices-starters">Microservices Starters</h2><section class="chapter"><h3 id="1-micronaut" data-toc="1-micronaut">1. <a href="https://micronaut.io/launch/" id="lc5os1_3710" data-external="true" rel="noopener noreferrer">Micronaut</a></h3><div class="code-block" data-lang="bash">
+$ curl https://launch.micronaut.io/demo.zip -o demo.zip
+$ unzip demo.zip -d demo &amp;&amp; cd demo &amp;&amp; ./gradlew run --continuous --watch-fs
+
+// OR
+$ curl 'https://launch.micronaut.io/create/DEFAULT/dev.suresh.sample-app?lang=kotlin&amp;build=gradle&amp;test=junit&amp;javaVersion=JDK_11&amp;features=http-client&amp;features=data-jdbc&amp;features=jdbc-hikari&amp;features=kotlin-extension-functions&amp;features=graalvm' \
+     --compressed \
+      -o sample-app.zip
+</div></section><section class="chapter"><h3 id="2-springboot" data-toc="2-springboot">2. <a href="https://start.spring.io/" id="lc5os1_3713" data-external="true" rel="noopener noreferrer">SpringBoot</a></h3><div class="code-block" data-lang="bash">
+$ curl https://start.spring.io/starter.zip \
+    -d dependencies=devtools,web \
+    -d type=gradle-project \
+    -d language=kotlin \
+    -d javaVersion=11 \
+    -d packaging=jar \
+    -d platformVersion=2.2.6.RELEASE \
+    -d name=helloworld \
+    -d groupId=dev.suresh \
+    -d artifactId=helloworld \
+    -d packageName=dev.suresh \
+    -d description=Hello%20World%20App \
+    -d baseDir=helloworld \
+    -o helloworld.zip
+</div><ul class="list _bullet" id="lc5os1_3715"><li class="list__item" id="lc5os1_3716"><p><a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/" id="lc5os1_3717" data-external="true" rel="noopener noreferrer">SpringBoot</a></p></li><li class="list__item" id="lc5os1_3718"><p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/index.html" id="lc5os1_3719" data-external="true" rel="noopener noreferrer">Spring and Kotlin Docs</a></p></li></ul></section><section class="chapter"><h3 id="3-gradle-initializr" data-toc="3-gradle-initializr">3. <a href="https://gradle-initializr.cleverapps.io/" id="lc5os1_3721" data-external="true" rel="noopener noreferrer">Gradle Initializr</a></h3><div class="code-block" data-lang="bash">
+$ curl 'https://gradle-initializr.cleverapps.io/starter?type=kotlin-application&amp;testFramework=&amp;dsl=kotlin&amp;gradleVersion=6.3&amp;archive=zip&amp;projectName=helloworld-kotlin&amp;packageName=dev.suresh&amp;generate-project=' --compressed -o helloworld-kotlin.zip
+
+// OR
+$ gradle init --type &lt;java-library|java-application|...&gt; --dsl kotlin
+</div></section><section class="chapter"><h3 id="4-maven-archetype-quickstart" data-toc="4-maven-archetype-quickstart">4. <a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" id="lc5os1_3724" data-external="true" rel="noopener noreferrer">Maven Archetype Quickstart</a></h3><div class="code-block" data-lang="bash">
+$ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+</div></section></section><section class="chapter"><h2 id="misc" data-toc="misc">Misc</h2><ul class="list _bullet" id="lc5os1_3726"><li class="list__item" id="lc5os1_3727"><p id="lc5os1_3728"><a href="https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages" id="lc5os1_3729" data-external="true" rel="noopener noreferrer">Github Registry</a></p><div class="code-block" data-lang="bash">
+$ VERSION=$(date +%s)
+$ docker build . --file Dockerfile --tag docker.pkg.github.com/sureshg/repo/app:${VERSION}
+$ docker login docker.pkg.github.com --username sureshg --password ${{ secrets.GITHUB_TOKEN }}
+$ docker push docker.pkg.github.com/sureshg/repo/app:${VERSION}
+</div></li><li class="list__item" id="lc5os1_3731"><p id="lc5os1_3732">Service container</p><div class="code-block" data-lang="yaml">
+services:
+   postgres:
+     image: postgres:10.8
+     env:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: postgres
+     options:
+     ports:
+       - 5432/tcp
+ ...
+ jobs.services.postgres.ports[5432]
+</div></li></ul></section><section class="chapter"><h2 id="mac-os" data-toc="mac-os">Mac OS</h2><ul class="list _bullet" id="lc5os1_3734"><li class="list__item" id="lc5os1_3735"><section class="chapter"><h3 id="remove-quarantine-attributes" data-toc="remove-quarantine-attributes">Remove Quarantine Attributes</h3><div class="code-block" data-lang="bash">
+$ sudo xattr -cr /Applications/compose-desktop-sample.app
+
+# If you are using macOS Catalina and later you may need to remove the quarantine attribute from the bits before you can use them
+$ sudo xattr -r -d com.apple.quarantine path/to/app/folder/
+</div></section></li><li class="list__item" id="lc5os1_3737"><section class="chapter"><h3 id="java-home-settings-in-xcode" data-toc="java-home-settings-in-xcode">Java Home settings in Xcode</h3><p id="lc5os1_3738">Xcode uses Java env returned by <code class="code" id="lc5os1_3739">/usr/libexec/java_home</code></p><p id="lc5os1_3740">Set <code class="code" id="lc5os1_3741">JAVA_HOME</code> in <code class="code" id="lc5os1_3742">XCode</code>-&gt; <code class="code" id="lc5os1_3743">Preferences</code>-&gt; <code class="code" id="lc5os1_3744">Locations</code>-&gt; <code class="code" id="lc5os1_3745">Custom Paths</code> to <code class="code" id="lc5os1_3746">/Users/&lt;user&gt;/.sdkman/candidates/java/current</code></p></section></li><li class="list__item" id="lc5os1_3747"><p id="lc5os1_3748">Install Rosetta</p><div class="code-block" data-lang="bash">
+$ softwareupdate --install-rosetta --agree-to-license
+</div></li><li class="list__item" id="lc5os1_3750"><p id="lc5os1_3751">Install Command Line Tools</p><div class="code-block" data-lang="bash">
+$ xcode-select --install
+</div></li></ul></section><section class="chapter"><h2 id="openjdk-build" data-toc="openjdk-build"><a href="https://openjdk.java.net/groups/build/doc/building.html" id="lc5os1_3754" data-external="true" rel="noopener noreferrer">OpenJDK Build</a></h2><div class="code-block" data-lang="bash">
+$ sdk install java 23-open
+$ git clone https://github.com/openjdk/jdk.git
+$ cd jdk
+# $ make clean
+$ bash configure
+$ make images
+$ build/*/images/jdk/bin/java --version
+</div></section><section class="chapter"><h2 id="oracle-a1-flex" data-toc="oracle-a1-flex"><a href="https://cloud.oracle.com/?region=us-sanjose-1" id="lc5os1_3757" data-external="true" rel="noopener noreferrer">Oracle A1 Flex</a></h2><div class="code-block" data-lang="bash">
+# Reset the password
+# https://docs.oracle.com/en-us/iaas/Content/Compute/References/serialconsole.htm#four__opcpasswordreset
+$ /usr/sbin/load_policy -i
+$ sudo /bin/mount -o remount, rw /
+$ sudo passwd opc
+$ sudo reboot -f
+
+# Install softwares
+$ sudo yum upgrade -y
+$ sudo yum install curl wget tree docker git zsh -y
+$ sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;
+$ curl -s &quot;https://get.sdkman.io&quot; | bash
+$ sdk i java 23.ea-open
+
+# For Github self hosted runners on Aarch64
+export LD_LIBRARY_PATH=/opt/oracle/oracle-armtoolset-8/root/usr/lib64:/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export JAVA_HOME_11_X64=/home/opc/.sdkman/candidates/java/11.0.11.hs-adpt
+
+# Install EPEL
+$ sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+</div><ul class="list _bullet" id="lc5os1_3759"><li class="list__item" id="lc5os1_3760"><p id="lc5os1_3761">Open Ports</p><div class="code-block" data-lang="bash">
+  # Networking &gt; Virtual cloud networks &gt; Security List &gt; Add Ingress Rules (open tcp/8080)
+ $ firewall-cmd  --permanent --zone=public --add-port=8080/tcp
+ $ firewall-cmd  --reload
+ $ http://ip:8080
+</div></li></ul></section><section class="chapter"><h2 id="native-image" data-toc="native-image">Native-Image</h2><div class="code-block" data-lang="markup">
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.graalvm.nativeimage&lt;/groupId&gt;
+    &lt;artifactId&gt;svm&lt;/artifactId&gt;
+    &lt;version&gt;${graalvm.version}&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</div><p id="lc5os1_3764">Find GraalVm used to generate the native-image</p><div class="code-block" data-lang="bash">
+$ strings -a $(which native-image) | grep -i com.oracle.svm.core.VM
+</div><div class="code-block" data-lang="bash">
+$ git commit --allow-empty -m &quot;empty commit&quot;
+</div><ul class="list _bullet" id="lc5os1_3767"><li class="list__item" id="lc5os1_3768"><p>https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata</p></li><li class="list__item" id="lc5os1_3769"><p>https://www.graalvm.org/dev/reference-manual/native-image/StaticImages/</p></li><li class="list__item" id="lc5os1_3770"><p>Github Action: https://github.com/helpermethod/graalvm-native-image-toolchain</p></li><li class="list__item" id="lc5os1_3771"><p>https://github.com/graalvm/graalvm-ce-dev-builds/releases/</p></li><li class="list__item" id="lc5os1_3772"><p>https://search.maven.org/artifact/org.graalvm.nativeimage/svm/20.0.0/jar</p></li></ul></section><section class="chapter"><h2 id="blogs" data-toc="blogs">Blogs</h2><ul class="list _bullet" id="lc5os1_3773"><li class="list__item" id="lc5os1_3774"><p>https://www.marcobehler.com/guides/jdbc</p></li><li class="list__item" id="lc5os1_3775"><p>https://www.marcobehler.com/guides/java-databases</p></li><li class="list__item" id="lc5os1_3776"><p>https://vladmihalcea.com/jdbc-driver-maven-dependency/</p></li><li class="list__item" id="lc5os1_3777"><p>https://vladmihalcea.com/jdbc-driver-connection-url-strings/</p></li><li class="list__item" id="lc5os1_3778"><p>Tools </p><ul class="list _bullet" id="lc5os1_3779"><li class="list__item" id="lc5os1_3780"><p>https://utteranc.es/ - Comments Widgets</p></li><li class="list__item" id="lc5os1_3781"><p>https://orchid.run/wiki/learn/tutorials/how-to-document-kotlin</p></li><li class="list__item" id="lc5os1_3782"><p>http://casual-effects.com/markdeep/</p></li><li class="list__item" id="lc5os1_3783"><p>https://www.mkdocs.org/ (eg: https://github.com/hexagonkt/hexagon/tree/master/hexagon_site)</p></li><li class="list__item" id="lc5os1_3784"><p>Github publish example </p><ul class="list _bullet" id="lc5os1_3785"><li class="list__item" id="lc5os1_3786"><p>https://github.com/hexagonkt/hexagon/blob/master/.github/workflows/main.yml</p></li></ul></li></ul></li></ul></section><section class="chapter"><h2 id="awesome-svgs" data-toc="awesome-svgs">Awesome Svgs</h2><section class="chapter"><h3 id="illustrations" data-toc="illustrations">Illustrations</h3><ul class="list _bullet" id="lc5os1_3787"><li class="list__item" id="lc5os1_3788"><p>https://undraw.co/illustrations</p></li><li class="list__item" id="lc5os1_3789"><p>https://www.manypixels.co/gallery/</p></li><li class="list__item" id="lc5os1_3790"><p>https://www.pixeltrue.com/free-illustrations</p></li></ul></section><section class="chapter"><h3 id="background" data-toc="background">Background</h3><ul class="list _bullet" id="lc5os1_3791"><li class="list__item" id="lc5os1_3792"><p>https://www.svgbackgrounds.com/</p></li></ul></section><section class="chapter"><h3 id="icons" data-toc="icons">Icons</h3><ul class="list _bullet" id="lc5os1_3793"><li class="list__item" id="lc5os1_3794"><p>https://icons.getbootstrap.com/</p></li><li class="list__item" id="lc5os1_3795"><p>https://material.io/resources/icons/?style=baseline (not sag)</p></li><li class="list__item" id="lc5os1_3796"><p>https://fontawesome.com/v4.7.0/icons/ (not sag)</p></li><li class="list__item" id="lc5os1_3797"><p>https://simpleicons.org/ (Brand Icons - good one)</p></li><li class="list__item" id="lc5os1_3798"><p>https://github.com/microsoft/fluentui-system-icons</p></li><li class="list__item" id="lc5os1_3799"><p>https://tablericons.com/</p></li><li class="list__item" id="lc5os1_3800"><p>https://tabler-icons.io/</p></li><li class="list__item" id="lc5os1_3801"><p>https://systemuicons.com/</p></li><li class="list__item" id="lc5os1_3802"><p>https://github.com/c5inco/intellij-icons-compose</p></li><li class="list__item" id="lc5os1_3803"><p>https://www.visiwig.com/icons/</p></li><li class="list__item" id="lc5os1_3804"><p>https://standart.io/</p></li><li class="list__item" id="lc5os1_3805"><p>https://thenounproject.com/</p></li><li class="list__item" id="lc5os1_3806"><p>https://www.flaticon.com/</p></li><li class="list__item" id="lc5os1_3807"><p>https://www.iconfinder.com/</p></li><li class="list__item" id="lc5os1_3808"><p>https://ionicons.com/</p></li><li class="list__item" id="lc5os1_3809"><p>https://icons8.com/</p></li><li class="list__item" id="lc5os1_3810"><p>https://github.com/game-icons/icons</p></li></ul></section><section class="chapter"><h3 id="emojis" data-toc="emojis">Emojis</h3><ul class="list _bullet" id="lc5os1_3811"><li class="list__item" id="lc5os1_3812"><p>https://emojipedia.org/search/</p></li><li class="list__item" id="lc5os1_3813"><p>https://github.com/twitter/twemoji/tree/master/assets</p></li></ul></section><section class="chapter"><h3 id="awesome-list" data-toc="awesome-list">Awesome List</h3><ul class="list _bullet" id="lc5os1_3814"><li class="list__item" id="lc5os1_3815"><p>https://github.com/vkarampinis/awesome-icons</p></li><li class="list__item" id="lc5os1_3816"><p>https://github.com/notlmn/awesome-icons</p></li><li class="list__item" id="lc5os1_3817"><p>https://github.com/ikatyang/emoji-cheat-sheet</p></li></ul></section><section class="chapter"><h3 id="tools" data-toc="tools">Tools</h3><ul class="list _bullet" id="lc5os1_3818"><li class="list__item" id="lc5os1_3819"><p>https://jakearchibald.github.io/svgomg/</p></li><li class="list__item" id="lc5os1_3820"><p>https://css-tricks.com/tools-for-optimizing-svg/</p></li><li class="list__item" id="lc5os1_3821"><p>https://imageoptim.com/mac</p></li><li class="list__item" id="lc5os1_3822"><p>https://xmlgraphics.apache.org/batik/</p></li><li class="list__item" id="lc5os1_3823"><p>https://github.com/svg/svgo-osx-folder-action</p></li></ul><div class="code-block" data-lang="bash">
+$ pip3 install mkdocs-macros-plugin
+$ ./gradlew dokka
+$ cp  docs/mkdocs.yml build/dokka
+$ cp -R docs/images build/dokka/my-app
+$ cp CHANGELOG.md build/dokka/my-app/CHANGELOG.md
+$ cp README.md build/dokka/my-app/Overview.md
+$ Fix the img reference on Overview.md
+$ cd build/dokka
+$ mkdocs build
+</div></section></section><div class="last-modified">Last modified: 15 March 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="containers.html" class="navigation-links__next">Containers &amp; K8S</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="frontend/app.js"></script></body></html>

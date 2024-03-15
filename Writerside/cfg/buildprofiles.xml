@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
+
+    <variables>
+        <primary-color>emerald</primary-color>
+        <color-preset>vivid</color-preset>
+        <web-root>https://suresh.dev/</web-root>
+        <header-logo>header-logo.png</header-logo>
+        <product-web-url>https://suresh.dev/</product-web-url>
+        <search-scope/>
+        <download-title>suresh.dev</download-title>
+        <download-page>https://suresh.dev</download-page>
+        <showDownloadButton>true</showDownloadButton>
+        <offline-docs>true</offline-docs>
+        <og-twitter>@sur3shg</og-twitter>
+    </variables>
+
+    <footer>
+        <copyright>Suresh 2024</copyright>
+        <social type="blog" href="https://suresh.dev/notes"/>
+        <social type="twitter" href="https://twitter.com/sur3shg"/>
+        <link href="https://github.com/sureshg">Github</link>
+    </footer>
+</buildprofiles>
