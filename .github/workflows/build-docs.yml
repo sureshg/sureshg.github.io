@@ -23,8 +23,10 @@ env:
   INSTANCE: 'Writerside/notes'
   ARTIFACT: 'webHelpNOTES2-all.zip'
   DOCKER_VERSION: '233.14938'
+  ALGOLIA_ARTIFACT: 'algolia-indexes-NOTES.zip'
   ALGOLIA_APP_NAME: 'QD1IR5ST5F'
   ALGOLIA_INDEX_NAME: 'suresh.dev.index'
+  ALGOLIA_KEY: '${{ secrets.ALGOLIA_KEY }}'
   CONFIG_JSON_PRODUCT: 'NOTES'
   CONFIG_JSON_VERSION: '1.0'
 
@@ -42,13 +44,14 @@ jobs:
           artifact: ${{ env.ARTIFACT }}
           docker-version: ${{ env.DOCKER_VERSION }}
 
-      - name: 📤 Save artifact with build results
+      - name: 📤 Upload Docs and Search Index artifacts
         uses: actions/upload-artifact@v4
         with:
           name: docs
           path: |
             artifacts/${{ env.ARTIFACT }}
             artifacts/report.json
+            artifacts/${{ env.ALGOLIA_ARTIFACT }}
           retention-days: 7
 
   test:
@@ -100,7 +103,7 @@ jobs:
   #      - name: Package and upload Pages artifact
   #        uses: actions/upload-pages-artifact@v3
   #        with:
-  #          path: dir
+  #          path: notesDir
   #
   #      - name: Deploy to GitHub Pages
   #        id: deployment
@@ -119,12 +122,12 @@ jobs:
 
       - name: 🔍 Publish Search Index
         run: |
-          unzip -O UTF-8 -qq '${{ env.ARTIFACT }}' -d algolia-indexes
-          env algolia-key='${{ secrets.ALGOLIA_KEY }}' java -jar /opt/builder/help-publication-agent.jar \
+          unzip -O UTF-8 -qq '${{ env.ALGOLIA_ARTIFACT }}' -d algolia-indexes
+          env algolia-key='${{ env.ALGOLIA_KEY }}' java -jar /opt/builder/help-publication-agent.jar \
           update-index \
-          --application-name '${{ env.ALGOLIA_APP_NAME }}' \
+          --application-name '${{env.ALGOLIA_APP_NAME}}' \
           --index-name '${{env.ALGOLIA_INDEX_NAME}}' \
           --product '${{env.CONFIG_JSON_PRODUCT}}' \
           --version '${{env.CONFIG_JSON_VERSION}}' \
           --index-directory algolia-indexes/ \
-            2>&1 | tee algolia-update-index-log.txt
+          2>&1 | tee algolia-update-index-log.txt
