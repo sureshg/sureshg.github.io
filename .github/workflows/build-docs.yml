@@ -8,6 +8,7 @@ on:
       - '*'
     paths:
       - Writerside/**
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
