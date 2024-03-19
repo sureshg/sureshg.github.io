@@ -13,9 +13,6 @@
         <download-page>https://suresh.dev</download-page>
         <showDownloadButton>true</showDownloadButton>
         <og-twitter>@sur3shg</og-twitter>
-        <noindex-content>false</noindex-content>
-        <offline-docs>true</offline-docs>
-
         <algolia-id>QD1IR5ST5F</algolia-id>
         <algolia-index>suresh.dev.index</algolia-index>
         <algolia-api-key>e205ec1712a2f745af4bdb1224d7f3e9</algolia-api-key>
@@ -28,7 +25,14 @@
         <link href="https://github.com/sureshg">Github</link>
     </footer>
 
-    <build-profile instance="b">
+    <build-profile instance="blog">
+        <variables>
+            <noindex-content>false</noindex-content>
+            <offline-docs>true</offline-docs>
+        </variables>
+    </build-profile>
+
+    <build-profile instance="notes">
         <variables>
             <noindex-content>false</noindex-content>
             <offline-docs>true</offline-docs>

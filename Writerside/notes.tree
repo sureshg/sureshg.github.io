@@ -2,10 +2,9 @@
 <!DOCTYPE instance-profile
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
-<instance-profile id="n"
+<instance-profile id="notes"
                   name="Suresh's Tech Notes"
                   start-page="Containers.md">
-
     <toc-element toc-title="1. API Doc"
                  target-for-accept-web-file-names="https://suresh.dev/kotlin-mpp-playground/docs/"/>
     <toc-element toc-title="2. OpenJDK" topic="OpenJDK.md"/>
