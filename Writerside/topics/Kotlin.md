@@ -1,7 +1,6 @@
 # Kotlin
 
 <!-- TOC -->
-
 * [Kotlin](#kotlin)
     * [Kotlin Compiler Options](#kotlin-compiler-options)
     * [Native Image](#native-image)
@@ -10,7 +9,6 @@
     * [Misc](#misc)
         * [Math](#math)
     * [OpenAPI Doc](#openapi-doc)
-
 <!-- TOC -->
 
 <tldr>
