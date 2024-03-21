@@ -1,6 +1,7 @@
 # Kotlin
 
 <!-- TOC -->
+
 * [Kotlin](#kotlin)
     * [Kotlin Compiler Options](#kotlin-compiler-options)
     * [Native Image](#native-image)
@@ -9,6 +10,7 @@
     * [Misc](#misc)
         * [Math](#math)
     * [OpenAPI Doc](#openapi-doc)
+
 <!-- TOC -->
 
 <tldr>
@@ -79,7 +81,8 @@ $ strings -a app | grep -i com.oracle.svm.core.VM
 
 {src="kotlin/App.kt" lang="kotlin" validate="true" }
 
-Download <res resource-id="movie-data" id="movie-data"  instance="n" />
+Download
+<res resource-id="movie-data" id="movie-data"  instance="notes" />
 
 ### Misc
 
