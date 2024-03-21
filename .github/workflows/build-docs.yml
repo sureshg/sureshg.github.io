@@ -37,8 +37,8 @@ jobs:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🏗️ Build docs using Writerside Docker builder
-        uses: JetBrains/writerside-github-action@v5
+      - name: 🏗️ Build Writerside docs using Docker
+        uses: JetBrains/writerside-github-action@v4
         with:
           instance: ${{ env.INSTANCE }}
           artifact: ${{ env.ARTIFACT }}
