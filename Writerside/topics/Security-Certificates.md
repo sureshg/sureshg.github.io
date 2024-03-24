@@ -6,6 +6,8 @@
     * [OpenSSL & Keytool](#openssl--keytool)
     * [OpenJDK](#openjdk)
     * [Self Signed Certs](#self-signed-certs)
+      * [Using OpenSSL](#using-openssl)
+      * [Using OpenJDK Keytool](#using-openjdk-keytool)
     * [cURL: Auth/Mutual TLS](#curl-authmutual-tls)
     * [Add CACerts](#add-cacerts)
     * [GPG/OpenPGP](#gpgopenpgp)
@@ -51,15 +53,28 @@ $ curl -vvI https://google.com 2>&1 | grep -i date
 
 ```bash
 # Create/Add trust store
-$ keytool -importcert -trustcacerts -alias globalsign-rootca -storetype PKCS12 -keystore globalsign-rootca.p12 -storepass changeit -file globalsign.crt
+$ keytool -importcert \
+          -trustcacerts \
+          -alias globalsign-rootca \
+          -storetype PKCS12 \
+          -keystore globalsign-rootca.p12 \
+          -storepass changeit \
+          -file globalsign.crt
 
 # Add intermediate certs (Optional)
-$ keytool -importcert -keystore globalsign-rootca.p12 -alias CA-intermediate -storepass changeit -file CA-intermediate.cer
+$ keytool -importcert \
+          -keystore globalsign-rootca.p12 \
+          -alias CA-intermediate \
+          -storepass changeit \
+          -file CA-intermediate.cer
 
 # Show PKCS#12 info.
 $ openssl pkcs12 -info -password pass:changeit -in globalsign-rootca.p12
-$ keytool -list -keystore globalsign-rootca.p12 --storetype pkcs12 -storepass changeit -v
-
+$ keytool -list \
+          -keystore globalsign-rootca.p12 \
+          --storetype pkcs12 \
+          -storepass changeit \
+          -v
 
 # OpenSSL: Create a new PKCS#12 store from certs
 $ openssl pkcs12 -export -chain -out keystore.p12 \
@@ -163,16 +178,14 @@ $ awk -v cmd='openssl x509 -noout -subject -dates ' '/BEGIN/{close(cmd)};{print 
 
 ### Self Signed Certs
 
-* [Add self-generated RootCA to OSes](https://www.bounca.org/tutorials/install_root_certificate.html)
-
-* [Setup CA on CentsOs](https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-a-certificate-authority-ca-on-centos-8)
+#### Using OpenSSL
 
 ```bash
-# For OpenSSL ≥ 1.1.1
 $ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
           -keyout example.key -out example.pem \
           -subj "/C=US/ST=CA/L=SanJose/O=Company Name/OU=Org/CN=www.example.com" \
           -addext "subjectAltName=DNS:example.com,DNS:www.example.net,IP:10.0.0.1"
+
 # For ECC
 $ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -days 3650 \
           -nodes -keyout example.key -out example.pem -subj "/CN=localhost" \
@@ -180,6 +193,7 @@ $ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -days 3650 \
 
 # See certificate details (in text format, no cert output)
 $ openssl x509 -in example.pem -text -noout
+
 # Instead of text form, just print subject/issuer/dates
 $ openssl x509 -in example.pem -noout -subject -issuer -dates
 
@@ -199,7 +213,6 @@ $ diff <(openssl x509 -pubkey -in example.pem -noout) <(openssl pkey -check -in 
 # OR create a test TLS server that will verify that a key and certificate match
 $ openssl s_server -accept 443 -www -key example.key -cert example.pem
 
-
 # Using OpenSSL ≤ 1.1.0
 $ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
           -keyout example.key -out example.pem -subj "/CN=example.com" \
@@ -208,6 +221,40 @@ $ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
           echo '[san]'; echo 'subjectAltName=DNS:example.com,DNS:www.example.net,IP:10.0.0.1')
 
 ```
+
+#### Using OpenJDK Keytool
+
+```Bash
+# Generate self signed cert
+$ keytool -genkeypair \
+          -keyalg RSA \
+          -keysize 4096 \
+          -sigalg SHA256withRSA \
+          -alias server \
+          -storetype JKS \
+          -keystore keystore.jks \
+          -storepass changeit \
+          -keypass changeit \
+          -dname "CN=localhost, OU=app, O=app, L=Unspecified, ST=Unspecified, C=US" \
+          -ext "SAN=dns:test.server.com,ip:127.0.0.1" \
+          -validity 7200
+
+# Migrate from  JKS to PKCS12 
+$ keytool -importkeystore \
+          -srckeystore keystore.jks \
+          -srcstoretype JKS \
+          -srcstorepass changeit \
+          -destkeystore keystore.p12 \
+          -deststoretype PKCS12 \
+          -deststorepass changeit
+          
+# List cert entries
+$ keytool -keystore keystore.jks -storepass changeit -list -v          
+```
+
+* [Add self-generated RootCA to OSes](https://www.bounca.org/tutorials/install_root_certificate.html)
+
+* [Setup CA on CentsOs](https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-a-certificate-authority-ca-on-centos-8)
 
 ### cURL: Auth/Mutual TLS
 
@@ -267,7 +314,11 @@ $ curl -v \
 
   ```bash
   $ cacerts="$(find "$HOME/Library/Application Support/JetBrains/IntelliJIdea2022.3" -name cacerts)"
-  $ keytool -list -keystore "$cacerts" -storetype pkcs12 -storepass changeit
+  $ keytool -list \
+            -keystore "$cacerts" \
+            -storetype pkcs12 \
+            -storepass changeit
+  
   $ keytool -importcert \
             -trustcacerts \
             -alias rootca \
@@ -275,7 +326,11 @@ $ curl -v \
             -keystore $cacerts \
             -storepass changeit \
             -file "$HOME/Desktop/RootCA-SHA256.crt"
-  $ keytool -list -keystore "$cacerts" -storetype pkcs12 -storepass changeit
+  
+  $ keytool -list \
+            -keystore "$cacerts" \
+            -storetype pkcs12 \
+            -storepass changeit
   ```
 
 ### GPG/OpenPGP
