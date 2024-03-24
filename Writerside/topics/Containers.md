@@ -1,13 +1,15 @@
 # Containers & K8S
 
 <!-- TOC -->
+
 * [Containers & K8S](#containers--k8s)
     * [OpenJDK Container Images](#openjdk-container-images)
-        * [Oracle JDK (NFTC)](#oracle-jdk-nftc)
+    * [Oracle JDK (NFTC)](#oracle-jdk-nftc)
     * [Docker Commands](#docker-commands)
     * [Debug Container](#debug-container)
     * [JVM Ergonomics and Container logs](#jvm-ergonomics-and-container-logs)
     * [JVM default GC](#jvm-default-gc)
+    * [Container Sandbox](#container-sandbox)
     * [App Running on K8S/Docker](#app-running-on-k8sdocker)
     * [Access Docker desktop LinuxKit VM on MacOS](#access-docker-desktop-linuxkit-vm-on-macos)
     * [Multi Architecture Support](#multi-architecture-support)
@@ -16,7 +18,8 @@
     * [Container Tools {collapsible="true"}](#container-tools-collapsibletrue)
     * [Jlink {collapsible="true"}](#jlink-collapsibletrue)
     * [Documentation {collapsible="true"}](#documentation-collapsibletrue)
-  * [Git {collapsible="true"}](#git-collapsibletrue)
+    * [Git {collapsible="true"}](#git-collapsibletrue)
+
 <!-- TOC -->
 
 ### OpenJDK Container Images
@@ -25,28 +28,26 @@
 # Distroless Java Images
 # https://console.cloud.google.com/gcr/images/distroless/GLOBAL
 # https://github.com/GoogleContainerTools/distroless#what-images-are-available
-$ docker pull gcr.io/distroless/java-base-debian11:latest
-$ docker pull gcr.io/distroless/java17-debian11:latest
+$ docker pull gcr.io/distroless/java-base-debian12:latest
+$ docker pull gcr.io/distroless/java21-debian12:latest
 
 # Distroless Static & Base
-$ docker pull gcr.io/distroless/static-debian11:latest
-$ docker pull gcr.io/distroless/base-debian11:latest
+$ docker pull gcr.io/distroless/static-debian12:latest
+$ docker pull gcr.io/distroless/base-debian12:latest
 
 # GraalVM native-image base
-$ docker pull cgr.dev/chainguard/graalvm-native-image-base:latest
-$ docker pull cgr.dev/chainguard/static:latest
+$ docker pull cgr.dev/chainguard/graalvm-native:latest
+$ docker pull cgr.dev/chainguard/static:latest-glibc
 $ docker pull cgr.dev/chainguard/jdk:latest
 
 # Openjdk
 # https://github.com/docker-library/openjdk
 $ docker pull openjdk:23-slim
-$ docker pull openjdk:23-jdk-oracle
-$ docker pull openjdk:19-alpine
 
 # Eclipse Temurin
 # https://github.com/adoptium/containers#supported-images
-$ docker pull eclipse-temurin:20-jdk
-$ docker pull eclipse-temurin:20-alpine
+$ docker pull eclipse-temurin:21-jdk
+$ docker pull eclipse-temurin:21-alpine
 
 # Oracle OpenJDK
 $ docker pull container-registry.oracle.com/java/openjdk:latest
@@ -57,19 +58,19 @@ $ docker pull container-registry.oracle.com/java/jdk:latest
 
 # Azul Zulu
 # https://github.com/zulu-openjdk/zulu-openjdk
-$ docker pull azul/zulu-openjdk-debian:20-jre
-$ docker pull azul/zulu-openjdk-alpine:20-jre
+$ docker pull azul/zulu-openjdk-debian:21-jre
+$ docker pull azul/zulu-openjdk-alpine:21-jre
 $ docker pull azul/prime-debian:latest
 
 # Amazon Corretto
-# https://github.com/corretto/corretto-docker/tree/main/20/slim
-$ docker pull amazoncorretto:20
-$ docker pull amazoncorretto:20-alpine-jdk
+# https://github.com/corretto/corretto-docker
+$ docker pull amazoncorretto:21
+$ docker pull amazoncorretto:21-alpine-jdk
 
 # Microsoft OpenJDK
 # https://learn.microsoft.com/en-us/java/openjdk/containers
-$ docker pull mcr.microsoft.com/openjdk/jdk:17-ubuntu
-$ docker pull mcr.microsoft.com/openjdk/jdk:17-distroless
+$ docker pull mcr.microsoft.com/openjdk/jdk:21-ubuntu
+$ docker pull mcr.microsoft.com/openjdk/jdk:21-distroless
 
 # Liberica
 # https://github.com/bell-sw/Liberica/tree/master/docker/repos/liberica-openjre-debian
@@ -78,17 +79,13 @@ $ docker pull bellsoft/liberica-openjdk-alpine-musl:latest
 $ docker pull bellsoft/liberica-openjdk-alpine:latest (libc)
 
 # GraalVM CE & EE
-# https://github.com/orgs/graalvm/packages
+# https://github.com/graalvm/container
 $ docker pull ghcr.io/graalvm/graalvm-community:latest
-$ docker pull ghcr.io/graalvm/native-image-community:latest
 $ docker pull ghcr.io/graalvm/native-image-community:muslib
 $ docker pull container-registry.oracle.com/graalvm/native-image:latest
 
 # GraalVM CE Dev Builds (No docker images available)
 https://github.com/graalvm/graalvm-ce-dev-builds/releases/
-
-# GraalVM builds from Gluon
-https://github.com/gluonhq/graal/releases
 
 # Jetbrains Runtime (No docker images available)
 https://github.com/JetBrains/JetBrainsRuntime/releases
@@ -97,9 +94,6 @@ https://github.com/JetBrains/JetBrainsRuntime/releases
 # https://github.com/mdogan/homebrew-zulu
 $ brew tap mdogan/zulu
 $ brew install <name>
-
-# Examples
-$ docker run -it --rm gcr.io/distroless/java-debian11:base-nonroot openssl s_client --connect google.com:443
 ```
 
 - https://hub.docker.com/_/openjdk
@@ -107,7 +101,7 @@ $ docker run -it --rm gcr.io/distroless/java-debian11:base-nonroot openssl s_cli
 - https://container-registry.oracle.com/java/openjdk
 - https://www.graalvm.org/docs/getting-started/container-images/
 
-##### Oracle JDK (NFTC)
+### Oracle JDK (NFTC)
 
 * [Oracle Java SE Downloads](https://www.oracle.com/javadownload)
 * [Oracle Java Archive](https://www.oracle.com/java/technologies/java-archive.html)
@@ -120,23 +114,15 @@ $ docker run -it --rm gcr.io/distroless/java-debian11:base-nonroot openssl s_cli
 $ docker system prune -af
 
 # Docker Run
-$ docker run -it --rm \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v "$HOME/app.yaml":"$HOME/app.yaml" \
-      -v  "$(pwd)":"$(pwd)":rw \
-      --workdir "$(pwd)" \
-      --entrypoint="run" \
-      ghcr.io/sureshg/containers:openjdk-latest
-
-# CMD (windows)
-$ docker run -it --rm ^
-    -v /var/run/docker.sock:/var/run/docker.sock ^
-    -v "%cd%"/app:/app:rw ^
-    --entrypoint="run" ^
-    ghcr.io/sureshg/containers:openjdk-latest
-
-# Find container IPAddress
-$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' openjdk
+$ docker run \
+        -it \
+        --rm \
+        --pull always \
+        --workdir /app \
+        --publish 8080:8080 \
+        --name app \
+        --mount type=bind,source=$PWD,destination=/app,readonly \
+        openjdk:23-slim       
 ```
 
 ### [Debug Container](https://github.com/iximiuz/cdebug)
@@ -243,6 +229,50 @@ $ docker run -it --rm --cpus=1 --memory=1G openjdk:23-slim java -Xlog:gc --versi
 * [**Stop using CPU limits on Kubernetes**](https://home.robusta.dev/blog/stop-using-cpu-limits)
 * [JVM ergonomics](https://www.youtube.com/watch?v=wApqCjHWF8Q)
 * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+### Container Sandbox
+
+```Bash
+$ docker run \
+         -it --rm \
+         --cpus="0.5" \
+         --memory="512m" \
+         --memory-swap="640m" \
+         --pids-limit 512 \
+         --cap-drop=ALL \
+         --cap-add=DAC_OVERRIDE \
+         --security-opt=no-new-privileges \
+         --ulimit nproc=20:20 \
+         --ulimit fsize=1000000 \
+         --user nobody \
+         --network none \
+         --read-only \
+         --tmpfs /tmp \
+         --name sandboxed \
+         --workdir /app \
+         --mount type=bind,source=$PWD,destination=/app,readonly \
+         --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly \
+         --mount type=bind,source=/usr/bin/docker,destination=/usr/bin/docker,readonly \
+         --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
+         --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
+         openjdk:23-slim java --enable-preview src/App.java
+         
+# --security-opt seccomp=my_sandbox
+# --cap-add=chown \
+# --cap-add=setgid \
+# --cap-add=setuid \
+# --cap-add=sys_chroot \
+# --cap-add=audit_write \
+# --cap-add=kill \
+# --cap-add=sys_tty_config \
+# --cap-add=DAC_OVERRIDE - Needed to allow overwriting the file
+
+# Create nobody user
+# RUN useradd --shell /bin/sh --create-home --uid 65534 nobody        
+```  
+
+* [Secure Computing Mode - seccomp](https://docs.docker.com/engine/security/seccomp/)
+* [https://run.mccue.dev](https://github.com/bowbahdoe/run-java-code/blob/main/ui/src/sandbox.rs#L109)
 
 ### App Running on K8S/Docker
 
@@ -365,10 +395,10 @@ ENV HTTP_PROXY="http://proxy.test.com:8080"
 ENV HTTPS_PROXY="http://proxy.test.com:8080"
 ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 ```
+
 ### Container Runtime Interface
 
 ![Container Runtimes](containers.svg){ width="450px" border-effect="none" style="block" thumbnail="true" }
-
 
 ### Container Tools {collapsible="true"}
 

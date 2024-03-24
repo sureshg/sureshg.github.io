@@ -6,6 +6,7 @@
         <primary-color>emerald</primary-color>
         <color-preset>vivid</color-preset>
         <web-root>https://suresh.dev/</web-root>
+        <custom-favicons>favicon.ico</custom-favicons>
         <header-logo>header-logo.png</header-logo>
         <product-web-url>https://suresh.dev/</product-web-url>
         <search-scope/>
