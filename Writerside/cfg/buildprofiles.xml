@@ -18,6 +18,10 @@
         <algolia-index>suresh.dev.index</algolia-index>
         <algolia-api-key>e205ec1712a2f745af4bdb1224d7f3e9</algolia-api-key>
     </variables>
+    
+    <icons>
+        <local-src>images</local-src>
+    </icons>
 
     <footer>
         <copyright>Suresh 2024</copyright>

@@ -17,7 +17,7 @@
     * [Container Tools {collapsible="true"}](#container-tools-collapsibletrue)
     * [Jlink {collapsible="true"}](#jlink-collapsibletrue)
     * [Documentation {collapsible="true"}](#documentation-collapsibletrue)
-  * [Git {collapsible="true"}](#git-collapsibletrue)
+    * [Git {collapsible="true"}](#git-collapsibletrue)
 <!-- TOC -->
 
 ### OpenJDK Container Images
@@ -440,6 +440,6 @@ ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 * https://www.morling.dev/blog/smaller-faster-starting-container-images-with-jlink-and-appcds/
 * https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/
 
-## Git {collapsible="true"}
+### Git {collapsible="true"}
 
 * https://github.com/newren/git-filter-repo

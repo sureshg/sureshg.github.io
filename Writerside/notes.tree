@@ -13,7 +13,7 @@
     <toc-element toc-title="5. Linux" topic="Linux.md"/>
     <toc-element toc-title="6. Kotlin" topic="Kotlin.md"/>
     <toc-element toc-title="7. Publishing" topic="Publishing.md"/>
-    <toc-element toc-title="9. Readings" topic="Readings.md"/>
+    <toc-element toc-title="8. Readings" topic="Readings.md"/>
     <toc-element toc-title="9. Misc">
         <toc-element toc-title="API Doc"
                      target-for-accept-web-file-names="https://suresh.dev/kotlin-mpp-playground/docs/"/>

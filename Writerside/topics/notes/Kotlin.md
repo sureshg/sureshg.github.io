@@ -74,6 +74,8 @@ $ strings -a app | grep -i com.oracle.svm.core.VM
 
 ### Samples
 
+<icon src="kodee-loving.png" height="100" width="100"/>
+
 ```kotlin
 ```
 
