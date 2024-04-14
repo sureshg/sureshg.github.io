@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="Home" id="Home" help-id="Home-Page">
+
+    <section-starting-page>
+        <title>Tech Notes</title>
+        <description>
+            Curated technical insights: Notes, links, and commands.
+        </description>
+
+        <spotlight>
+            <a href="OpenJDK.md" type="start" summary="OpenJDK/JVM">OpenJDK/JVM</a>
+            <a href="Kotlin.md" type="cross-platform" summary="Kotlin">Kotlin</a>
+
+        </spotlight>
+
+        <primary>
+            <title>Containers</title>
+            <a href="Containers.md" type="container" summary="Containers and Kubernetes">Containers and K8S</a>
+            <a href="Linux.md" type="server" summary="Linux">Linux</a>
+        </primary>
+
+        <secondary>
+            <title>Profiling & Security</title>
+            <a href="Security-Certificates.md" type="key" summary="Certificate and Security">Certificate and
+                Security</a>
+            <a href="JVM-Profiling.md" type="tools" summary="JVM Profiling">JVM Profiling</a>
+        </secondary>
+
+        <misc>
+            <cards narrow="true">
+                <title>Misc</title>
+                <a href="Publishing.md" type="open-source" summary="Artifact Publishing">Publishing</a>
+                <a href="Readings.md" type="check-list" summary="Reading List">Reading</a>
+            </cards>
+
+            <links narrow="true">
+                <group>
+                    <title>Links</title>
+                    <a href=""/>
+                    <a href="https://suresh.dev/kotlin-mpp-playground/docs/" summary="Dokka API Doc">API Doc</a>
+                </group>
+
+                <group>
+                    <title>Apps</title>
+                    <a href="https://suresh.dev/kotlin-mpp-playground/app/" summary="Kotlin Multiplatform App">Kotlin
+                        Multiplatform App</a>
+                </group>
+
+            </links>
+        </misc>
+    </section-starting-page>
+
+</topic>

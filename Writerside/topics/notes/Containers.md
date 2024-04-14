@@ -1,7 +1,6 @@
 # Containers & K8S
 
 <!-- TOC -->
-
 * [Containers & K8S](#containers--k8s)
     * [OpenJDK Container Images](#openjdk-container-images)
     * [Oracle JDK (NFTC)](#oracle-jdk-nftc)
@@ -18,8 +17,7 @@
     * [Container Tools {collapsible="true"}](#container-tools-collapsibletrue)
     * [Jlink {collapsible="true"}](#jlink-collapsibletrue)
     * [Documentation {collapsible="true"}](#documentation-collapsibletrue)
-    * [Git {collapsible="true"}](#git-collapsibletrue)
-
+  * [Git {collapsible="true"}](#git-collapsibletrue)
 <!-- TOC -->
 
 ### OpenJDK Container Images

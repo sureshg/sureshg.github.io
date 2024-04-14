@@ -4,15 +4,19 @@
 
 <instance-profile id="notes"
                   name="Suresh's Tech Notes"
-                  start-page="Containers.md">
-    <toc-element toc-title="1. API Doc"
-                 target-for-accept-web-file-names="https://suresh.dev/kotlin-mpp-playground/docs/"/>
-    <toc-element toc-title="2. OpenJDK" topic="OpenJDK.md"/>
-    <toc-element toc-title="3. Containers" topic="Containers.md"/>
-    <toc-element toc-title="4. Security Certificates" topic="Security-Certificates.md"/>
-    <toc-element toc-title="5. JVM Profiling" topic="JVM-Profiling.md"/>
-    <toc-element toc-title="6. Linux" topic="Linux.md"/>
-    <toc-element toc-title="7. Kotlin" topic="Kotlin.md"/>
-    <toc-element toc-title="8. Publishing" topic="Publishing.md"/>
+                  start-page="Home.topic">
+    <toc-element topic="Home.topic"/>
+    <toc-element toc-title="1. OpenJDK" topic="OpenJDK.md"/>
+    <toc-element toc-title="2. Containers" topic="Containers.md"/>
+    <toc-element toc-title="3. Security Certificates" topic="Security-Certificates.md"/>
+    <toc-element toc-title="4. JVM Profiling" topic="JVM-Profiling.md"/>
+    <toc-element toc-title="5. Linux" topic="Linux.md"/>
+    <toc-element toc-title="6. Kotlin" topic="Kotlin.md"/>
+    <toc-element toc-title="7. Publishing" topic="Publishing.md"/>
     <toc-element toc-title="9. Readings" topic="Readings.md"/>
+    <toc-element toc-title="9. Misc">
+        <toc-element toc-title="API Doc"
+                     target-for-accept-web-file-names="https://suresh.dev/kotlin-mpp-playground/docs/"/>
+        <include from="shared" element-id="shared"/>
+    </toc-element>
 </instance-profile>
