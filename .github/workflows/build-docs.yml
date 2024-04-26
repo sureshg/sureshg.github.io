@@ -22,7 +22,7 @@ permissions:
 env:
   INSTANCE: 'Writerside/notes'
   ARTIFACT: 'webHelpNOTES2-all.zip'
-  DOCKER_VERSION: '233.14938'
+  DOCKER_VERSION: '241.15989'
   ALGOLIA_ARTIFACT: 'algolia-indexes-NOTES.zip'
   ALGOLIA_APP_NAME: 'QD1IR5ST5F'
   ALGOLIA_INDEX_NAME: 'suresh.dev.index'
@@ -36,9 +36,11 @@ jobs:
     steps:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: 🏗️ Build Writerside docs using Docker
-        uses: JetBrains/writerside-github-action@v4
+        uses: JetBrains/writerside-github-action@v5
         with:
           instance: ${{ env.INSTANCE }}
           artifact: ${{ env.ARTIFACT }}

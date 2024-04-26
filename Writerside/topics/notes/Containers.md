@@ -3,7 +3,6 @@
 <!-- TOC -->
 * [Containers & K8S](#containers--k8s)
     * [OpenJDK Container Images](#openjdk-container-images)
-    * [Oracle JDK (NFTC)](#oracle-jdk-nftc)
     * [Docker Commands](#docker-commands)
     * [Debug Container](#debug-container)
     * [JVM Ergonomics and Container logs](#jvm-ergonomics-and-container-logs)
@@ -17,7 +16,6 @@
     * [Container Tools {collapsible="true"}](#container-tools-collapsibletrue)
     * [Jlink {collapsible="true"}](#jlink-collapsibletrue)
     * [Documentation {collapsible="true"}](#documentation-collapsibletrue)
-    * [Git {collapsible="true"}](#git-collapsibletrue)
 <!-- TOC -->
 
 ### OpenJDK Container Images
@@ -99,29 +97,39 @@ $ brew install <name>
 - https://container-registry.oracle.com/java/openjdk
 - https://www.graalvm.org/docs/getting-started/container-images/
 
-### Oracle JDK (NFTC)
-
-* [Oracle Java SE Downloads](https://www.oracle.com/javadownload)
-* [Oracle Java Archive](https://www.oracle.com/java/technologies/java-archive.html)
-* [JDK Script Friendly URLs](https://www.oracle.com/java/technologies/jdk-script-friendly-urls/)
-
 ### Docker Commands
 
-```bash
-# Remove all unused images, not just dangling ones
-$ docker system prune -af
+* Docker Run
 
-# Docker Run
-$ docker run \
-        -it \
-        --rm \
-        --pull always \
-        --workdir /app \
-        --publish 8080:8080 \
-        --name app \
-        --mount type=bind,source=$PWD,destination=/app,readonly \
-        openjdk:23-slim       
-```
+   ```bash
+   # Remove all unused images, not just dangling ones
+   $ docker system prune -af
+   
+   # Docker Run
+   $ docker run \
+           -it \
+           --rm \
+           --pull always \
+           --workdir /app \
+           --publish 8080:8080 \
+           --name app \
+           --mount type=bind,source=$PWD,destination=/app,readonly \
+           openjdk:23-slim       
+   ```
+
+* Docker Image Size
+
+  ```Bash
+  # Compressed Size
+  $ docker image save ghcr.io/sureshg/containers:openjdk-latest | gzip | wc -c | numfmt --to=si
+  $ docker image save ghcr.io/sureshg/containers:nativeimage-latest | gzip | wc -c | numfmt --to=si
+  # OR
+  $ docker manifest inspect ghcr.io/sureshg/containers:openjdk-latest -v
+  
+  # Uncompressed Size
+  $ docker inspect -f "{{ .Size }}" sureshg/jvm | numfmt --to=si
+  $ docker history sureshg/jvm
+  ```
 
 ### [Debug Container](https://github.com/iximiuz/cdebug)
 
@@ -218,12 +226,12 @@ $ docker run \
 ### JVM default GC
 
 ```bash
-# https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/os.cpp#L1691
 # OpenJDK reverts to Serial GC when it detects < 2 CPUs or < 2GB RAM
 $ docker run -it --rm --cpus=1 --memory=1G openjdk:23-slim java -Xlog:gc --version
   #[0.007s][info][gc] Using Serial
 ```
 
+* [OpenJDK - is_server_class_machine](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/os.cpp#:~:text=is_server_class_machine)
 * [**Stop using CPU limits on Kubernetes**](https://home.robusta.dev/blog/stop-using-cpu-limits)
 * [JVM ergonomics](https://www.youtube.com/watch?v=wApqCjHWF8Q)
 * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
@@ -416,8 +424,6 @@ ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 * https://github.com/google/go-containerregistry/tree/main/cmd/crane
 * [Trivy - Container Scanning](https://github.com/aquasecurity/trivy)
 * [CoSign - Container Signing](https://github.com/sigstore/cosign)
-* [Kaniko - Build Images In Kubernetes](https://github.com/GoogleContainerTools/kaniko)
-* [Colima - Container runtimes on MacOS ](https://github.com/abiosoft/colima)
 
 ### Jlink {collapsible="true"}
 
@@ -440,6 +446,3 @@ ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 * https://www.morling.dev/blog/smaller-faster-starting-container-images-with-jlink-and-appcds/
 * https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/
 
-### Git {collapsible="true"}
-
-* https://github.com/newren/git-filter-repo

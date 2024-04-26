@@ -8,8 +8,8 @@
     * [Self Signed Certs](#self-signed-certs)
       * [Using OpenSSL](#using-openssl)
       * [Using OpenJDK Keytool](#using-openjdk-keytool)
-    * [cURL: Auth/Mutual TLS](#curl-authmutual-tls)
     * [Add CACerts](#add-cacerts)
+    * [cURL: Auth/Mutual TLS](#curl-authmutual-tls)
     * [GPG/OpenPGP](#gpgopenpgp)
     * [Tools](#tools)
     * [TLS Debugging](#tls-debugging)
@@ -32,19 +32,31 @@
 
 ```bash
 # Extract the server certificates.
-$ echo -n | openssl s_client -showcerts -connect google.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > globalsign.crt
+$ echo -n | openssl s_client -showcerts -connect google.com:443 \
+          | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > google.pem
 
 # OR use java keytool
 $ keytool -printcert -rfc -sslserver google.com:443 > google.pem
 
-# Show full cert chain (with subject and expiry)
-$ echo | openssl s_client -showcerts -connect google.com:443 2>/dev/null | while openssl x509 -noout -subject -dates 2>/dev/null; do : ; done
+# Show full cert chain (CN, SAN and Expiry) of TLS server
+$ echo | openssl s_client -showcerts -connect google.com:443 2>/dev/null \
+       | while openssl x509 -noout -subject -ext subjectAltName -issuer -dates -fingerprint 2>/dev/null; do echo "**************" ; done
 
-# Extract and show cert details
-$ echo | openssl s_client -showcerts -connect google.com:443 2>/dev/null | openssl x509 -inform pem -noout -text
+# Show just the cert details of a TLS server
+$ echo | openssl s_client -showcerts -connect google.com:443 2>/dev/null \
+       | openssl x509 -inform pem -noout -text
+
+# Show full cert chain of PEM
+$ cat cert.pem | while openssl x509 -noout -subject -ext subjectAltName -issuer -dates -fingerprint 2>/dev/null; do echo "**************" ; done
+$ keytool -printcert -file cert.pem | grep -i issuer
 
 # Extract TLS public keys in Cert pinning format
-$ openssl s_client -connect 'dns.google.com:443' 2>&1 < /dev/null | sed -n '/-----BEGIN/,/-----END/p' | openssl x509 -noout -pubkey | openssl asn1parse -noout -inform pem -out /dev/stdout | openssl dgst -sha256 -binary | openssl base64
+$ openssl s_client -connect 'dns.google.com:443' 2>&1 < /dev/null \
+         | sed -n '/-----BEGIN/,/-----END/p' \
+         | openssl x509 -noout -pubkey \
+         | openssl asn1parse -noout -inform pem -out /dev/stdout \
+         | openssl dgst -sha256 -binary \
+         | openssl base64
 
 $ curl -vvI https://google.com 2>&1 | grep -i date
 ```
@@ -130,9 +142,6 @@ $ while openssl x509 -noout -subject -issuer -dates; do echo ........... ; done 
 
 # Using java keytool
 $ keytool -printcert -file /etc/ssl/certs/ca-bundle.crt | grep -i issuer
-
-# Using some awk trick
-$ awk -v cmd='openssl x509 -noout -subject -dates ' '/BEGIN/{close(cmd)};{print | cmd}' < /etc/ssl/certs/ca-bundle.crt
 ```
 
 ### OpenJDK
@@ -195,7 +204,7 @@ $ openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -days 3650 \
 $ openssl x509 -in example.pem -text -noout
 
 # Instead of text form, just print subject/issuer/dates
-$ openssl x509 -in example.pem -noout -subject -issuer -dates
+$ openssl x509 -in example.pem -noout -subject -ext subjectAltName -issuer -dates  -fingerprint
 
 # Show SAN entries
 $ openssl x509 -text -in example.pem -noout | grep -A1 'Subject Alternative Name'
@@ -212,14 +221,6 @@ $ diff <(openssl x509 -pubkey -in example.pem -noout) <(openssl pkey -check -in 
 
 # OR create a test TLS server that will verify that a key and certificate match
 $ openssl s_server -accept 443 -www -key example.key -cert example.pem
-
-# Using OpenSSL ≤ 1.1.0
-$ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
-          -keyout example.key -out example.pem -subj "/CN=example.com" \
-          -extensions san \
-          -config <(echo '[req]'; echo 'distinguished_name=req';
-          echo '[san]'; echo 'subjectAltName=DNS:example.com,DNS:www.example.net,IP:10.0.0.1')
-
 ```
 
 #### Using OpenJDK Keytool
@@ -256,25 +257,6 @@ $ keytool -keystore keystore.jks -storepass changeit -list -v
 
 * [Setup CA on CentsOs](https://www.digitalocean.com/community/tutorials/how-to-set-up-and-configure-a-certificate-authority-ca-on-centos-8)
 
-### cURL: Auth/Mutual TLS
-
-```bash
-# mTLS Authentication using PKCS#12 bundle
-$ curl -v \
-       --cert-type P12 \
-       --cert ~/keystore.p12:xxxxx \
-       -X GET "https://my-server:443/api"
-
-
-# Mutual TLS using PEM files
-$ curl -v \
-       --cacert ca.pem \
-       --key client.key \
-       --cert client.pem \
-       --resolve "my-server:443:8.8.8.8" \
-       -X GET "https://my-server:443/api"
-```
-
 ### Add CACerts
 
 - To JDK Truststore
@@ -310,28 +292,24 @@ $ curl -v \
   popd >/dev/null || exit 1
   ```
 
-- IntelliJ Truststore
+### cURL: Auth/Mutual TLS
 
-  ```bash
-  $ cacerts="$(find "$HOME/Library/Application Support/JetBrains/IntelliJIdea2022.3" -name cacerts)"
-  $ keytool -list \
-            -keystore "$cacerts" \
-            -storetype pkcs12 \
-            -storepass changeit
-  
-  $ keytool -importcert \
-            -trustcacerts \
-            -alias rootca \
-            -storetype PKCS12 \
-            -keystore $cacerts \
-            -storepass changeit \
-            -file "$HOME/Desktop/RootCA-SHA256.crt"
-  
-  $ keytool -list \
-            -keystore "$cacerts" \
-            -storetype pkcs12 \
-            -storepass changeit
-  ```
+```bash
+# mTLS Authentication using PKCS#12 bundle
+$ curl -v \
+       --cert-type P12 \
+       --cert ~/keystore.p12:xxxxx \
+       -X GET "https://my-server:443/api"
+
+
+# Mutual TLS using PEM files
+$ curl -v \
+       --cacert ca.pem \
+       --key client.key \
+       --cert client.pem \
+       --resolve "my-server:443:8.8.8.8" \
+       -X GET "https://my-server:443/api"
+```
 
 ### GPG/OpenPGP
 
