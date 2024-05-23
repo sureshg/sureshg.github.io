@@ -13,11 +13,12 @@
 
 <tldr>
  <p>
-   Shortcut: <shortcut>CMD + SPACE</shortcut>
+   Shortcut: <shortcut>CMD + SPACE</shortcut> 
 </p>
- <p>
+<p>
   Configure: <ui-path>Settings | View | Edit</ui-path>
 </p>
+<p>Press <shortcut key="$Copy"/> to copy.</p>
 </tldr>
 
 ### Kotlin Compiler Options

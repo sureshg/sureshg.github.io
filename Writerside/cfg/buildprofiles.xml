@@ -24,6 +24,15 @@
         <local-src>images</local-src>
     </icons>
 
+    <shortcuts>
+        <src>keymap.xml</src>
+        <layout name="Windows" display-name="Windows"/>
+        <layout name="macOS" display-name="macOS"/>
+        <layout name="Linux" display-name="Linux"/>
+    </shortcuts>
+
+    <sitemap priority="0.35" change-frequency="weekly"/>
+
     <footer>
         <copyright>Suresh 2024</copyright>
         <social type="blog" href="https://suresh.dev/notes"/>
@@ -33,8 +42,8 @@
 
     <build-profile instance="blog">
         <variables>
-            <noindex-content>false</noindex-content>
             <offline-docs>true</offline-docs>
+            <noindex-content>false</noindex-content>
         </variables>
     </build-profile>
 
