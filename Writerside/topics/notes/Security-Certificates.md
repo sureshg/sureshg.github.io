@@ -134,6 +134,16 @@ $ openssl pkcs12 -in keystore.p12 -nodes -nokeys -cacerts -passin pass:<password
 $ openssl pkcs8 -topk8 -inform PEM -outform DER -in cert.pem -out out.pem -nocrypt
 ```
 
+* **PEM to single line**
+
+```Bash
+$ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}'  cert.pem > cert.cer
+# Revert singleline to multiline
+$ echo -ne $(cat cert.cer)
+# Check if the reverted format is ok
+$ echo -ne $(cat cert.cer) | openssl rsa -check
+```
+
 * **Show all certs from System truststore**
 
 ```bash
