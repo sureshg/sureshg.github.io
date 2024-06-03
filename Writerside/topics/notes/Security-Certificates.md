@@ -347,7 +347,7 @@ $ curl -v \
   $ gpg --list-keys --keyid-format SHORT
 
   # Comment out 'no-tty' in ~/.gnupg/gpg.conf
-  $ gpg --edit-key C8B53CA1
+  $ gpg --edit-key C8B5XXXX
   $ gpg> list
          expire // type 1y
          key 1  // renew encryption subkey
@@ -357,16 +357,24 @@ $ curl -v \
          quit
 
   # Export for backup
-  $ gpg -a --export C8B53CA1 > sureshg.gpg.public
-  $ gpg -a --export-secret-keys C8B53CA1 > sureshg.gpg.private
+  $ gpg -a --export C8B5XXXX > sureshg.gpg.public
+  $ gpg -a --export-secret-keys C8B5XXXX > sureshg.gpg.private
 
   # Send it to key servers
-  $ gpg --keyserver keyserver.ubuntu.com --send-keys C8B53CA1
-  $ gpg --keyserver pgp.mit.edu --send-keys C8B53CA1
+  $ gpg --keyserver keyserver.ubuntu.com --send-keys C8B5XXXX
+  $ gpg --keyserver pgp.mit.edu --send-keys C8B5XXXX
 
   # Update GPG key in Github
   $ cat sureshg.gpg.public| pbcopy
   $ https://github.com/settings/gpg/new
+  ```
+
+* Change Secret Password
+
+  ```Bash
+  $ gpg --list-secret-keys --keyid-format=short
+  $ gpg --edit-key C8B5XXXX
+  $ gpg>  passwd
   ```
 
 ### Tools
