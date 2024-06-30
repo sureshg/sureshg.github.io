@@ -3,7 +3,7 @@
                xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
 
     <variables>
-        <primary-color>emerald</primary-color>
+        <primary-color>aqua</primary-color>
         <color-preset>vivid</color-preset>
         <web-root>https://suresh.dev/</web-root>
         <custom-favicons>favicon.ico</custom-favicons>

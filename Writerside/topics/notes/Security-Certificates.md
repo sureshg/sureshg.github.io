@@ -40,15 +40,22 @@ $ keytool -printcert -rfc -sslserver google.com:443 > google.pem
 
 # Show full cert chain (CN, SAN and Expiry) of TLS server
 $ echo | openssl s_client -showcerts -connect google.com:443 2>/dev/null \
-       | while openssl x509 -noout -subject -ext subjectAltName -issuer -dates -fingerprint 2>/dev/null; do echo "**************" ; done
+       | while openssl x509 -noout \
+       -subject -ext subjectAltName -issuer -dates \
+       -fingerprint -sha256 -serial 2>/dev/null; \
+       do echo "--------------" ; done
 
 # Show just the cert details of a TLS server
 $ echo | openssl s_client -showcerts -connect google.com:443 2>/dev/null \
        | openssl x509 -inform pem -noout -text
 
 # Show full cert chain of PEM
-$ cat cert.pem | while openssl x509 -noout -subject -ext subjectAltName -issuer -dates -fingerprint 2>/dev/null; do echo "**************" ; done
-$ keytool -printcert -file cert.pem | grep -i issuer
+$ cat cert.pem | while openssl x509 -noout \
+                      -subject -ext subjectAltName -issuer -dates \
+                      -fingerprint -sha256 -serial 2>/dev/null; \
+                      do echo "**************" ; done
+$ keytool -printcert -file cert.pem \
+    | grep -i -e "Owner" -e "Issuer:" -e "Serial number:" -e "SHA256:"
 
 # Extract TLS public keys in Cert pinning format
 $ openssl s_client -connect 'dns.google.com:443' 2>&1 < /dev/null \
@@ -151,7 +158,8 @@ $ echo -ne $(cat cert.cer) | openssl rsa -check
 $ while openssl x509 -noout -subject -issuer -dates; do echo ........... ; done < $(find -L /etc/ssl/certs -regex ".*/ca-\(bundle\|certificates\).crt") 2>/dev/null | grep -i subject
 
 # Using java keytool
-$ keytool -printcert -file /etc/ssl/certs/ca-bundle.crt | grep -i issuer
+$ keytool -printcert -file /etc/ssl/certs/ca-bundle.crt \
+   | grep -i -e "Owner" -e "Issuer:" -e "Serial number:" -e "SHA256:"
 ```
 
 ### OpenJDK
@@ -194,6 +202,15 @@ $ keytool -printcert -file /etc/ssl/certs/ca-bundle.crt | grep -i issuer
 
     * [OpenJDK CACerts](https://github.com/openjdk/jdk/tree/master/src/java.base/share/data/cacerts)
     * [Android CACerts](https://android.googlesource.com/platform/system/ca-certificates/+/master/files)
+
+
+* **Use Mac System truststore in Java**
+
+  ```bash
+  $ java -Djavax.net.ssl.trustStoreType=KeychainStore \
+         -Djavax.net.ssl.trustStore=/Library/Keychains/System.keychain \
+         -jar app.jar
+  ```
 
 ### Self Signed Certs
 
