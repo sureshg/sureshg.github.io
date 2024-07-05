@@ -3,12 +3,10 @@
 <no-index/>
 
 <!-- TOC -->
-
 * [Readings](#readings)
     * [Java](#java)
     * [Happy eyeballs](#happy-eyeballs)
     * [Database](#database)
-
 <!-- TOC -->
 
 <show-structure for="chapter,procedure" depth="2"/>
