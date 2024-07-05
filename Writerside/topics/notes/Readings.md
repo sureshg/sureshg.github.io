@@ -3,11 +3,15 @@
 <no-index/>
 
 <!-- TOC -->
+
 * [Readings](#readings)
     * [Java](#java)
     * [Happy eyeballs](#happy-eyeballs)
     * [Database](#database)
+
 <!-- TOC -->
+
+<show-structure for="chapter,procedure" depth="2"/>
 
 ### Java
 
@@ -41,11 +45,21 @@
 
 ### Database
 
-* https://shekhargulati.com/2022/01/27/correctly-using-postgres-as-queue/
-* https://vladmihalcea.com/database-job-queue-skip-locked/
-* https://www.2ndquadrant.com/en/blog/what-is-select-skip-locked-for-in-postgresql-9-5/
-* https://blogg.bekk.no/high-performance-persistent-queue-using-db-scheduler-b0e9764d41ba
-* https://github.com/kagkarlsson/db-scheduler
+* [VladMihalcea - DB Job Queue using SKIP LOCKED](https://vladmihalcea.com/database-job-queue-skip-locked/)
+* [VladMihalcea - Best UUID type for PrimaryKey](https://vladmihalcea.com/uuid-database-primary-key/)
+* [VladMihalcea - hypersistence-tsid](https://github.com/vladmihalcea/hypersistence-tsid)
+* [Maciej Walkowiak - PostgreSQL and UUID as primary key](https://maciejwalkowiak.com/blog/postgres-uuid-primary-key/)
+* [UUID7 in 33 langs](https://antonz.org/uuidv7/#java)
+* [GunnarMorling - Last Updated Columns With Postgres](https://www.morling.dev/blog/last-updated-columns-with-postgres/)
+* [Most work queue implementations in SQL are wrong](https://www.2ndquadrant.com/en/blog/what-is-select-skip-locked-for-in-postgresql-9-5/)
+* [Choosing Primary Key Type in Postgres](https://shekhargulati.com/2022/06/23/choosing-a-primary-key-type-in-postgres/)
+* [Correctly using Postgres as queue](https://shekhargulati.com/2022/01/27/correctly-using-postgres-as-queue/)
+* [JOOQ - JDBC Drivers Maven Coordinates](https://blog.jooq.org/maven-coordinates-of-the-most-popular-jdbc-drivers/)
+* [JOOQ - JDBC Connection URLs](https://blog.jooq.org/jdbc-connection-urls-of-the-most-popular-rdbms/)
+* [JOOQ - Simulating Latency with SQL / JDBC](https://blog.jooq.org/simulating-latency-with-sql-jdbc/)
+* [VladMihalcea - Optimistic vs. Pessimistic Locking](https://vladmihalcea.com/optimistic-vs-pessimistic-locking/)
 * [Sakila DB](https://github.com/jOOQ/sakila/tree/main/postgres-sakila-db)
 * [Chinook PostgreSql](https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql)
 * [Audit Table Schema](https://gist.github.com/ooredroxoo/b92baba03c30ed87e46227fd08a25c6c)
+* https://github.com/coditory/sherlock-distributed-lock
+* https://github.com/kagkarlsson/db-scheduler
