@@ -8,7 +8,6 @@
     * [Samples](#samples)
     * [Misc](#misc)
         * [Math](#math)
-    * [OpenAPI Doc](#openapi-doc)
 <!-- TOC -->
 
 <primary-label ref="Kotlin"/>
@@ -121,7 +120,3 @@ $$
 x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 \end{equation}
 $$
-
-### OpenAPI Doc
-
-<api-doc openapi-path="../../resources/documentation.yaml"/>

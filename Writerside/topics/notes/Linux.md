@@ -14,6 +14,8 @@
 
 <primary-label ref="Linux"/>
 
+<show-structure/>
+
 ### Command Line Tools
 
 * ##### Process threads, cpu and memory usage.
