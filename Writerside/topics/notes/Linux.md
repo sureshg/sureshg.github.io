@@ -1,15 +1,18 @@
 # Linux
 
 <!-- TOC -->
-
 * [Linux](#linux)
     * [Command Line Tools](#command-line-tools)
     * [Proc FileSystem](#proc-filesystem)
+    * [Git Config](#git-config)
     * [Curl](#curl)
+    * [DIG](#dig)
     * [SSH](#ssh)
     * [Wireshark](#wireshark)
     * [TCPDump](#tcpdump)
-    <!-- TOC -->
+<!-- TOC -->
+
+<primary-label ref="Linux"/>
 
 ### Command Line Tools
 
@@ -141,6 +144,17 @@
   $ ps --no-headers -o comm 1 | grep -q 'systemd'
   ```
 
+### Git Config
+
+These are the common useful git aliases
+
+  ```Bash
+  $ git config --global alias.remote-tags '!git ls-remote --tags --sort="-creatordate" origin | grep -v "\^{}"'
+  $ git config --global alias.remote-tags-short '!git ls-remote --tags --sort="-creatordate" origin | grep -v "\^{}" | cut -f2 | sed "s/refs\/tags\///"'
+  $ git config --global alias.pull-rebase-push '!git pull origin main --rebase && git push origin main --follow-tags'
+  $ git config --global alias.tag-version '!git describe --always --tags --match "v*"'
+  ``` 
+
 ### Curl
 
 * Get round trip time
@@ -162,7 +176,7 @@
   ```
 
 
-* Download latest release from Github
+* Download the latest release from Github
 
   ```bash
   # Download the latest release from Github

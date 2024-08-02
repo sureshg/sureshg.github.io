@@ -14,9 +14,11 @@
     * [Netcat Webserver](#netcat-webserver)
     * [Container Runtime Interface](#container-runtime-interface)
     * [Container Tools {collapsible="true"}](#container-tools-collapsibletrue)
-    * [Jlink {collapsible="true"}](#jlink-collapsibletrue)
-    * [Documentation {collapsible="true"}](#documentation-collapsibletrue)
 <!-- TOC -->
+
+<primary-label ref="Containers"/>
+<secondary-label ref="JVM"/>
+<secondary-label ref="KT"/>
 
 ### OpenJDK Container Images
 
@@ -424,25 +426,4 @@ ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 * https://github.com/google/go-containerregistry/tree/main/cmd/crane
 * [Trivy - Container Scanning](https://github.com/aquasecurity/trivy)
 * [CoSign - Container Signing](https://github.com/sigstore/cosign)
-
-### Jlink {collapsible="true"}
-
-* https://www.morling.dev/blog/smaller-faster-starting-container-images-with-jlink-and-appcds/
-* https://blog.adoptium.net/2021/08/using-jlink-in-dockerfiles/
-* https://docs.microsoft.com/en-us/java/openjdk/java-jlink-runtimes
-* https://github.com/dsyer/sample-docker-microservice/
-* https://mbien.dev/blog/entry/custom-java-runtimes-with-jlink
-* https://jpetazzo.github.io/2020/03/01/quest-minimal-docker-images-part-2/
-
-### Documentation {collapsible="true"}
-
-* https://spring-gcp.saturnism.me/deployment/docker/container-awareness
-* https://spring-gcp.saturnism.me/deployment/docker
-* https://www.infoq.com/presentations/openjdk-containers/
-* https://www.youtube.com/watch?v=Yj0sx1dvEdo
-* https://www.youtube.com/watch?v=2IpJABPzpvw
-* https://developers.redhat.com/devnation/tech-talks/containerjfr
-* http://blog.gilliard.lol/2019/12/04/Clojure-Containers.html
-* https://www.morling.dev/blog/smaller-faster-starting-container-images-with-jlink-and-appcds/
-* https://blog.arkey.fr/2020/06/28/using-jdk-flight-recorder-and-jdk-mission-control/
 

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
-
+<!DOCTYPE buildprofiles SYSTEM "https://resources.jetbrains.com/writerside/1.0/build-profiles.dtd">
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <variables>
         <primary-color>aqua</primary-color>
+        <link-color>deep-ocean</link-color>
         <color-preset>vivid</color-preset>
         <web-root>https://suresh.dev/</web-root>
+        <resizable-sidebar>true</resizable-sidebar>
+        <sidebar-width>200</sidebar-width>
+        <custom-css>custom.css</custom-css>
         <custom-favicons>favicon.ico</custom-favicons>
         <header-logo>header-logo.png</header-logo>
         <product-web-url>https://suresh.dev/</product-web-url>
@@ -17,6 +21,7 @@
         <algolia-id>QD1IR5ST5F</algolia-id>
         <algolia-index>suresh.dev.index</algolia-index>
         <algolia-api-key>e205ec1712a2f745af4bdb1224d7f3e9</algolia-api-key>
+        <!--<content-max-width>1000</content-max-width>-->
         <!--<search-endpoint>https://my.search/endpoint</search-endpoint>-->
     </variables>
 
@@ -60,4 +65,5 @@
             <offline-docs>true</offline-docs>
         </variables>
     </build-profile>
+
 </buildprofiles>

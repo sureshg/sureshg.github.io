@@ -18,6 +18,10 @@
     * [Cryptography](#cryptography)
 <!-- TOC -->
 
+<primary-label ref="Security"/>
+<secondary-label ref="JVM"/>
+<secondary-label ref="KT"/>
+
 ### CA Certs and Certificate Transparency Logs
 
 * [Certificate Search - crt.sh](https://crt.sh/)

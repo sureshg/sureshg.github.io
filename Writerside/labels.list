@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE labels SYSTEM "https://resources.jetbrains.com/writerside/1.0/labels-list.dtd">
+<labels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/labels.xsd">
+    <primary-label id="Kotlin" short-name="KT" name="Kotlin" color="purple" href="https://kotlinlang.org/">
+        Go to https://kotlinlang.org
+    </primary-label>
+
+    <primary-label id="Java" short-name="Java" name="Java" href="https://dev.java/">
+        Go to https://dev.java
+    </primary-label>
+
+    <primary-label id="Linux" short-name="Linux" name="Linux" color="red"/>
+
+    <primary-label id="Security" short-name="Security" name="Security" color="red"/>
+
+    <primary-label id="Containers" short-name="Containers" name="Container" color="blue"/>
+
+    <primary-label id="jetbrains" short-name="JB" name="JetBrains" href="https://www.jetbrains.com" color="red">
+        Go to www.jetbrains.com
+    </primary-label>
+
+    <secondary-label id="OpenJDK" name="OpenJDK" color="tangerine">OpenJDK</secondary-label>
+    <secondary-label id="JVM" name="JVM" color="strawberry">JVM</secondary-label>
+    <secondary-label id="KT" name="KT" color="purple">Kotlin</secondary-label>
+    <secondary-label id="wip" name="WIP">Work in progress</secondary-label>
+    <secondary-label id="beta" name="β" color="tangerine">Beta</secondary-label>
+    <secondary-label id="experimental" name="Experimental" color="red">This is an experimental feature
+    </secondary-label>
+</labels>

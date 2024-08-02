@@ -1,10 +1,10 @@
-openapi: "3.0.3"
+openapi: "3.1.0"
 info:
   title: "kotlin_mpp_playground API"
   description: "kotlin_mpp_playground API"
   version: "1.0.0"
 servers:
-- url: "https://kotlin_mpp_playground"
+  - url: "https://kotlin_mpp_playground"
 paths:
   /:
     get:
@@ -23,13 +23,13 @@ paths:
     get:
       description: ""
       parameters:
-      - name: "param"
-        in: "path"
-        required: true
-        schema:
-          type: "array"
-          items:
-            type: "string"
+        - name: "param"
+          in: "path"
+          required: true
+          schema:
+            type: "array"
+            items:
+              type: "string"
       responses:
         "200":
           description: "OK <br> A file response"
@@ -68,6 +68,9 @@ paths:
             '*/*':
               schema:
                 type: "string"
+  /jfr:
+    get:
+      description: ""
   /profile:
     get:
       description: ""

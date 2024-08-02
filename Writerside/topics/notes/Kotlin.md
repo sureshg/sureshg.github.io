@@ -11,6 +11,10 @@
     * [OpenAPI Doc](#openapi-doc)
 <!-- TOC -->
 
+<primary-label ref="Kotlin"/>
+<secondary-label ref="JVM"/>
+<secondary-label ref="OpenJDK"/>
+
 <tldr>
  <p>
    Shortcut: <shortcut>CMD + SPACE</shortcut> 
@@ -112,13 +116,12 @@ classDiagram
 
 ##### Math
 
-```tex
+$$
 \begin{equation}
- x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 \end{equation}
-```
+$$
 
 ### OpenAPI Doc
 
 <api-doc openapi-path="../../resources/documentation.yaml"/>
-

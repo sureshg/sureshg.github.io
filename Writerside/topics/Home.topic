@@ -33,7 +33,6 @@
         <misc>
             <cards narrow="true">
                 <title>Misc</title>
-                <a href="Publishing.md" type="open-source" summary="Artifact Publishing">Publishing</a>
                 <a href="Readings.md" type="check-list" summary="Reading List">Reading</a>
             </cards>
 

@@ -20,8 +20,14 @@
     * [11. JVM Tools](#11-jvm-tools)
     * [12. System/Node Health](#12-systemnode-health)
     * [13. Commands](#13-commands)
-    * [14. Resources](#14-resources)
+    * [14. Clock Cycles](#14-clock-cycles)
+    * [15. Resources](#15-resources)
 <!-- TOC -->
+
+<primary-label ref="Java"/>
+<secondary-label ref="JVM"/>
+<secondary-label ref="KT"/>
+<secondary-label ref="OpenJDK"/>
 
 ### 1. Flight Recorder
 
@@ -338,7 +344,11 @@ $ java -XX:+UseG1GC
   $ ss -s
   ```
 
-### 14. Resources
+### 14. Clock Cycles
+
+<img src="CPU Clock Cycles.png" width="500" height="500" alt="CPU Clock Cycles" thumbnail="true"/>
+
+### 15. Resources
 
 * [JDK Mission Control Docs](https://docs.oracle.com/en/java/java-components/jdk-mission-control/)
 * [Marcus Hirt's Blog](http://hirt.se/blog/?p=1312)

@@ -11,11 +11,8 @@
         * [6. Show Java VMProperty Settings](#6-show-java-vmproperty-settings)
         * [7. Scan deprecated APIs](#7-scan-deprecated-apis)
         * [8. JPMS](#8-jpms)
-        * [9. JVMCI (Graal) Compiler](#9-jvmci--graal--compiler)
-        * [10. JShell](#10-jshell)
-        * [11. Virtual Thread config](#11-virtual-thread-config)
-        * [12. Generics](#12-generics)
-        * [13. Java TEMP Config](#13-java-temp-config)
+        * [9. JShell](#9-jshell)
+        * [10. Java TEMP Config](#10-java-temp-config)
     * [IDEs and Tools](#ides-and-tools)
     * [Networking & Security](#networking--security)
         * [1. Allow Unsafe Server Cert Change](#1-allow-unsafe-server-cert-change)
@@ -25,36 +22,22 @@
     * [Gradle Kotlin DSL](#gradle-kotlin-dsl)
         * [1. Docs](#1-docs)
         * [2. Name Abbrevation](#2-name-abbrevation)
-        * [3. Create new Java `SourceSet`](#3-create-new-java-sourceset)
-        * [4. Custom SourceSet directories](#4-custom-sourceset-directories)
-        * [5. Kotlin SourceSets](#5-kotlin-sourcesets)
-        * [6. Compile classpath](#6-compile-classpath)
-        * [7. Configure/Create Tasks](#7-configurecreate-tasks)
-        * [8. Enabling Java preview feature](#8-enabling-java-preview-feature)
-        * [9. Reproducible builds](#9-reproducible-builds)
-        * [10. Multi Release Jar](#10-multi-release-jar)
-        * [11. Dependencies](#11-dependencies)
-        * [12. Update Wrapper and others](#12-update-wrapper-and-others)
-        * [13. Gradle Versions](#13-gradle-versions)
+        * [3. Configure/Create Tasks](#3-configurecreate-tasks)
+        * [4. Reproducible builds](#4-reproducible-builds)
+        * [5. Multi Release Jar](#5-multi-release-jar)
+        * [6. Dependencies](#6-dependencies)
     * [Maven](#maven)
-        * [1. Public Maven Repositories](#1-public-maven-repositories)
-        * [2. Create a Project](#2-create-a-project)
-        * [3. Enabling Java preview feature](#3-enabling-java-preview-feature)
-        * [4. Reproducible Builds](#4-reproducible-builds)
-        * [5. Maven Wrapper](#5-maven-wrapper)
-        * [6. Update Version number](#6-update-version-number)
-        * [7. Dependency Tree](#7-dependency-tree)
+        * [1. Create a Project](#1-create-a-project)
+        * [2. Enabling Java preview feature](#2-enabling-java-preview-feature)
+        * [3. Reproducible Builds](#3-reproducible-builds)
+        * [4. Maven Wrapper](#4-maven-wrapper)
+        * [5. Update Version number](#5-update-version-number)
+        * [6. Dependency Tree](#6-dependency-tree)
     * [Microservices Starters](#microservices-starters)
-        * [1. Micronaut](#1-micronaut)
-        * [2. SpringBoot](#2-springboot)
-        * [3. Gradle Initializr](#3-gradle-initializr)
-        * [4. Maven Archetype Quickstart](#4-maven-archetype-quickstart)
+        * [1. SpringBoot](#1-springboot)
     * [Misc](#misc)
-    * [Mac OS](#mac-os)
     * [OpenJDK Build](#openjdk-build)
     * [Oracle A1 Flex](#oracle-a1-flex)
-    * [Native-Image](#native-image)
-    * [Blogs](#blogs)
     * [Awesome Svgs](#awesome-svgs)
         * [Illustrations](#illustrations)
         * [Background](#background)
@@ -63,6 +46,10 @@
         * [Awesome List](#awesome-list)
         * [Tools](#tools)
 <!-- TOC -->
+
+<primary-label ref="Java"/>
+<secondary-label ref="JVM"/>
+<secondary-label ref="KT"/>
 
 ### Java Commands
 
@@ -75,7 +62,7 @@ $ mkdir -p src/{main,test}/{java,resources}
 ##### 2. Preview features
 
 ```bash
-$ javac --enable-preview -release 23 Foo.java
+$ javac --enable-preview -release 24 Foo.java
 $ java  --enable-preview Foo
 ```
 
@@ -136,6 +123,11 @@ $ jlink-runtime/java -Xshare:on --version
 $ java --version
 $ java -Xinternalversion
 
+# Show Java Version (Useful for shell scripts)
+$ java -XshowSettings:properties -version 2>&1 | grep "java.specification.version =" | awk '{print $3}'
+$ jshell --feedback=silent -  <<< 'System.out.println(System.getProperty("java.specification.version"))'
+
+# Show all settings
 $ java -XshowSettings:all --version
 
 # Show all Javac linter options
@@ -249,18 +241,7 @@ $ jpackage --main-jar app.jar \
 - [**Java Modules Cheat Sheet**](https://nipafx.dev/build-modules/)
 - [JPackage Scripts](https://github.com/dlemmermann/JPackageScriptFX)
 
-##### 9. [JVMCI (Graal) Compiler](https://openjdk.java.net/jeps/317)
-
-```bash
-$ java -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler
-
-# To see that Graal is actually being loaded
-$ java -Dgraal.ShowConfiguration=info
-```
-
-- [GraalJS OpenJDK Demo](https://github.com/graalvm/graal-js-jdk11-maven-demo)
-
-##### 10. JShell
+##### 9. JShell
 
 ```bash
 # JShell with preview feature enabled
@@ -274,26 +255,7 @@ $ jshell --enable-preview --startup DEFAULT --startup ~/calc.repl
 $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))' | jshell -s -)"
 ```
 
-##### 11. Virtual Thread config
-
-```bash
-# Virtual Thread's Default ForkJoinPool scheduler config. The scheduler is based on ForkJoinPool
-# and it's setup to spin up additional underlying carrier threads to help when there are virtual
-# threads blocked in Object.wait. The default maximum is 256.
-
-$ java -Djdk.defaultScheduler.parallelism=4   // Default to Runtime.getRuntime().availableProcessors()
-       -Djdk.defaultScheduler.maxPoolSize=256 // max(parallelism, 256)
-
-# Trace pinned thread while holding monitors.
-$ java -Djdk.tracePinnedThreads=short|full
-```
-
-##### 12. Generics
-
-- [GenericsFAQ](http://www.angelikalanger.com/GenericsFAQ/JavaGenericsFAQ.html)
-- [How we got Generics we have](https://cr.openjdk.java.net/~briangoetz/valhalla/erasure.html)
-
-##### 13. Java TEMP Config
+##### 10. Java TEMP Config
 
   ```bash
   $ echo "-------- TMP PATH for $OSTYPE --------"
@@ -457,97 +419,7 @@ $ ./gradlew --console=plain \
             cle dU
 ```
 
-##### 3. Create new Java `SourceSet`
-
-```kotlin
-sourceSets {
-    create("java15") {
-        java {
-            srcDirs("src/main/java15")
-        }
-    }
-}
-
-// OR can also do
-val graal by sourceSets.creating
-// "graalCompileOnly"("org.graalvm.nativeimage:svm:21.2.0")
-// "graalCompileOnly"("org.graalvm.sdk:graal-sdk:21.2.0")
-// nativeImageCompileOnly(graal.output.classesDirs)
-```
-
-- [SourceSet](https://docs.gradle.org/current/userguide/building_java_projects.html#sec:java_source_sets)
-
-##### 4. Custom SourceSet directories
-
-```kotlin
-sourceSets {
-    main {
-        java {
-            setSrcDirs(listOf("src"))
-        }
-    }
-    test {
-        java {
-            setSrcDirs(listOf("test"))
-        }
-    }
-}
-```
-
-##### 5. Kotlin SourceSets
-
-```kotlin
-kotlin {
-    sourceSets {
-        main {
-            kotlin.srcDirs("...")
-        }
-        test {
-            kotlin.srcDirs("...")
-        }
-        create("java11") {
-            kotlin.srcDirs("src/main/java11")
-        }
-
-        val test by creating {}
-    }
-}
-
-// Change kotlin src dir
-kotlin {
-    sourceSets {
-        main {
-            kotlin.srcDirs("src")
-            languageSettings.apply {
-                optIn("kotlin.ExperimentalStdlibApi")
-            }
-        }
-    }
-}
-
-// or
-sourceSets.main {
-    withConvention(KotlinSourceSet::class) {
-        kotlin.srcDirs("src/main/kotlin", "src-gen/main/kotlin")
-    }
-}
-
-// Sources Jar
-val sourcesJar by tasks.registering(Jar::class) {
-    // kotlin.sourceSets.main.get().kotlin
-    from(sourceSets.main.get().allSource)
-    archiveClassifier = "sources"
-}
-```
-
-##### 6. Compile classpath
-
-```kotlin
-sourceSets.main.get().compileClasspath
-// kotlin.sourceSets.main.get().kotlin
-```
-
-##### 7. [Configure/Create Tasks](https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:containers)
+##### 3. [Configure/Create Tasks](https://docs.gradle.org/current/userguide/kotlin_dsl.html#kotdsl:containers)
 
 - ###### Eager
 
@@ -570,21 +442,7 @@ sourceSets.main.get().compileClasspath
   val bar: BarTask by registering {}      // Take Task type from val (Kotlin 1.4)
   ```
 
-##### 8. [Enabling Java preview feature](https://docs.gradle.org/current/userguide/building_java_projects.html#sec:feature_preview)
-
-```kotlin
-tasks.withType<JavaCompile>.configureEach {
-    options.compilerArgs.add("--enable-preview")
-}
-tasks.withType<Test>.configureEach {
-    jvmArgs("--enable-preview")
-}
-tasks.withType<JavaExec>.configureEach {
-    jvmArgs("--enable-preview")
-}
-```
-
-##### 9. [Reproducible builds](https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives)
+##### 4. [Reproducible builds](https://docs.gradle.org/current/userguide/working_with_files.html#sec:reproducible_archives)
 
 ```kotlin
 withType<AbstractArchiveTask>().configureEach {
@@ -596,7 +454,7 @@ withType<AbstractArchiveTask>().configureEach {
 - [reproducible-builds.org](https://reproducible-builds.org/docs/jvm/)
 - https://github.com/jvm-repo-rebuild/reproducible-central
 
-##### 10. [Multi Release Jar](https://blog.gradle.org/mrjars)
+##### 5. [Multi Release Jar](https://blog.gradle.org/mrjars)
 
 ```kotlin
 // See https://github.com/melix/mrjar-gradle for more on multi release jars
@@ -632,7 +490,7 @@ if (JavaVersion.current().isJava11Compatible) {
 }
 ```
 
-##### 11. Dependencies
+##### 6. Dependencies
 
 ```bash
 # Direct dependencies
@@ -662,67 +520,20 @@ $ ./gradlew clean build --no-build-cache
 
 # To refresh all dependencies in the dependency cache
 $ ./gradlew clean build --refresh-dependencies
-
-$ rm -rf ~/.gradle/caches
-
-# Build Config
-configurations.all {
-    resolutionStrategy {
-        cacheChangingModulesFor(0, SECONDS)
-        cacheDynamicVersionsFor(0, SECONDS)
-    }
-}
-
-# Add dep update task for build-logic
-val allDepUpdates by
-    tasks.creating {
-      group = BasePlugin.BUILD_GROUP
-      description = "Run 'dependencyUpdates' task for all ${rootProject.name} projects"
-
-      dependsOn(rootProject.subprojects.map { ":${it.name}:dependencyUpdates" })
-      dependsOn(
-          rootProject.gradle.includedBuilds
-              .filter { it.name !in listOf(project.name) }
-              .map { it.task(":dependencyUpdates") })
-    }
 ```
 
 - [Debugging Dependencies](https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html)
 - [Gradle Conflict Resolution](https://docs.gradle.org/current/userguide/dependency_resolution.html#sec:conflict-resolution)
 
-##### 12. Update Wrapper and others
-
-```bash
-$ ./gradlew wrapper --gradle-version=7.5.1 --distribution-type=bin
-
-# Set system properties or tool options
-$ JAVA_TOOL_OPTIONS=-Dhttps.protocols=TLSv1.2 ./gradlew build
-
-# Displays the properties
-$ ./gradlew properties
-
-# Gradle run with arguments
-$ ./gradlew run --args="<JFR_FILE>"
-```
-
-##### 13. Gradle Versions
-
-- https://services.gradle.org/versions
-
 ### [Maven](https://search.maven.org/search?q=org.jetbrains.kotlin)
 
-##### 1. [Public Maven Repositories](https://www.deps.co/guides/public-maven-repositories/)
-
-- https://mvnrepository.com/repos
-- https://maven.google.com/web/index.html
-
-##### 2. [Create a Project](http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+##### 1. [Create a Project](http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
 ```bash
 $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 ```
 
-##### 3. [Enabling Java preview feature](https://blog.codefx.org/java/enable-preview-language-features/#Enabling-Previews-In-Tools)
+##### 2. [Enabling Java preview feature](https://blog.codefx.org/java/enable-preview-language-features/#Enabling-Previews-In-Tools)
 
 ```xml
 
@@ -757,7 +568,7 @@ $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArt
 </build>
 ```
 
-##### 4. [Reproducible Builds](https://maven.apache.org/guides/mini/guide-reproducible-builds.html)
+##### 3. [Reproducible Builds](https://maven.apache.org/guides/mini/guide-reproducible-builds.html)
 
 ```xml
 
@@ -767,13 +578,13 @@ $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArt
 </properties>
 ```
 
-##### 5. [Maven Wrapper](https://maven.apache.org/wrapper/)
+##### 4. [Maven Wrapper](https://maven.apache.org/wrapper/)
 
 ```bash
 $ mvn wrapper:wrapper -Dmaven=3.8.5
 ```
 
-##### 6. [Update Version number](http://www.mojohaus.org/versions-maven-plugin/)
+##### 5. [Update Version number](http://www.mojohaus.org/versions-maven-plugin/)
 
 ```bash
 $ ./mvnw versions:set -DnewVersion=1.0.1-SNAPSHOT -DprocessAllModules -DgenerateBackupPoms=false
@@ -781,7 +592,7 @@ $ ./mvnw versions:revert // Rollback
 $ ./mvnw versions:commit
 ```
 
-##### 7. [Dependency Tree](https://search.maven.org/search?q=fc:kotlin.text.Regex)
+##### 6. [Dependency Tree](https://search.maven.org/search?q=fc:kotlin.text.Regex)
 
 ```bash
 # Show all orginal versions, not the resolved ones.
@@ -799,19 +610,7 @@ https://search.maven.org/search?q=fc:kotlin.text.Regex
 
 ### Microservices Starters
 
-##### 1. [Micronaut](https://micronaut.io/launch/)
-
-```bash
-$ curl https://launch.micronaut.io/demo.zip -o demo.zip
-$ unzip demo.zip -d demo && cd demo && ./gradlew run --continuous --watch-fs
-
-// OR
-$ curl 'https://launch.micronaut.io/create/DEFAULT/dev.suresh.sample-app?lang=kotlin&build=gradle&test=junit&javaVersion=JDK_11&features=http-client&features=data-jdbc&features=jdbc-hikari&features=kotlin-extension-functions&features=graalvm' \
-     --compressed \
-      -o sample-app.zip
-```
-
-##### 2. [SpringBoot](https://start.spring.io/)
+##### 1. [SpringBoot](https://start.spring.io/)
 
 ```bash
 $ curl https://start.spring.io/starter.zip \
@@ -833,21 +632,6 @@ $ curl https://start.spring.io/starter.zip \
 - [SpringBoot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
 - [Spring and Kotlin Docs](https://docs.spring.io/spring/docs/current/spring-framework-reference/index.html)
 
-##### 3. [Gradle Initializr](https://gradle-initializr.cleverapps.io/)
-
-```bash
-$ curl 'https://gradle-initializr.cleverapps.io/starter?type=kotlin-application&testFramework=&dsl=kotlin&gradleVersion=6.3&archive=zip&projectName=helloworld-kotlin&packageName=dev.suresh&generate-project=' --compressed -o helloworld-kotlin.zip
-
-// OR
-$ gradle init --type <java-library|java-application|...> --dsl kotlin
-```
-
-##### 4. [Maven Archetype Quickstart](http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
-
-```bash
-$ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
-```
-
 ### Misc
 
 - [Github Registry](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages)
@@ -857,46 +641,6 @@ $ mvn archetype:generate -DgroupId=dev.suresh -DartifactId=my-app -DarchetypeArt
   $ docker build . --file Dockerfile --tag docker.pkg.github.com/sureshg/repo/app:${VERSION}
   $ docker login docker.pkg.github.com --username sureshg --password ${{ secrets.GITHUB_TOKEN }}
   $ docker push docker.pkg.github.com/sureshg/repo/app:${VERSION}
-  ```
-
-- Service container
-
-  ```yaml
-  services:
-     postgres:
-       image: postgres:10.8
-       env:
-         POSTGRES_USER: postgres
-         POSTGRES_PASSWORD: postgres
-       options:
-       ports:
-         - 5432/tcp
-   ...
-   jobs.services.postgres.ports[5432]
-  ```
-
-### Mac OS
-
-- ###### Remove Quarantine Attributes
-
-  ```bash
-  $ sudo xattr -cr /Applications/compose-desktop-sample.app
-
-  # If you are using macOS Catalina and later you may need to remove the quarantine attribute from the bits before you can use them
-  $ sudo xattr -r -d com.apple.quarantine path/to/app/folder/
-  ```
-
-- ###### Java Home settings in Xcode
-
-  Xcode uses Java env returned by `/usr/libexec/java_home`
-
-  Set `JAVA_HOME` in `XCode` -> `Preferences` -> `Locations` -> `Custom Paths`
-  to `/Users/<user>/.sdkman/candidates/java/current`
-
-- Install Rosetta
-
-  ```bash
-  $ softwareupdate --install-rosetta --agree-to-license
   ```
 
 - Install Command Line Tools
@@ -946,53 +690,11 @@ $ sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noar
 * Open Ports
 
   ```bash
-    # Networking > Virtual cloud networks > Security List > Add Ingress Rules (open tcp/8080)
+   # Networking > Virtual cloud networks > Security List > Add Ingress Rules (open tcp/8080)
    $ firewall-cmd  --permanent --zone=public --add-port=8080/tcp
    $ firewall-cmd  --reload
    $ http://ip:8080
   ```
-
-### Native-Image
-
-```xml
-
-<dependency>
-    <groupId>org.graalvm.nativeimage</groupId>
-    <artifactId>svm</artifactId>
-    <version>${graalvm.version}</version>
-    <scope>provided</scope>
-</dependency>
-```
-
-Find GraalVm used to generate the native-image
-
-```bash
-$ strings -a $(which native-image) | grep -i com.oracle.svm.core.VM
-```
-
-```bash
-$ git commit --allow-empty -m "empty commit"
-```
-
-- https://github.com/oracle/graalvm-reachability-metadata/tree/master/metadata
-- https://www.graalvm.org/dev/reference-manual/native-image/StaticImages/
-- Github Action: https://github.com/helpermethod/graalvm-native-image-toolchain
-- https://github.com/graalvm/graalvm-ce-dev-builds/releases/
-- https://search.maven.org/artifact/org.graalvm.nativeimage/svm/20.0.0/jar
-
-### Blogs
-
-- https://www.marcobehler.com/guides/jdbc
-- https://www.marcobehler.com/guides/java-databases
-- https://vladmihalcea.com/jdbc-driver-maven-dependency/
-- https://vladmihalcea.com/jdbc-driver-connection-url-strings/
-- Tools
-    - https://utteranc.es/ - Comments Widgets
-    - https://orchid.run/wiki/learn/tutorials/how-to-document-kotlin
-    - http://casual-effects.com/markdeep/
-    - https://www.mkdocs.org/ (eg: https://github.com/hexagonkt/hexagon/tree/master/hexagon_site)
-    - Github publish example
-        - https://github.com/hexagonkt/hexagon/blob/master/.github/workflows/main.yml
 
 ### Awesome Svgs
 
