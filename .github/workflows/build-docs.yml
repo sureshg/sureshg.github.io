@@ -91,7 +91,7 @@ jobs:
         run: unzip -O UTF-8 -qq '${{ env.ARTIFACT }}' -d notesDir
 
       - name: 🚀 Deploy notes
-        uses: JamesIves/github-pages-deploy-action@v4.6.3
+        uses: JamesIves/github-pages-deploy-action@v4.6.4
         with:
           branch: main
           folder: notesDir
