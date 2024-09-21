@@ -1,5 +1,5 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
-<html lang="en-US" data-preset="vivid" data-primary-color="#24AFD0" data-link-color="#214C69" data-resizable-sidebar="true" data-sidebar-width="200"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2024-08-02T20:55:18.655307937"><title>Containers &amp; K8S | Suresh's Tech Notes</title><script type="application/json" id="virtual-toc-data">[{"id":"openjdk-container-images","level":0,"title":"OpenJDK Container Images","anchor":"#openjdk-container-images"},{"id":"docker-commands","level":0,"title":"Docker Commands","anchor":"#docker-commands"},{"id":"debug-container","level":0,"title":"Debug Container","anchor":"#debug-container"},{"id":"jvm-ergonomics-and-container-logs","level":0,"title":"JVM Ergonomics and Container logs","anchor":"#jvm-ergonomics-and-container-logs"},{"id":"jvm-default-gc","level":0,"title":"JVM default GC","anchor":"#jvm-default-gc"},{"id":"container-sandbox","level":0,"title":"Container Sandbox","anchor":"#container-sandbox"},{"id":"app-running-on-k8s-docker","level":0,"title":"App Running on K8S/Docker","anchor":"#app-running-on-k8s-docker"},{"id":"access-docker-desktop-linuxkit-vm-on-macos","level":0,"title":"Access Docker desktop LinuxKit VM on MacOS","anchor":"#access-docker-desktop-linuxkit-vm-on-macos"},{"id":"multi-architecture-support","level":0,"title":"Multi Architecture Support","anchor":"#multi-architecture-support"},{"id":"netcat-webserver","level":0,"title":"Netcat Webserver","anchor":"#netcat-webserver"},{"id":"container-runtime-interface","level":0,"title":"Container Runtime Interface","anchor":"#container-runtime-interface"},{"id":"container-tools","level":0,"title":"Container Tools","anchor":"#container-tools"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="frontend/app.css" rel="stylesheet"><link href="static/custom.css" rel="stylesheet"><link rel="icon" type="image/x-icon" sizes="16x16" href="images/favicon.ico"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Containers &amp; K8S | Suresh's Tech Notes"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Suresh's Tech Notes Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://suresh.dev/notes/1.0/containers.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@sur3shg"><meta name="twitter:title" content="Containers &amp; K8S | Suresh's Tech Notes"><meta name="twitter:description" content=""><meta name="twitter:creator" content="@sur3shg"><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+<html lang="en-US" data-preset="vivid" data-primary-color="#24AFD0" data-link-color="#214C69" data-resizable-sidebar="true" data-sidebar-width="200"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="built-on" content="2024-09-21T20:47:06.362224937"><title>Containers &amp; K8S | Suresh's Tech Notes</title><script type="application/json" id="virtual-toc-data">[{"id":"openjdk-container-images","level":0,"title":"OpenJDK Container Images","anchor":"#openjdk-container-images"},{"id":"docker-commands","level":0,"title":"Docker Commands","anchor":"#docker-commands"},{"id":"debug-container","level":0,"title":"Debug Container","anchor":"#debug-container"},{"id":"jvm-ergonomics-and-container-logs","level":0,"title":"JVM Ergonomics and Container logs","anchor":"#jvm-ergonomics-and-container-logs"},{"id":"jvm-default-gc","level":0,"title":"JVM default GC","anchor":"#jvm-default-gc"},{"id":"container-sandbox","level":0,"title":"Container Sandbox","anchor":"#container-sandbox"},{"id":"app-running-on-k8s-docker","level":0,"title":"App Running on K8S/Docker","anchor":"#app-running-on-k8s-docker"},{"id":"access-docker-desktop-linuxkit-vm-on-macos","level":0,"title":"Access Docker desktop LinuxKit VM on MacOS","anchor":"#access-docker-desktop-linuxkit-vm-on-macos"},{"id":"multi-architecture-support","level":0,"title":"Multi Architecture Support","anchor":"#multi-architecture-support"},{"id":"netcat-webserver","level":0,"title":"Netcat Webserver","anchor":"#netcat-webserver"},{"id":"container-runtime-interface","level":0,"title":"Container Runtime Interface","anchor":"#container-runtime-interface"},{"id":"container-tools","level":0,"title":"Container Tools","anchor":"#container-tools"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="frontend/app.css" rel="stylesheet"><link href="static/custom.css" rel="stylesheet"><link rel="icon" type="image/x-icon" sizes="16x16" href="images/favicon.ico"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Containers &amp; K8S | Suresh's Tech Notes"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Suresh's Tech Notes Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://suresh.dev/notes/1.0/containers.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@sur3shg"><meta name="twitter:title" content="Containers &amp; K8S | Suresh's Tech Notes"><meta name="twitter:description" content=""><meta name="twitter:creator" content="@sur3shg"><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "WebPage",
     "@id": "https://suresh.dev/notes/1.0/containers.html#webpage",
@@ -13,7 +13,7 @@
     "@id": "https://suresh.devnotes/#website",
     "url": "https://suresh.devnotes/",
     "name": "Suresh's Tech Notes Help"
-}</script><!-- End Schema.org --></head><body data-id="Containers" data-main-title="Containers & K8S" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Suresh's Tech Notes 1.0 Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Containers" data-label-id="Containers" data-annotation-ids="JVM,KT" id="Containers.md">Containers & K8S</h1><ul class="list _bullet" id="-1ubktk_3"><li class="list__item" id="-1ubktk_19"><p><span id="-1ubktk_20">Containers &amp; K8S</span></p><ul class="list _bullet" id="-1ubktk_21"><li class="list__item" id="-1ubktk_22"><p><a href="#openjdk-container-images" id="-1ubktk_34" data-tooltip="# Distroless Java Images # https://console.cloud.google.com/gcr/images/distroless/GLOBAL # https://github.com/GoogleContainerTools/distroless#what-images-are-available $ docker pull gcr.io/distroless/java-base-debian12:latest $ docker pull gcr.io/distroless/java21-debian12:latest #…">OpenJDK Container Images</a></p></li><li class="list__item" id="-1ubktk_23"><p><a href="#docker-commands" id="-1ubktk_35" data-tooltip="Docker Run">Docker Commands</a></p></li><li class="list__item" id="-1ubktk_24"><p><a href="#debug-container" id="-1ubktk_36" data-tooltip="Debug Container # On M1 mac $ docker run \ --platform linux/amd64 \ --pull always \ -it \ --rm \ -p 8080:80 \ --name openjdk-playground \ ghcr.io/sureshg/containers:openjdk-latest # Default busybox image should work. $ brew install cdebug $ cdebug exec \ --privileged \ -it \ --rm \…">Debug Container</a></p></li><li class="list__item" id="-1ubktk_25"><p><a href="#jvm-ergonomics-and-container-logs" id="-1ubktk_37" data-tooltip="For container logs, add -Xlog:gc*,os=trace,os+container=trace option. Override the default container CPU quota detection -XX:ActiveProcessorCount=">JVM Ergonomics and Container logs</a></p></li><li class="list__item" id="-1ubktk_26"><p><a href="#jvm-default-gc" id="-1ubktk_38" data-tooltip="# OpenJDK reverts to Serial GC when it detects &lt; 2 CPUs or &lt; 2GB RAM $ docker run -it --rm --cpus=1 --memory=1G openjdk:23-slim java -Xlog:gc --version #[0.007s][info][gc] Using Serial OpenJDK - is_server_class_machine Stop using CPU limits on Kubernetes JVM ergonomics…">JVM default GC</a></p></li><li class="list__item" id="-1ubktk_27"><p><a href="#container-sandbox" id="-1ubktk_39" data-tooltip="$ docker run \ -it --rm \ --cpus=&quot;0.5&quot; \ --memory=&quot;512m&quot; \ --memory-swap=&quot;640m&quot; \ --pids-limit 512 \ --cap-drop=ALL \ --cap-add=DAC_OVERRIDE \ --security-opt=no-new-privileges \ --ulimit nproc=20:20 \ --ulimit fsize=1000000 \ --user nobody \ --network…">Container Sandbox</a></p></li><li class="list__item" id="-1ubktk_28"><p><span id="-1ubktk_40">App Running on K8S/Docker</span></p></li><li class="list__item" id="-1ubktk_29"><p><a href="#access-docker-desktop-linuxkit-vm-on-macos" id="-1ubktk_41" data-tooltip="$ docker run -it --rm --memory=256m --cpus=1 --mount type=bind,source=/,destination=/host --name alpine alpine /# chroot /host # docker version">Access Docker desktop LinuxKit VM on MacOS</a></p></li><li class="list__item" id="-1ubktk_30"><p><a href="#multi-architecture-support" id="-1ubktk_42" data-tooltip="tonistiigi/binfmt">Multi Architecture Support</a></p></li><li class="list__item" id="-1ubktk_31"><p><a href="#netcat-webserver" id="-1ubktk_43" data-tooltip="Forwards Logs">Netcat Webserver</a></p></li><li class="list__item" id="-1ubktk_32"><p><a href="#container-runtime-interface" id="-1ubktk_44" data-tooltip="">Container Runtime Interface</a></p></li><li class="list__item" id="-1ubktk_33"><p><span id="-1ubktk_45">Container Tools</span></p></li></ul></li></ul><section class="chapter"><h2 id="openjdk-container-images" data-toc="openjdk-container-images">OpenJDK Container Images</h2><div class="code-block" data-lang="bash">
+}</script><!-- End Schema.org --></head><body data-id="Containers" data-main-title="Containers & K8S" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Suresh's Tech Notes 1.0 Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Containers" data-label-id="Containers" data-annotation-ids="JVM,KT" id="Containers.md">Containers & K8S</h1><section class="chapter"><h2 id="openjdk-container-images" data-toc="openjdk-container-images">OpenJDK Container Images</h2><div class="code-block" data-lang="bash">
 # Distroless Java Images
 # https://console.cloud.google.com/gcr/images/distroless/GLOBAL
 # https://github.com/GoogleContainerTools/distroless#what-images-are-available
@@ -31,12 +31,12 @@ $ docker pull cgr.dev/chainguard/jdk:latest
 
 # Openjdk
 # https://github.com/docker-library/openjdk
-$ docker pull openjdk:23-slim
+$ docker pull openjdk:24-slim
 
 # Eclipse Temurin
 # https://github.com/adoptium/containers#supported-images
-$ docker pull eclipse-temurin:21-jdk
-$ docker pull eclipse-temurin:21-alpine
+$ docker pull eclipse-temurin:23-jdk
+$ docker pull eclipse-temurin:23-alpine
 
 # Oracle OpenJDK
 $ docker pull container-registry.oracle.com/java/openjdk:latest
@@ -47,14 +47,14 @@ $ docker pull container-registry.oracle.com/java/jdk:latest
 
 # Azul Zulu
 # https://github.com/zulu-openjdk/zulu-openjdk
-$ docker pull azul/zulu-openjdk-debian:21-jre
-$ docker pull azul/zulu-openjdk-alpine:21-jre
+$ docker pull azul/zulu-openjdk-debian:23-jre
+$ docker pull azul/zulu-openjdk-alpine:23-jre
 $ docker pull azul/prime-debian:latest
 
 # Amazon Corretto
 # https://github.com/corretto/corretto-docker
-$ docker pull amazoncorretto:21
-$ docker pull amazoncorretto:21-alpine-jdk
+$ docker pull amazoncorretto:23
+$ docker pull amazoncorretto:23-alpine
 
 # Microsoft OpenJDK
 # https://learn.microsoft.com/en-us/java/openjdk/containers
@@ -83,7 +83,7 @@ https://github.com/JetBrains/JetBrainsRuntime/releases
 # https://github.com/mdogan/homebrew-zulu
 $ brew tap mdogan/zulu
 $ brew install &lt;name&gt;
-</div><ul class="list _bullet" id="-1ubktk_47"><li class="list__item" id="-1ubktk_48"><p>https://hub.docker.com/_/openjdk</p></li><li class="list__item" id="-1ubktk_49"><p>https://github.com/docker-library/docs/tree/master/openjdk</p></li><li class="list__item" id="-1ubktk_50"><p>https://container-registry.oracle.com/java/openjdk</p></li><li class="list__item" id="-1ubktk_51"><p>https://www.graalvm.org/docs/getting-started/container-images/</p></li></ul></section><section class="chapter"><h2 id="docker-commands" data-toc="docker-commands">Docker Commands</h2><ul class="list _bullet" id="-1ubktk_52"><li class="list__item" id="-1ubktk_53"><p id="-1ubktk_55">Docker Run</p><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="-b3lh3z_19"><li class="list__item" id="-b3lh3z_20"><p>https://hub.docker.com/_/openjdk</p></li><li class="list__item" id="-b3lh3z_21"><p>https://github.com/docker-library/docs/tree/master/openjdk</p></li><li class="list__item" id="-b3lh3z_22"><p>https://container-registry.oracle.com/java/openjdk</p></li><li class="list__item" id="-b3lh3z_23"><p>https://www.graalvm.org/docs/getting-started/container-images/</p></li></ul></section><section class="chapter"><h2 id="docker-commands" data-toc="docker-commands">Docker Commands</h2><ul class="list _bullet" id="-b3lh3z_24"><li class="list__item" id="-b3lh3z_25"><p id="-b3lh3z_27">Docker Run</p><div class="code-block" data-lang="bash">
 # Remove all unused images, not just dangling ones
 $ docker system prune -af
 
@@ -96,8 +96,8 @@ $ docker run \
         --publish 8080:8080 \
         --name app \
         --mount type=bind,source=$PWD,destination=/app,readonly \
-        openjdk:23-slim       
-</div></li><li class="list__item" id="-1ubktk_54"><p id="-1ubktk_57">Docker Image Size</p><div class="code-block" data-lang="bash">
+        openjdk:24-slim       
+</div></li><li class="list__item" id="-b3lh3z_26"><p id="-b3lh3z_29">Docker Image Size</p><div class="code-block" data-lang="bash">
 # Compressed Size
 $ docker image save ghcr.io/sureshg/containers:openjdk-latest | gzip | wc -c | numfmt --to=si
 $ docker image save ghcr.io/sureshg/containers:nativeimage-latest | gzip | wc -c | numfmt --to=si
@@ -107,7 +107,7 @@ $ docker manifest inspect ghcr.io/sureshg/containers:openjdk-latest -v
 # Uncompressed Size
 $ docker inspect -f &quot;{{ .Size }}&quot; sureshg/jvm | numfmt --to=si
 $ docker history sureshg/jvm
-</div></li></ul></section><section class="chapter"><h2 id="debug-container" data-toc="debug-container"><a href="https://github.com/iximiuz/cdebug" id="-1ubktk_61" data-external="true" rel="noopener noreferrer">Debug Container</a></h2><div class="code-block" data-lang="bash">
+</div></li></ul></section><section class="chapter"><h2 id="debug-container" data-toc="debug-container"><a href="https://github.com/iximiuz/cdebug" id="-b3lh3z_33" data-external="true" rel="noopener noreferrer">Debug Container</a></h2><div class="code-block" data-lang="bash">
 # On M1 mac
 $ docker run \
          --platform linux/amd64 \
@@ -175,9 +175,9 @@ $ docker run \
         --mount type=bind,source=$(pwd),destination=/app,readonly \
         --mount type=bind,source=/,destination=/host,readonly \
         --name openjdk \
-        openjdk:23-slim \
+        openjdk:24-slim \
         java \
-        --source 23 --enable-preview \
+        --source 24 --enable-preview \
         -XX:+UnlockExperimentalVMOptions \
         -XX:+UnlockDiagnosticVMOptions \
         -XX:+PrintFlagsFinal \
@@ -186,11 +186,11 @@ $ docker run \
         -Xlog:gc \
         /app/App.java \
         | grep -e &quot;Use.*GC&quot; -e &quot;Active&quot; -e &quot;Using&quot; -e &quot;Max.*Limit&quot; -e &quot;Container&quot; -e &quot;•&quot;
-</div><aside class="prompt" data-type="note" data-title="GC Logs &amp; ActiveProcessorCount" id="-1ubktk_63"><p id="-1ubktk_64">For container logs, add <span class="control" id="-1ubktk_65">-Xlog:gc*,os=trace,os+container=trace</span> option. Override the default container CPU quota detection <span class="control" id="-1ubktk_66">-XX:ActiveProcessorCount=</span></p></aside></section><section class="chapter"><h2 id="jvm-default-gc" data-toc="jvm-default-gc">JVM default GC</h2><div class="code-block" data-lang="bash">
+</div><aside class="prompt" data-type="note" data-title="GC Logs &amp; ActiveProcessorCount" id="-b3lh3z_35"><p id="-b3lh3z_36">For container logs, add <span class="control" id="-b3lh3z_37">-Xlog:gc*,os=trace,os+container=trace</span> option. Override the default container CPU quota detection <span class="control" id="-b3lh3z_38">-XX:ActiveProcessorCount=</span></p></aside></section><section class="chapter"><h2 id="jvm-default-gc" data-toc="jvm-default-gc">JVM default GC</h2><div class="code-block" data-lang="bash">
 # OpenJDK reverts to Serial GC when it detects &lt; 2 CPUs or &lt; 2GB RAM
-$ docker run -it --rm --cpus=1 --memory=1G openjdk:23-slim java -Xlog:gc --version
+$ docker run -it --rm --cpus=1 --memory=1G openjdk:24-slim java -Xlog:gc --version
   #[0.007s][info][gc] Using Serial
-</div><ul class="list _bullet" id="-1ubktk_69"><li class="list__item" id="-1ubktk_70"><p><a href="https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/os.cpp#:~:text=is_server_class_machine" id="-1ubktk_74" data-external="true" rel="noopener noreferrer">OpenJDK - is_server_class_machine</a></p></li><li class="list__item" id="-1ubktk_71"><p><a href="https://home.robusta.dev/blog/stop-using-cpu-limits" id="-1ubktk_75" data-external="true" rel="noopener noreferrer"><span class="control" id="-1ubktk_76">Stop using CPU limits on Kubernetes</span></a></p></li><li class="list__item" id="-1ubktk_72"><p><a href="https://www.youtube.com/watch?v=wApqCjHWF8Q" id="-1ubktk_77" data-external="true" rel="noopener noreferrer">JVM ergonomics</a></p></li><li class="list__item" id="-1ubktk_73"><p>https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</p></li></ul></section><section class="chapter"><h2 id="container-sandbox" data-toc="container-sandbox">Container Sandbox</h2><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="-b3lh3z_41"><li class="list__item" id="-b3lh3z_42"><p><a href="https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/os.cpp#:~:text=is_server_class_machine" id="-b3lh3z_46" data-external="true" rel="noopener noreferrer">OpenJDK - is_server_class_machine</a></p></li><li class="list__item" id="-b3lh3z_43"><p><a href="https://home.robusta.dev/blog/stop-using-cpu-limits" id="-b3lh3z_47" data-external="true" rel="noopener noreferrer"><span class="control" id="-b3lh3z_48">Stop using CPU limits on Kubernetes</span></a></p></li><li class="list__item" id="-b3lh3z_44"><p><a href="https://www.youtube.com/watch?v=wApqCjHWF8Q" id="-b3lh3z_49" data-external="true" rel="noopener noreferrer">JVM ergonomics</a></p></li><li class="list__item" id="-b3lh3z_45"><p>https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</p></li></ul></section><section class="chapter"><h2 id="container-sandbox" data-toc="container-sandbox">Container Sandbox</h2><div class="code-block" data-lang="bash">
 $ docker run \
          -it --rm \
          --cpus=&quot;0.5&quot; \
@@ -213,7 +213,7 @@ $ docker run \
          --mount type=bind,source=/usr/bin/docker,destination=/usr/bin/docker,readonly \
          --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
          --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-         openjdk:23-slim java --enable-preview src/App.java
+         openjdk:24-slim java --enable-preview src/App.java
          
 # --security-opt seccomp=my_sandbox
 # --cap-add=chown \
@@ -227,13 +227,13 @@ $ docker run \
 
 # Create nobody user
 # RUN useradd --shell /bin/sh --create-home --uid 65534 nobody        
-</div><ul class="list _bullet" id="-1ubktk_79"><li class="list__item" id="-1ubktk_80"><p><a href="https://docs.docker.com/engine/security/seccomp/" id="-1ubktk_82" data-external="true" rel="noopener noreferrer">Secure Computing Mode - seccomp</a></p></li><li class="list__item" id="-1ubktk_81"><p><a href="https://github.com/bowbahdoe/run-java-code/blob/main/ui/src/sandbox.rs#L109" id="-1ubktk_83" data-external="true" rel="noopener noreferrer">https://run.mccue.dev</a></p></li></ul></section><section class="chapter"><h2 id="app-running-on-k8s-docker" data-toc="app-running-on-k8s-docker">App Running on K8S/Docker</h2><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="-b3lh3z_51"><li class="list__item" id="-b3lh3z_52"><p><a href="https://docs.docker.com/engine/security/seccomp/" id="-b3lh3z_54" data-external="true" rel="noopener noreferrer">Secure Computing Mode - seccomp</a></p></li><li class="list__item" id="-b3lh3z_53"><p><a href="https://github.com/bowbahdoe/run-java-code/blob/main/ui/src/sandbox.rs#L109" id="-b3lh3z_55" data-external="true" rel="noopener noreferrer">https://run.mccue.dev</a></p></li></ul></section><section class="chapter"><h2 id="app-running-on-k8s-docker" data-toc="app-running-on-k8s-docker">App Running on K8S/Docker</h2><div class="code-block" data-lang="bash">
 # Check if running on docker container
 $ docker run \
      -it \
      --rm \
      --pull always \
-     openjdk:23-slim \
+     openjdk:24-slim \
      sh -c &quot;cat /proc/self/cgroup | grep -i '/docker'&quot;
 
 # Check if running on Kubernets
@@ -241,17 +241,17 @@ $  docker run \
      -it \
      --rm \
      --pull always \
-     openjdk:23-slim \
+     openjdk:24-slim \
      sh -c &quot;printenv | grep SERVICE&quot;
-</div><ul class="list _bullet" id="-1ubktk_85"><li class="list__item" id="-1ubktk_86"><p><a href="https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#environment-variables:~:text=printenv%20%7C%20grep%20SERVICE-,KUBERNETES_SERVICE_HOST,-%3D10.0.0.1%0AKUBERNETES_SERVICE_PORT%3D443" id="-1ubktk_87" data-external="true" rel="noopener noreferrer">Check if the container is running inside K8S</a></p></li></ul></section><section class="chapter"><h2 id="access-docker-desktop-linuxkit-vm-on-macos" data-toc="access-docker-desktop-linuxkit-vm-on-macos">Access Docker desktop LinuxKit VM on MacOS</h2><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="-b3lh3z_57"><li class="list__item" id="-b3lh3z_58"><p><a href="https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#environment-variables:~:text=printenv%20%7C%20grep%20SERVICE-,KUBERNETES_SERVICE_HOST,-%3D10.0.0.1%0AKUBERNETES_SERVICE_PORT%3D443" id="-b3lh3z_59" data-external="true" rel="noopener noreferrer">Check if the container is running inside K8S</a></p></li></ul></section><section class="chapter"><h2 id="access-docker-desktop-linuxkit-vm-on-macos" data-toc="access-docker-desktop-linuxkit-vm-on-macos">Access Docker desktop LinuxKit VM on MacOS</h2><div class="code-block" data-lang="bash">
 $ docker run -it --rm --memory=256m --cpus=1 --mount type=bind,source=/,destination=/host --name alpine alpine
  /# chroot /host
   # docker version
-</div></section><section class="chapter"><h2 id="multi-architecture-support" data-toc="multi-architecture-support"><a href="https://docs.docker.com/desktop/multi-arch/" id="-1ubktk_91" data-external="true" rel="noopener noreferrer">Multi Architecture Support</a></h2><ul class="list _bullet" id="-1ubktk_90"><li class="list__item" id="-1ubktk_92"><p id="-1ubktk_97"><a href="https://github.com/tonistiigi/binfmt" id="-1ubktk_99" data-external="true" rel="noopener noreferrer"><span class="control" id="-1ubktk_100">tonistiigi/binfmt</span></a></p><div class="code-block" data-lang="bash">
+</div></section><section class="chapter"><h2 id="multi-architecture-support" data-toc="multi-architecture-support"><a href="https://docs.docker.com/desktop/multi-arch/" id="-b3lh3z_63" data-external="true" rel="noopener noreferrer">Multi Architecture Support</a></h2><ul class="list _bullet" id="-b3lh3z_62"><li class="list__item" id="-b3lh3z_64"><p id="-b3lh3z_69"><a href="https://github.com/tonistiigi/binfmt" id="-b3lh3z_71" data-external="true" rel="noopener noreferrer"><span class="control" id="-b3lh3z_72">tonistiigi/binfmt</span></a></p><div class="code-block" data-lang="bash">
 $ docker run --rm --privileged tonistiigi/binfmt --install all
-</div></li><li class="list__item" id="-1ubktk_93"><p id="-1ubktk_101"><a href="https://github.com/multiarch/qemu-user-static" id="-1ubktk_103" data-external="true" rel="noopener noreferrer"><span class="control" id="-1ubktk_104">multiarch/qemu-user-static</span></a></p><div class="code-block" data-lang="bash">
+</div></li><li class="list__item" id="-b3lh3z_65"><p id="-b3lh3z_73"><a href="https://github.com/multiarch/qemu-user-static" id="-b3lh3z_75" data-external="true" rel="noopener noreferrer"><span class="control" id="-b3lh3z_76">multiarch/qemu-user-static</span></a></p><div class="code-block" data-lang="bash">
 $ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-</div></li><li class="list__item" id="-1ubktk_94"><p id="-1ubktk_105"><a href="https://github.com/qemu/qemu/blob/master/scripts/qemu-binfmt-conf.sh" id="-1ubktk_106" data-external="true" rel="noopener noreferrer">Supported Targets - qemu-binfmt-conf.sh</a></p></li><li class="list__item" id="-1ubktk_95"><p id="-1ubktk_107"><a href="https://github.com/docker-library/official-images#architectures-other-than-amd64" id="-1ubktk_108" data-external="true" rel="noopener noreferrer">Dockerhub Supported Archs</a></p></li><li class="list__item" id="-1ubktk_96"><p id="-1ubktk_109">Examples</p><div class="code-block" data-lang="bash">
+</div></li><li class="list__item" id="-b3lh3z_66"><p id="-b3lh3z_77"><a href="https://github.com/qemu/qemu/blob/master/scripts/qemu-binfmt-conf.sh" id="-b3lh3z_78" data-external="true" rel="noopener noreferrer">Supported Targets - qemu-binfmt-conf.sh</a></p></li><li class="list__item" id="-b3lh3z_67"><p id="-b3lh3z_79"><a href="https://github.com/docker-library/official-images#architectures-other-than-amd64" id="-b3lh3z_80" data-external="true" rel="noopener noreferrer">Dockerhub Supported Archs</a></p></li><li class="list__item" id="-b3lh3z_68"><p id="-b3lh3z_81">Examples</p><div class="code-block" data-lang="bash">
 $ docker run -it --rm --platform=linux/aarch64  alpine uname -m
   aarch64
 $ docker run -it --rm --platform=linux/amd64 alpine uname -m
@@ -269,7 +269,7 @@ ENTRYPOINT while :; do nc -k -l -p $PORT -e sh -c 'echo -e &quot;HTTP/1.1 200 OK
 # https://github.com/jamesward/hello-netcat
 # docker build -t hello-netcat .
 # docker run -p 8080:80 -e PORT=80 -it hello-netcat
-</div><p id="-1ubktk_112">Forwards Logs</p><div class="code-block" data-lang="bash">
+</div><p id="-b3lh3z_84">Forwards Logs</p><div class="code-block" data-lang="bash">
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
  &amp;&amp; ln -sf /dev/stderr /var/log/nginx/error.log
@@ -279,7 +279,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 /proc/self/fd/2 (STDERR)
 
 # https://docs.docker.com/config/containers/logging/configure/
-</div><p id="-1ubktk_114"><a href="https://medium.com/@madflojo/shutdown-signals-with-docker-entry-point-scripts-5e560f4e2d45" id="-1ubktk_120" data-external="true" rel="noopener noreferrer">Shutdown signals and EnytryPoint</a></p><div class="code-block" data-lang="bash">
+</div><p id="-b3lh3z_86"><a href="https://medium.com/@madflojo/shutdown-signals-with-docker-entry-point-scripts-5e560f4e2d45" id="-b3lh3z_92" data-external="true" rel="noopener noreferrer">Shutdown signals and EnytryPoint</a></p><div class="code-block" data-lang="bash">
 #!/bin/bash
 ## Entrypoint script for my-app. This script is to show how to write
 ## an entrypoint script that actually passes down signals from Docker.
@@ -296,10 +296,10 @@ fi
 exec my-app
 </div><div class="code-block" data-lang="none">
 ENTRYPOINT [&quot;../../myapp-entrypoint.sh&quot;]
-</div><ul class="list _bullet" id="-1ubktk_117"><li class="list__item" id="-1ubktk_121"><p><a href="https://github.com/vasilmkd/docker-stats-monitor/blob/master/Dockerfile" id="-1ubktk_122" data-external="true" rel="noopener noreferrer">Docker stats GraalVM app</a></p></li></ul><p id="-1ubktk_118"><span class="control" id="-1ubktk_123">HTTP Proxy</span></p><div class="code-block" data-lang="bash">
+</div><ul class="list _bullet" id="-b3lh3z_89"><li class="list__item" id="-b3lh3z_93"><p><a href="https://github.com/vasilmkd/docker-stats-monitor/blob/master/Dockerfile" id="-b3lh3z_94" data-external="true" rel="noopener noreferrer">Docker stats GraalVM app</a></p></li></ul><p id="-b3lh3z_90"><span class="control" id="-b3lh3z_95">HTTP Proxy</span></p><div class="code-block" data-lang="bash">
 FROM debian:stable-slim
 
 ENV HTTP_PROXY=&quot;http://proxy.test.com:8080&quot;
 ENV HTTPS_PROXY=&quot;http://proxy.test.com:8080&quot;
 ENV NO_PROXY=&quot;*.test1.com,*.test2.com,127.0.0.1,localhost&quot;
-</div></section><section class="chapter"><h2 id="container-runtime-interface" data-toc="container-runtime-interface">Container Runtime Interface</h2><figure id="-1ubktk_124"><a href="images/containers.svg" class="lightbox"><img alt="Container Runtimes" src="images/containers.svg" title="Container Runtimes" width="604" height="791"></a></figure></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h2 id="container-tools" data-toc="container-tools">Container Tools</h2></div><div class="collapse__content"><ul class="list _bullet" id="-1ubktk_125"><li class="list__item" id="-1ubktk_126"><p>https://github.com/rancher-sandbox/rancher-desktop</p></li><li class="list__item" id="-1ubktk_127"><p>https://github.com/beringresearch/macpine (Lightweight Linux VMs on MacOS)</p></li><li class="list__item" id="-1ubktk_128"><p>https://github.com/containerd/containerd</p></li><li class="list__item" id="-1ubktk_129"><p>https://github.com/lima-vm/lima (Linux on Mac)</p></li><li class="list__item" id="-1ubktk_130"><p>https://github.com/containerd/nerdctl</p></li><li class="list__item" id="-1ubktk_131"><p>https://github.com/k3s-io/k3s</p></li><li class="list__item" id="-1ubktk_132"><p>https://github.com/rancher/k3d/</p></li><li class="list__item" id="-1ubktk_133"><p>https://kind.sigs.k8s.io/</p></li><li class="list__item" id="-1ubktk_134"><p>https://github.com/k0sproject/k0s</p></li><li class="list__item" id="-1ubktk_135"><p>https://github.com/canonical/multipass (Running Ubuntu VM)</p></li><li class="list__item" id="-1ubktk_136"><p>https://podman.io/blogs/2021/09/06/podman-on-macs.html</p></li><li class="list__item" id="-1ubktk_137"><p>https://github.com/wagoodman/dive</p></li><li class="list__item" id="-1ubktk_138"><p>https://github.com/google/cadvisor</p></li><li class="list__item" id="-1ubktk_139"><p>https://github.com/google/go-containerregistry/tree/main/cmd/crane</p></li><li class="list__item" id="-1ubktk_140"><p><a href="https://github.com/aquasecurity/trivy" id="-1ubktk_142" data-external="true" rel="noopener noreferrer">Trivy - Container Scanning</a></p></li><li class="list__item" id="-1ubktk_141"><p><a href="https://github.com/sigstore/cosign" id="-1ubktk_143" data-external="true" rel="noopener noreferrer">CoSign - Container Signing</a></p></li></ul></div></div></section><div class="last-modified">Last modified: 02 August 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="openjdk.html" class="navigation-links__prev">OpenJDK</a><a href="security-certificates.html" class="navigation-links__next">Security &amp; Certificates</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="frontend/app.js"></script></body></html>
+</div></section><section class="chapter"><h2 id="container-runtime-interface" data-toc="container-runtime-interface">Container Runtime Interface</h2><figure id="-b3lh3z_96"><a href="images/containers.svg" class="lightbox"><img alt="Container Runtimes" src="images/containers.svg" title="Container Runtimes" width="604" height="791"></a></figure></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h2 id="container-tools" data-toc="container-tools">Container Tools</h2></div><div class="collapse__content"><ul class="list _bullet" id="-b3lh3z_97"><li class="list__item" id="-b3lh3z_98"><p>https://github.com/rancher-sandbox/rancher-desktop</p></li><li class="list__item" id="-b3lh3z_99"><p>https://github.com/beringresearch/macpine (Lightweight Linux VMs on MacOS)</p></li><li class="list__item" id="-b3lh3z_100"><p>https://github.com/containerd/containerd</p></li><li class="list__item" id="-b3lh3z_101"><p>https://github.com/lima-vm/lima (Linux on Mac)</p></li><li class="list__item" id="-b3lh3z_102"><p>https://github.com/containerd/nerdctl</p></li><li class="list__item" id="-b3lh3z_103"><p>https://github.com/k3s-io/k3s</p></li><li class="list__item" id="-b3lh3z_104"><p>https://github.com/rancher/k3d/</p></li><li class="list__item" id="-b3lh3z_105"><p>https://kind.sigs.k8s.io/</p></li><li class="list__item" id="-b3lh3z_106"><p>https://github.com/k0sproject/k0s</p></li><li class="list__item" id="-b3lh3z_107"><p>https://github.com/canonical/multipass (Running Ubuntu VM)</p></li><li class="list__item" id="-b3lh3z_108"><p>https://podman.io/blogs/2021/09/06/podman-on-macs.html</p></li><li class="list__item" id="-b3lh3z_109"><p>https://github.com/wagoodman/dive</p></li><li class="list__item" id="-b3lh3z_110"><p>https://github.com/google/cadvisor</p></li><li class="list__item" id="-b3lh3z_111"><p>https://github.com/google/go-containerregistry/tree/main/cmd/crane</p></li><li class="list__item" id="-b3lh3z_112"><p><a href="https://github.com/sigstore/cosign" id="-b3lh3z_113" data-external="true" rel="noopener noreferrer">CoSign - Container Signing</a></p></li></ul></div></div></section><div class="last-modified">Last modified: 21 September 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="openjdk.html" class="navigation-links__prev">OpenJDK</a><a href="security-certificates.html" class="navigation-links__next">Security &amp; Certificates</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="frontend/app.js"></script></body></html>
