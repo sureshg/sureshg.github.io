@@ -1,34 +1,8 @@
 # Security & Certificates
 
-<!-- TOC -->
-* [Security & Certificates](#security--certificates)
-    * [CA Certs and Certificate Transparency Logs](#ca-certs-and-certificate-transparency-logs)
-    * [OpenSSL & Keytool](#openssl--keytool)
-    * [OpenJDK](#openjdk)
-    * [Self Signed Certs](#self-signed-certs)
-      * [Using OpenSSL](#using-openssl)
-      * [Using OpenJDK Keytool](#using-openjdk-keytool)
-    * [Add CACerts](#add-cacerts)
-    * [cURL: Auth/Mutual TLS](#curl-authmutual-tls)
-    * [GPG/OpenPGP](#gpgopenpgp)
-    * [Tools](#tools)
-    * [TLS Debugging](#tls-debugging)
-    * [Misc](#misc)
-    * [TrustStore](#truststore)
-    * [Cryptography](#cryptography)
-<!-- TOC -->
-
 <primary-label ref="Security"/>
 <secondary-label ref="JVM"/>
 <secondary-label ref="KT"/>
-
-### CA Certs and Certificate Transparency Logs
-
-* [Certificate Search - crt.sh](https://crt.sh/)
-* https://crt.sh/test-websites?trustedBy=Java
-* [LintCert](https://crt.sh/lintcert)
-* [Cert Lint Library](https://github.com/amazon-archives/certlint)
-* [CT Logs](https://certificate.transparency.dev/logs/)
 
 ### OpenSSL & Keytool
 
@@ -91,6 +65,14 @@ $ keytool -importcert \
           -storepass changeit \
           -file CA-intermediate.cer
 
+# Create PKCS12 truststore using OpenSSL
+$ openssl pkcs12 -export \
+                 -jdktrust anyExtendedKeyUsage \
+                 -nokeys \
+                 -in server.pem \
+                 -password pass: \
+                 -out truststore-openssl.p12
+              
 # Show PKCS#12 info.
 $ openssl pkcs12 -info -password pass:changeit -in globalsign-rootca.p12
 $ keytool -list \
@@ -342,6 +324,14 @@ $ curl -v \
        -X GET "https://my-server:443/api"
 ```
 
+### CA Certs and Certificate Transparency Logs
+
+* [Certificate Search - crt.sh](https://crt.sh/)
+* https://crt.sh/test-websites?trustedBy=Java
+* [LintCert](https://crt.sh/lintcert)
+* [Cert Lint Library](https://github.com/amazon-archives/certlint)
+* [CT Logs](https://certificate.transparency.dev/logs/)
+
 ### GPG/OpenPGP
 
 * [**Setup GPG on MacOS - IntelliJ
@@ -430,9 +420,9 @@ $ curl -v \
 
 ### TLS Debugging
 
-* [Debugging TLS Connection in Java](https://docs.oracle.com/en/java/javase/20/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-31B7E142-B874-46E9-8DD0-4E18EC0EB2CF)
+* [Debugging TLS Connection in Java](https://docs.oracle.com/en/java/javase/23/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-31B7E142-B874-46E9-8DD0-4E18EC0EB2CF)
 
-* [Java Security Guide](https://docs.oracle.com/en/java/javase/20/security/java-security-overview1.html)
+* [Java Security Guide](https://docs.oracle.com/en/java/javase/23/security/java-security-overview1.html)
 
 ```bash
 $ java -Djavax.net.debug=help MyApp

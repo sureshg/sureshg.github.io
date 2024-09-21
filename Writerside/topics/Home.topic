@@ -13,21 +13,21 @@
 
         <spotlight>
             <a href="OpenJDK.md" type="start" summary="OpenJDK/JVM">OpenJDK/JVM</a>
-            <a href="Kotlin.md" type="cross-platform" summary="Kotlin">Kotlin</a>
+            <a href="Kotlin.md" type="cross-platform" summary="Kotlin"/>
 
         </spotlight>
 
         <primary>
             <title>Containers</title>
             <a href="Containers.md" type="container" summary="Containers and Kubernetes">Containers and K8S</a>
-            <a href="Linux.md" type="server" summary="Linux">Linux</a>
+            <a href="Linux.md" type="server" summary="Linux"/>
         </primary>
 
         <secondary>
-            <title>Profiling & Security</title>
+            <title>Profiling &amp; Security</title>
             <a href="Security-Certificates.md" type="key" summary="Certificate and Security">Certificate and
                 Security</a>
-            <a href="JVM-Profiling.md" type="tools" summary="JVM Profiling">JVM Profiling</a>
+            <a href="JVM-Profiling.md" type="tools" summary="JVM Profiling"/>
         </secondary>
 
         <misc>

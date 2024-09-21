@@ -1,15 +1,5 @@
 # Kotlin
 
-<!-- TOC -->
-* [Kotlin](#kotlin)
-    * [Kotlin Compiler Options](#kotlin-compiler-options)
-    * [Native Image](#native-image)
-    * [Videos](#videos)
-    * [Samples](#samples)
-    * [Misc](#misc)
-        * [Math](#math)
-<!-- TOC -->
-
 <primary-label ref="Kotlin"/>
 <secondary-label ref="JVM"/>
 <secondary-label ref="OpenJDK"/>

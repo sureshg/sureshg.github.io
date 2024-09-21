@@ -1,17 +1,5 @@
 # Linux
 
-<!-- TOC -->
-* [Linux](#linux)
-    * [Command Line Tools](#command-line-tools)
-    * [Proc FileSystem](#proc-filesystem)
-    * [Git Config](#git-config)
-    * [Curl](#curl)
-    * [DIG](#dig)
-    * [SSH](#ssh)
-    * [Wireshark](#wireshark)
-    * [TCPDump](#tcpdump)
-<!-- TOC -->
-
 <primary-label ref="Linux"/>
 
 <show-structure/>

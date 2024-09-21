@@ -1,21 +1,5 @@
 # Containers & K8S
 
-<!-- TOC -->
-* [Containers & K8S](#containers--k8s)
-    * [OpenJDK Container Images](#openjdk-container-images)
-    * [Docker Commands](#docker-commands)
-    * [Debug Container](#debug-container)
-    * [JVM Ergonomics and Container logs](#jvm-ergonomics-and-container-logs)
-    * [JVM default GC](#jvm-default-gc)
-    * [Container Sandbox](#container-sandbox)
-    * [App Running on K8S/Docker](#app-running-on-k8sdocker)
-    * [Access Docker desktop LinuxKit VM on MacOS](#access-docker-desktop-linuxkit-vm-on-macos)
-    * [Multi Architecture Support](#multi-architecture-support)
-    * [Netcat Webserver](#netcat-webserver)
-    * [Container Runtime Interface](#container-runtime-interface)
-    * [Container Tools {collapsible="true"}](#container-tools-collapsibletrue)
-<!-- TOC -->
-
 <primary-label ref="Containers"/>
 <secondary-label ref="JVM"/>
 <secondary-label ref="KT"/>
@@ -40,12 +24,12 @@ $ docker pull cgr.dev/chainguard/jdk:latest
 
 # Openjdk
 # https://github.com/docker-library/openjdk
-$ docker pull openjdk:23-slim
+$ docker pull openjdk:24-slim
 
 # Eclipse Temurin
 # https://github.com/adoptium/containers#supported-images
-$ docker pull eclipse-temurin:21-jdk
-$ docker pull eclipse-temurin:21-alpine
+$ docker pull eclipse-temurin:23-jdk
+$ docker pull eclipse-temurin:23-alpine
 
 # Oracle OpenJDK
 $ docker pull container-registry.oracle.com/java/openjdk:latest
@@ -56,14 +40,14 @@ $ docker pull container-registry.oracle.com/java/jdk:latest
 
 # Azul Zulu
 # https://github.com/zulu-openjdk/zulu-openjdk
-$ docker pull azul/zulu-openjdk-debian:21-jre
-$ docker pull azul/zulu-openjdk-alpine:21-jre
+$ docker pull azul/zulu-openjdk-debian:23-jre
+$ docker pull azul/zulu-openjdk-alpine:23-jre
 $ docker pull azul/prime-debian:latest
 
 # Amazon Corretto
 # https://github.com/corretto/corretto-docker
-$ docker pull amazoncorretto:21
-$ docker pull amazoncorretto:21-alpine-jdk
+$ docker pull amazoncorretto:23
+$ docker pull amazoncorretto:23-alpine
 
 # Microsoft OpenJDK
 # https://learn.microsoft.com/en-us/java/openjdk/containers
@@ -116,7 +100,7 @@ $ brew install <name>
            --publish 8080:8080 \
            --name app \
            --mount type=bind,source=$PWD,destination=/app,readonly \
-           openjdk:23-slim       
+           openjdk:24-slim       
    ```
 
 * Docker Image Size
@@ -207,9 +191,9 @@ $ docker run \
         --mount type=bind,source=$(pwd),destination=/app,readonly \
         --mount type=bind,source=/,destination=/host,readonly \
         --name openjdk \
-        openjdk:23-slim \
+        openjdk:24-slim \
         java \
-        --source 23 --enable-preview \
+        --source 24 --enable-preview \
         -XX:+UnlockExperimentalVMOptions \
         -XX:+UnlockDiagnosticVMOptions \
         -XX:+PrintFlagsFinal \
@@ -229,7 +213,7 @@ $ docker run \
 
 ```bash
 # OpenJDK reverts to Serial GC when it detects < 2 CPUs or < 2GB RAM
-$ docker run -it --rm --cpus=1 --memory=1G openjdk:23-slim java -Xlog:gc --version
+$ docker run -it --rm --cpus=1 --memory=1G openjdk:24-slim java -Xlog:gc --version
   #[0.007s][info][gc] Using Serial
 ```
 
@@ -263,7 +247,7 @@ $ docker run \
          --mount type=bind,source=/usr/bin/docker,destination=/usr/bin/docker,readonly \
          --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
          --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-         openjdk:23-slim java --enable-preview src/App.java
+         openjdk:24-slim java --enable-preview src/App.java
          
 # --security-opt seccomp=my_sandbox
 # --cap-add=chown \
@@ -290,7 +274,7 @@ $ docker run \
      -it \
      --rm \
      --pull always \
-     openjdk:23-slim \
+     openjdk:24-slim \
      sh -c "cat /proc/self/cgroup | grep -i '/docker'"
 
 # Check if running on Kubernets
@@ -298,7 +282,7 @@ $  docker run \
      -it \
      --rm \
      --pull always \
-     openjdk:23-slim \
+     openjdk:24-slim \
      sh -c "printenv | grep SERVICE"
 ```
 
@@ -424,6 +408,5 @@ ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 * https://github.com/wagoodman/dive
 * https://github.com/google/cadvisor
 * https://github.com/google/go-containerregistry/tree/main/cmd/crane
-* [Trivy - Container Scanning](https://github.com/aquasecurity/trivy)
 * [CoSign - Container Signing](https://github.com/sigstore/cosign)
 

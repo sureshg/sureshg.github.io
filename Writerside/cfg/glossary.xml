@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE terms SYSTEM "https://resources.jetbrains.com/writerside/1.0/glossary.dtd">
 <terms>
+    <term name="JVM">Java Virtual Machine</term>
+    <term name="KT">Kotlin</term>
     <term name="DRY">Don't Repeat Yourself</term>
     <term name="DSL">Domain-Specific Language</term>
     <term name="DAO">Data Access Object</term>
+    <term name="HTTP">Hypertext Transfer Protocol</term>
 </terms>

@@ -1,28 +1,6 @@
 # JVM Profiling
 
-<!-- TOC -->
-* [JVM Profiling](#jvm-profiling)
-    * [1. Flight Recorder](#1-flight-recorder)
-    * [2. Java Mission Control](#2-java-mission-control)
-    * [3. Visualization](#3-visualization)
-      * [FlameGraph of java threads](#flamegraph-of-java-threads)
-      * [JFR to FlameGraph](#jfr-to-flamegraph)
-      * [CPU/Memory Viz of a process](#cpumemory-viz-of-a-process)
-      * [Misc Tools](#misc-tools)
-    * [4. Profilers & Tools](#4-profilers--tools)
-    * [5. Commands](#5-commands)
-    * [6.JFR Streaming](#6jfr-streaming)
-    * [7. HeapDump](#7-heapdump)
-      * [Analyze using JOL](#analyze-using-jol)
-    * [8. ThreadDump](#8-threaddump)
-    * [9. Load Testing](#9-load-testing)
-    * [10. Unified GC Logging](#10-unified-gc-logging)
-    * [11. JVM Tools](#11-jvm-tools)
-    * [12. System/Node Health](#12-systemnode-health)
-    * [13. Commands](#13-commands)
-    * [14. Clock Cycles](#14-clock-cycles)
-    * [15. Resources](#15-resources)
-<!-- TOC -->
+<show-structure depth="3">
 
 <primary-label ref="Java"/>
 <secondary-label ref="JVM"/>
@@ -187,9 +165,9 @@ $ open '/Applications/JDK Mission Control.app' --args -vm $JAVA_HOME/bin
   $ jfr print --events FinalizerStatistics dump.jfr
   ```
 
-* [Troubleshoot Perf Issues Using JFR](https://docs.oracle.com/en/java/javase/20/troubleshoot/troubleshoot-performance-issues-using-jfr.html)
-* [Flight Recorder Tool](https://docs.oracle.com/en/java/javase/20/troubleshoot/diagnostic-tools.html#GUID-D38849B6-61C7-4ED6-A395-EA4BC32A9FD6)
-* [Flight Recorder API Guide](https://docs.oracle.com/en/java/javase/20/jfapi/flight-recorder-configurations.html)
+* [Troubleshoot Perf Issues Using JFR](https://docs.oracle.com/en/java/javase/23/troubleshoot/troubleshoot-performance-issues-using-jfr.html)
+* [Flight Recorder Tool](https://docs.oracle.com/en/java/javase/23/troubleshoot/diagnostic-tools.html#GUID-D38849B6-61C7-4ED6-A395-EA4BC32A9FD6)
+* [Flight Recorder API Guide](https://docs.oracle.com/en/java/javase/23/jfapi/flight-recorder-configurations.html)
 
 ### 6.JFR Streaming
 

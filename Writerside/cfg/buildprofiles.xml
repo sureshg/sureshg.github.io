@@ -23,6 +23,7 @@
         <algolia-api-key>e205ec1712a2f745af4bdb1224d7f3e9</algolia-api-key>
         <!--<content-max-width>1000</content-max-width>-->
         <!--<search-endpoint>https://my.search/endpoint</search-endpoint>-->
+        <ignore-problems>MRK056</ignore-problems>
     </variables>
 
     <icons>

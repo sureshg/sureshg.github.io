@@ -1,52 +1,5 @@
 # OpenJDK
 
-<!-- TOC -->
-* [OpenJDK](#openjdk)
-    * [Java Commands](#java-commands)
-        * [1. Create Source Code Structure](#1-create-source-code-structure)
-        * [2. Preview features](#2-preview-features)
-        * [3. Java Platform Module Systems (JPMS)](#3-java-platform-module-systems-jpms)
-        * [4. Disassembles a class](#4-disassembles-a-class)
-        * [5. App CDS](#5-app-cds)
-        * [6. Show Java VMProperty Settings](#6-show-java-vmproperty-settings)
-        * [7. Scan deprecated APIs](#7-scan-deprecated-apis)
-        * [8. JPMS](#8-jpms)
-        * [9. JShell](#9-jshell)
-        * [10. Java TEMP Config](#10-java-temp-config)
-    * [IDEs and Tools](#ides-and-tools)
-    * [Networking & Security](#networking--security)
-        * [1. Allow Unsafe Server Cert Change](#1-allow-unsafe-server-cert-change)
-        * [2. Debugging TLS](#2-debugging-tls)
-        * [3. Java Networking Properties](#3-java-networking-properties)
-        * [4. HTTP Client Properties](#4-http-client-properties)
-    * [Gradle Kotlin DSL](#gradle-kotlin-dsl)
-        * [1. Docs](#1-docs)
-        * [2. Name Abbrevation](#2-name-abbrevation)
-        * [3. Configure/Create Tasks](#3-configurecreate-tasks)
-        * [4. Reproducible builds](#4-reproducible-builds)
-        * [5. Multi Release Jar](#5-multi-release-jar)
-        * [6. Dependencies](#6-dependencies)
-    * [Maven](#maven)
-        * [1. Create a Project](#1-create-a-project)
-        * [2. Enabling Java preview feature](#2-enabling-java-preview-feature)
-        * [3. Reproducible Builds](#3-reproducible-builds)
-        * [4. Maven Wrapper](#4-maven-wrapper)
-        * [5. Update Version number](#5-update-version-number)
-        * [6. Dependency Tree](#6-dependency-tree)
-    * [Microservices Starters](#microservices-starters)
-        * [1. SpringBoot](#1-springboot)
-    * [Misc](#misc)
-    * [OpenJDK Build](#openjdk-build)
-    * [Oracle A1 Flex](#oracle-a1-flex)
-    * [Awesome Svgs](#awesome-svgs)
-        * [Illustrations](#illustrations)
-        * [Background](#background)
-        * [Icons](#icons)
-        * [Emojis](#emojis)
-        * [Awesome List](#awesome-list)
-        * [Tools](#tools)
-<!-- TOC -->
-
 <primary-label ref="Java"/>
 <secondary-label ref="JVM"/>
 <secondary-label ref="KT"/>
@@ -67,7 +20,7 @@ $ java  --enable-preview Foo
 ```
 
 - [JEP12](https://openjdk.java.net/jeps/12)
-- [Preview Features](https://docs.oracle.com/en/java/javase/20/language/preview-language-and-vm-features.html)
+- [Preview Features](https://docs.oracle.com/en/java/javase/23/language/preview-language-and-vm-features.html)
 - [Gradle - Enabling Java preview features](https://docs.gradle.org/current/userguide/building_java_projects.html#sec:feature_preview)
 
 ##### 3. Java Platform Module Systems (JPMS)
@@ -81,7 +34,7 @@ $ java --show-module-resolution java.base
 $ java --upgrade-module-path $DIR
 ```
 
-- [Java Compiler Upgradeable module]( https://docs.oracle.com/en/java/javase/20/docs/api/java.compiler/module-summary.html)
+- [Java Compiler Upgradeable module]( https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/module-summary.html)
 
 ##### 4. Disassembles a class
 
@@ -145,7 +98,7 @@ $ java -Xint             interpreted mode execution only (fast startup)
 $ java -Xmixed           mixed mode execution (default)
 ```
 
-- [Java Command Options*](https://docs.oracle.com/en/java/javase/20/docs/specs/man/java.html)
+- [Java Command Options*](https://docs.oracle.com/en/java/javase/23/docs/specs/man/java.html)
 - [VM Options](https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html)
 - [`class` file format major versions](https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-4.html#jvms-4.1-200-B.2)
 
@@ -171,10 +124,10 @@ $ jlink --list-plugins
 $ jdeps --generate-module-info ./  app.jar
 
 # List all deprecated APIs for a release
-$ jdeprscan --for-removal --release 23 --list
+$ jdeprscan --for-removal --release 24 --list
 
 # Scan deprecated APIs
-$ jdeprscan --for-removal --release 23 app.jar
+$ jdeprscan --for-removal --release 24 app.jar
 ```
 
 - [Java EE Maven artifacts](https://openjdk.java.net/jeps/320)
@@ -187,7 +140,7 @@ $ java -m jdk.httpserver -b 127.0.0.1
 
 # Compile all modules at once (Start from the main module)
 $ javac  --enable-preview \
-         --release 23 \
+         --release 24 \
          -parameters  \    // Optional, Generate metadata for reflection on method parameters
          --add-modules ALL-MODULE-PATH \  // Optional, Root modules to resolve in addition to the initial modules
          --module-path ... \           // Optional, where to find application modules
@@ -214,12 +167,12 @@ $ native-image \
     -p base-module.jar:main-module.jar \
     -m dev.suresh.Main
 
-# JavaFX 23 using jlink & jpackage
+# JavaFX 24 using jlink & jpackage
 $ wget "https://download.java.net/java/early_access/.../openjfx-xxx_macos-aarch64_bin-jmods.tar.gz"
 $ tar -xvzf openjfx-xxx_macos-aarch64_bin-jmods.tar.gz
 
 $ jlink --output javafx-jdk \
-        --module-path $JAVA_HOME/jmods:javafx-jmods-23 \
+        --module-path $JAVA_HOME/jmods:javafx-jmods-24 \
         --add-modules javafx.controls,java.desktop,java.logging
 #       --add-modules ALL-MODULE-PATH
 
@@ -320,7 +273,7 @@ $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))'
 
 ### Networking & Security
 
-[🚨Security Developer’s Guide](https://docs.oracle.com/en/java/javase/20/security/index.html)
+[🚨Security Developer’s Guide](https://docs.oracle.com/en/java/javase/23/security/index.html)
 
 ##### 1. [Allow Unsafe Server Cert Change](https://github.com/openjdk/jdk/blob/6a905b6546e288e86322ae978a1f594266aa368a/src/java.base/share/classes/sun/security/ssl/ClientHandshakeContext.java#L35-L76)
 
@@ -332,8 +285,8 @@ $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))'
 
 ##### 2. Debugging TLS
 
-- https://docs.oracle.com/en/java/javase/20/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4D421910-C36D-40A2-8BA2-7D42CCBED3C6
-- https://docs.oracle.com/en/java/javase/20/security/java-secure-socket-extension-jsse-reference-guide.html
+- https://docs.oracle.com/en/java/javase/23/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4D421910-C36D-40A2-8BA2-7D42CCBED3C6
+- https://docs.oracle.com/en/java/javase/23/security/java-secure-socket-extension-jsse-reference-guide.html
 - https://github.com/sureshg/InstallCerts/blob/master/src/main/kotlin/io/github/sureshg/extn/Certs.kt
 
   ```bash
@@ -353,8 +306,8 @@ $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))'
 ##### 3. Java Networking Properties
 
 - http://htmlpreview.github.io/?https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/net/doc-files/net-properties.html
-- https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/net/doc-files/net-properties.html
-- [All Java Networking System Properties](https://docs.oracle.com/en/java/javase/20/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73)
+- https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/net/doc-files/net-properties.html
+- [All Java Networking System Properties](https://docs.oracle.com/en/java/javase/23/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73)
 - https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html
 
 | Config             | Description                                   |
@@ -652,7 +605,7 @@ $ curl https://start.spring.io/starter.zip \
 ### [OpenJDK Build](https://openjdk.java.net/groups/build/doc/building.html)
 
 ```bash
-$ sdk install java 23-open
+$ sdk install java 24-open
 $ git clone https://github.com/openjdk/jdk.git
 $ cd jdk
 # $ make clean
@@ -676,7 +629,7 @@ $ sudo yum upgrade -y
 $ sudo yum install curl wget tree docker git zsh -y
 $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 23.ea-open
+$ sdk i java 24.ea-open
 
 # For Github self hosted runners on Aarch64
 export LD_LIBRARY_PATH=/opt/oracle/oracle-armtoolset-8/root/usr/lib64:/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
