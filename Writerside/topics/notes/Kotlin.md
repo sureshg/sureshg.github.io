@@ -75,33 +75,24 @@ $ strings -a app | grep -i com.oracle.svm.core.VM
 
 {src="kotlin/App.kt" lang="kotlin" validate="true" }
 
+<compare>
+    <code-block lang="kotlin">
+        if (true) {
+            doThis()
+        }
+    </code-block>
+    <code-block lang="kotlin">
+        if (true) doThis()
+    </code-block>
+</compare>
+
 Download <resource src="movies.csv"/>
 
 ### Misc
 
 ```mermaid
-classDiagram
-    Animal <|-- Duck
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal: +int age
-    Animal: +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck {
-        +String beakColor
-        +swim()
-        +quack()
-    }
-    class Fish {
-        -int sizeInFeet
-        -canEat()
-    }
-    class Zebra {
-        +bool is_wild
-        +run()
-    }
 ```
+{ src="class.mermaid" }
 
 ##### Math
 

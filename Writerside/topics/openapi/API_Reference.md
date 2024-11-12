@@ -1,3 +1,3 @@
 # API Reference
 
-<api-doc openapi-path="../../resources/documentation.yaml"/>
+<api-doc openapi-path="documentation.yaml"/>
