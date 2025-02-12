@@ -4,4 +4,5 @@ Shared Library Instance
 
 ### OpenAPI Doc
 
- <api-doc openapi-path="../../resources/documentation.yaml"/>
+ <api-doc openapi-path="documentation.yaml"/>
+

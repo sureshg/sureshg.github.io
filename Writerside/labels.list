@@ -27,4 +27,5 @@
     <secondary-label id="beta" name="β" color="tangerine">Beta</secondary-label>
     <secondary-label id="experimental" name="Experimental" color="red">This is an experimental feature
     </secondary-label>
+    <secondary-label id="MacOS" name="MacOS" color="strawberry">MacOS</secondary-label>
 </labels>

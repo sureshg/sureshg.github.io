@@ -137,6 +137,13 @@ $ echo -ne $(cat cert.cer)
 $ echo -ne $(cat cert.cer) | openssl rsa -check
 ```
 
+* **PEM to JSON**
+
+```bash
+# Convert the PEM text to JSON
+$ jq -sR . test.pem > test.txt
+```
+
 * **Show all certs from System truststore**
 
 ```bash

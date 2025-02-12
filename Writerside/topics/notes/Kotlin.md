@@ -92,6 +92,7 @@ Download <resource src="movies.csv"/>
 
 ```mermaid
 ```
+
 { src="class.mermaid" }
 
 ##### Math
