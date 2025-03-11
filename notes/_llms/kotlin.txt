@@ -1,0 +1,122 @@
+# Kotlin
+
+<tldr>
+Shortcut: `CMD + SPACE`
+
+Configure: `Settings | View | Edit`
+
+Press `Ctrl+C` (Windows), `⌘ C` (macOS), `Ctrl+C` (Linux) to copy.
+</tldr>
+
+## Kotlin Compiler Options
+
+```BASH
+$ kotlinc -X 2>&1 | grep -i release
+```
+
+## Native Image
+
+```BASH
+$ sdk u java graalvm-ce-dev
+$ cat > App.kt << EOF
+fun main() {
+  println("Hello Kotlin!")
+}
+EOF
+
+# $ kotlinc -version \
+#           -verbose \
+#           -include-runtime \
+#           -java-parameters \
+#           -jvm-target 19 \
+#           -Xjdk-release=19 \
+#           -api-version 1.9 \
+#           -language-version 2.0 \
+#           -Werror \
+#           -progressive \
+#           App.kt -d app.jar
+
+$ kotlinc -version -include-runtime App.kt -d app.jar
+$ java -showversion -jar app.jar
+$ native-image \
+      --no-fallback \
+      --native-image-info \
+      --enable-preview \
+      -jar app.jar
+
+$ chmod +x app
+$ time ./app
+
+# Static image info
+$ file app
+$ otool -L app
+$ objdump -section-headers  app
+
+# Find GraalVM used to generate the image
+$ strings -a app | grep -i com.oracle.svm.core.VM
+```
+
+## Videos
+
+* https://www.youtube.com/watch?v=SEKsvHYZz8s (crypto 101)
+
+## Samples
+
+![](images/kodee-loving.png)
+
+```KOTLIN
+fun main() {
+  println("Hello, Kotlin!")
+}
+```
+
+Before:
+
+```KOTLIN
+if (true) {
+    doThis()
+}
+```
+
+After:
+
+```KOTLIN
+if (true) doThis()
+```
+
+Download [](resources/movies.csv)
+
+## Misc
+
+```MERMAID
+classDiagram
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal: +int age
+    Animal: +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck {
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish {
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra {
+        +bool is_wild
+        +run()
+    }
+```
+
+### Math
+
+```TEX
+\begin{equation}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+```
+

@@ -1,0 +1,388 @@
+# Containers & K8S
+
+## OpenJDK Container Images
+
+```BASH
+# Distroless Java Images
+# https://console.cloud.google.com/gcr/images/distroless/GLOBAL
+# https://github.com/GoogleContainerTools/distroless#what-images-are-available
+$ docker pull gcr.io/distroless/java-base-debian12:latest
+$ docker pull gcr.io/distroless/java21-debian12:latest
+
+# Distroless Static & Base
+$ docker pull gcr.io/distroless/static-debian12:latest
+$ docker pull gcr.io/distroless/base-debian12:latest
+
+# GraalVM native-image base
+$ docker pull cgr.dev/chainguard/graalvm-native:latest
+$ docker pull cgr.dev/chainguard/static:latest-glibc
+$ docker pull cgr.dev/chainguard/jdk:latest
+
+# Openjdk
+# https://github.com/docker-library/openjdk
+$ docker pull openjdk:24-slim
+
+# Eclipse Temurin
+# https://github.com/adoptium/containers#supported-images
+$ docker pull eclipse-temurin:23-jdk
+$ docker pull eclipse-temurin:23-alpine
+
+# Oracle OpenJDK
+$ docker pull container-registry.oracle.com/java/openjdk:latest
+
+# Oracle Java (NFTC)
+# https://github.com/oracle/docker-images/tree/main/OracleJava
+$ docker pull container-registry.oracle.com/java/jdk:latest
+
+# Azul Zulu
+# https://github.com/zulu-openjdk/zulu-openjdk
+$ docker pull azul/zulu-openjdk-debian:23-jre
+$ docker pull azul/zulu-openjdk-alpine:23-jre
+$ docker pull azul/prime-debian:latest
+
+# Amazon Corretto
+# https://github.com/corretto/corretto-docker
+$ docker pull amazoncorretto:23
+$ docker pull amazoncorretto:23-alpine
+
+# Microsoft OpenJDK
+# https://learn.microsoft.com/en-us/java/openjdk/containers
+$ docker pull mcr.microsoft.com/openjdk/jdk:21-ubuntu
+$ docker pull mcr.microsoft.com/openjdk/jdk:21-distroless
+
+# Liberica
+# https://github.com/bell-sw/Liberica/tree/master/docker/repos/liberica-openjre-debian
+$ docker pull bellsoft/liberica-openjdk-debian:latest
+$ docker pull bellsoft/liberica-openjdk-alpine-musl:latest
+$ docker pull bellsoft/liberica-openjdk-alpine:latest (libc)
+
+# GraalVM CE & EE
+# https://github.com/graalvm/container
+$ docker pull ghcr.io/graalvm/graalvm-community:latest
+$ docker pull ghcr.io/graalvm/native-image-community:muslib
+$ docker pull container-registry.oracle.com/graalvm/native-image:latest
+
+# GraalVM CE Dev Builds (No docker images available)
+https://github.com/graalvm/graalvm-ce-dev-builds/releases/
+
+# Jetbrains Runtime (No docker images available)
+https://github.com/JetBrains/JetBrainsRuntime/releases
+
+# Azul Zulu OpenJDK & Mission Control (Homebrew on MacOS)
+# https://github.com/mdogan/homebrew-zulu
+$ brew tap mdogan/zulu
+$ brew install <name>
+```
+
+* https://hub.docker.com/_/openjdk
+
+* https://github.com/docker-library/docs/tree/master/openjdk
+
+* https://container-registry.oracle.com/java/openjdk
+
+* https://www.graalvm.org/docs/getting-started/container-images/
+
+## Docker Commands
+
+* Docker Run ```BASH # Remove all unused images, not just dangling ones $ docker system prune -af # Docker Run $ docker run \ -it \ --rm \ --pull always \ --workdir /app \ --publish 8080:8080 \ --name app \ --mount type=bind,source=$PWD,destination=/app,readonly \ openjdk:24-slim ```
+
+* Docker Image Size ```BASH # Compressed Size $ docker image save ghcr.io/sureshg/containers:openjdk-latest | gzip | wc -c | numfmt --to=si $ docker image save ghcr.io/sureshg/containers:nativeimage-latest | gzip | wc -c | numfmt --to=si # OR $ docker manifest inspect ghcr.io/sureshg/containers:openjdk-latest -v # Uncompressed Size $ docker inspect -f "{{ .Size }}" sureshg/jvm | numfmt --to=si $ docker history sureshg/jvm ```
+
+## 
+
+[Debug Container](https://github.com/iximiuz/cdebug)
+
+```BASH
+# On M1 mac
+$ docker run \
+         --platform linux/amd64 \
+         --pull always \
+         -it \
+         --rm \
+         -p 8080:80 \
+         --name openjdk-playground \
+         ghcr.io/sureshg/containers:openjdk-latest
+
+# Default busybox image should work.
+$ brew install cdebug
+$ cdebug exec \
+         --privileged \
+         -it \
+         --rm \
+         --platform linux/amd64 \
+         docker://openjdk-playground
+
+# Extract a file from the Docker environment and store it locally
+$ docker run \
+         --rm \
+         --entrypoint cat \
+         busybox:latest \
+         '/bin/ls' > ls
+
+# OR copy files from a container
+$ docker cp <CONTAINER>:/app/app/jar .
+
+# OR
+$ id=$(docker create ghcr.io/sureshg/containers:openjdk-latest)
+$ docker cp $id:/app/app.jar - > app.tar
+$ docker rm -v $id
+```
+
+## JVM Ergonomics and Container logs
+
+```BASH
+$ cat << EOF >App.java
+import static java.lang.System.out;
+public class App {
+  void main() {
+    var version = "• Java %s running on %s %s".formatted(
+                   System.getProperty("java.version"),
+                   System.getProperty("os.name"),
+                   System.getProperty("os.arch"));
+    out.println(version);
+    long unit = 1024 * 1024L;
+    long heapSize = Runtime.getRuntime().totalMemory();
+    long heapFreeSize = Runtime.getRuntime().freeMemory();
+    long heapUsedSize = heapSize-heapFreeSize;
+    long heapMaxSize = Runtime.getRuntime().maxMemory();
+
+    out.println("• [CPU] Active Processors: " + Runtime.getRuntime().availableProcessors());
+    out.println("• [Mem] Current Heap Size (Committed) : " + heapSize/unit + " MiB");
+    out.println("• [Mem] Current Free memeory in Heap  : " + heapFreeSize/unit + " MiB");
+    out.println("• [Mem] Currently used memory         : " + heapUsedSize/unit + " MiB");
+    out.println("• [Mem] Max Heap Size (-Xmx)          : " + heapMaxSize/unit + " MiB");
+  }
+}
+EOF
+
+$ docker run \
+        -it \
+        --rm \
+        --cpus=2 \
+        --memory=512m \
+        --pull always \
+        --mount type=bind,source=$(pwd),destination=/app,readonly \
+        --mount type=bind,source=/,destination=/host,readonly \
+        --name openjdk \
+        openjdk:24-slim \
+        java \
+        --source 24 --enable-preview \
+        -XX:+UnlockExperimentalVMOptions \
+        -XX:+UnlockDiagnosticVMOptions \
+        -XX:+PrintFlagsFinal \
+        -XX:MaxRAMPercentage=0.8 \
+        -XX:-MaxFDLimit \
+        -Xlog:gc \
+        /app/App.java \
+        | grep -e "Use.*GC" -e "Active" -e "Using" -e "Max.*Limit" -e "Container" -e "•"
+```
+
+Note: GC Logs & ActiveProcessorCount
+
+For container logs, add -Xlog:gc*,os=trace,os+container=trace option.
+Override the default container CPU quota detection -XX:ActiveProcessorCount=
+
+## JVM default GC
+
+```BASH
+# OpenJDK reverts to Serial GC when it detects < 2 CPUs or < 2GB RAM
+$ docker run -it --rm --cpus=1 --memory=1G openjdk:24-slim java -Xlog:gc --version
+  #[0.007s][info][gc] Using Serial
+```
+
+* [OpenJDK - is_server_class_machine](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/runtime/os.cpp#:~:text=is_server_class_machine)
+
+* [Stop using CPU limits on Kubernetes](https://home.robusta.dev/blog/stop-using-cpu-limits)
+
+* [JVM ergonomics](https://www.youtube.com/watch?v=wApqCjHWF8Q)
+
+* https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+## Container Sandbox
+
+```BASH
+$ docker run \
+         -it --rm \
+         --cpus="0.5" \
+         --memory="512m" \
+         --memory-swap="640m" \
+         --pids-limit 512 \
+         --cap-drop=ALL \
+         --cap-add=DAC_OVERRIDE \
+         --security-opt=no-new-privileges \
+         --ulimit nproc=20:20 \
+         --ulimit fsize=1000000 \
+         --user nobody \
+         --network none \
+         --read-only \
+         --tmpfs /tmp \
+         --name sandboxed \
+         --workdir /app \
+         --mount type=bind,source=$PWD,destination=/app,readonly \
+         --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly \
+         --mount type=bind,source=/usr/bin/docker,destination=/usr/bin/docker,readonly \
+         --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
+         --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
+         openjdk:24-slim java --enable-preview src/App.java
+         
+# --security-opt seccomp=my_sandbox
+# --cap-add=chown \
+# --cap-add=setgid \
+# --cap-add=setuid \
+# --cap-add=sys_chroot \
+# --cap-add=audit_write \
+# --cap-add=kill \
+# --cap-add=sys_tty_config \
+# --cap-add=DAC_OVERRIDE - Needed to allow overwriting the file
+
+# Create nobody user
+# RUN useradd --shell /bin/sh --create-home --uid 65534 nobody        
+```
+
+* [Secure Computing Mode - seccomp](https://docs.docker.com/engine/security/seccomp/)
+
+* [https://run.mccue.dev](https://github.com/bowbahdoe/run-java-code/blob/main/ui/src/sandbox.rs#L109)
+
+## App Running on K8S/Docker
+
+```BASH
+# Check if running on docker container
+$ docker run \
+     -it \
+     --rm \
+     --pull always \
+     openjdk:24-slim \
+     sh -c "cat /proc/self/cgroup | grep -i '/docker'"
+
+# Check if running on Kubernets
+$  docker run \
+     -it \
+     --rm \
+     --pull always \
+     openjdk:24-slim \
+     sh -c "printenv | grep SERVICE"
+```
+
+* [Check if the container is running inside K8S](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/#environment-variables:~:text=printenv%20%7C%20grep%20SERVICE-,KUBERNETES_SERVICE_HOST,-%3D10.0.0.1%0AKUBERNETES_SERVICE_PORT%3D443)
+
+## Access Docker desktop LinuxKit VM on MacOS
+
+```BASH
+$ docker run -it --rm --memory=256m --cpus=1 --mount type=bind,source=/,destination=/host --name alpine alpine
+ /# chroot /host
+  # docker version
+```
+
+## 
+
+[Multi Architecture Support](https://docs.docker.com/desktop/multi-arch/)
+
+* [tonistiigi/binfmt](https://github.com/tonistiigi/binfmt) ```BASH $ docker run --rm --privileged tonistiigi/binfmt --install all ```
+
+* [multiarch/qemu-user-static](https://github.com/multiarch/qemu-user-static) ```BASH $ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes ```
+
+* [Supported Targets - qemu-binfmt-conf.sh](https://github.com/qemu/qemu/blob/master/scripts/qemu-binfmt-conf.sh)
+
+* [Dockerhub Supported Archs](https://github.com/docker-library/official-images#architectures-other-than-amd64)
+
+* Examples ```BASH $ docker run -it --rm --platform=linux/aarch64 alpine uname -m aarch64 $ docker run -it --rm --platform=linux/amd64 alpine uname -m x86_64 $ docker run --rm arm64v8/alpine uname -a $ docker run --rm arm32v7/alpine uname -a $ docker run --rm ppc64le/alpine uname -a $ docker run --rm s390x/alpine uname -a $ docker run --rm tonistiigi/debian:riscv uname -a ```
+
+## Netcat Webserver
+
+```BASH
+FROM alpine
+
+ENTRYPOINT while :; do nc -k -l -p $PORT -e sh -c 'echo -e "HTTP/1.1 200 OK\n\n hello, world"'; done
+# https://github.com/jamesward/hello-netcat
+# docker build -t hello-netcat .
+# docker run -p 8080:80 -e PORT=80 -it hello-netcat
+```
+
+Forwards Logs
+
+```BASH
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+ && ln -sf /dev/stderr /var/log/nginx/error.log
+
+# OR output directly to
+/proc/self/fd/1 (STDOUT)
+/proc/self/fd/2 (STDERR)
+
+# https://docs.docker.com/config/containers/logging/configure/
+```
+
+[Shutdown signals and EnytryPoint](https://medium.com/@madflojo/shutdown-signals-with-docker-entry-point-scripts-5e560f4e2d45)
+
+```BASH
+#!/bin/bash
+## Entrypoint script for my-app. This script is to show how to write
+## an entrypoint script that actually passes down signals from Docker.
+
+## Load our DB Password into a runtime only Environment Variable
+if [ -f /run/secrets/password ]
+then
+  echo "Loading DB password from secrets file"
+  DB_PASS=$(cat /run/secrets/password)
+  export DB_PASS
+fi
+
+## Run the Application
+exec my-app
+```
+
+```
+ENTRYPOINT ["../../myapp-entrypoint.sh"]
+```
+
+* [Docker stats GraalVM app](https://github.com/vasilmkd/docker-stats-monitor/blob/master/Dockerfile)
+
+HTTP Proxy
+
+```BASH
+FROM debian:stable-slim
+
+ENV HTTP_PROXY="http://proxy.test.com:8080"
+ENV HTTPS_PROXY="http://proxy.test.com:8080"
+ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
+```
+
+## Container Runtime Interface
+
+![Container Runtimes](images/containers.svg)
+
+## Container Tools
+
+* https://github.com/rancher-sandbox/rancher-desktop
+
+* https://github.com/beringresearch/macpine (Lightweight Linux VMs on MacOS)
+
+* https://github.com/containerd/containerd
+
+* https://github.com/lima-vm/lima (Linux on Mac)
+
+* https://github.com/containerd/nerdctl
+
+* https://github.com/k3s-io/k3s
+
+* https://github.com/rancher/k3d/
+
+* https://kind.sigs.k8s.io/
+
+* https://github.com/k0sproject/k0s
+
+* https://github.com/canonical/multipass (Running Ubuntu VM)
+
+* https://podman.io/blogs/2021/09/06/podman-on-macs.html
+
+* https://github.com/wagoodman/dive
+
+* https://github.com/google/cadvisor
+
+* https://github.com/google/go-containerregistry/tree/main/cmd/crane
+
+* [CoSign - Container Signing](https://github.com/sigstore/cosign)
+
+Warning:
+Download the latest version.
+

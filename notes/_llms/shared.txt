@@ -1,0 +1,56 @@
+# Shared
+
+Shared Library Instance
+
+## OpenAPI Doc
+
+### / GET
+
+OpenAPI endpoint: GET /
+
+#### Responses
+
+### /browse/{param} GET
+
+OpenAPI endpoint: GET /browse/{param}
+
+#### Request parameters
+
+#### Responses
+
+### /ffm GET
+
+OpenAPI endpoint: GET /ffm
+
+#### Responses
+
+### /heapdump GET
+
+OpenAPI endpoint: GET /heapdump
+
+#### Responses
+
+### /info GET
+
+OpenAPI endpoint: GET /info
+
+#### Responses
+
+### /jfr GET
+
+OpenAPI endpoint: GET /jfr
+
+#### Responses
+
+### /profile GET
+
+OpenAPI endpoint: GET /profile
+
+#### Responses
+
+### /vthreads GET
+
+OpenAPI endpoint: GET /vthreads
+
+#### Responses
+
