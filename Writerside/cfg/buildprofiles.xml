@@ -38,12 +38,14 @@
     </shortcuts>
 
     <sitemap priority="0.35" change-frequency="weekly"/>
+    <llms-txt single-file="false"/>
 
     <footer>
         <copyright>Suresh 2024</copyright>
-        <social type="blog" href="https://suresh.dev/notes"/>
+        <social type="github" href="https://github.com/sureshg"/>
+        <social type="bluesky" href="https://bsky.app/profile/suresh.dev"/>
         <social type="twitter" href="https://twitter.com/sur3shg"/>
-        <link href="https://github.com/sureshg">Github</link>
+        <social type="blog" href="https://suresh.dev/notes"/>
     </footer>
 
     <build-profile instance="blog">
