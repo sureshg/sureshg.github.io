@@ -9,10 +9,9 @@
 
 ### 1. Flight Recorder
 
-* [JFR Event Collections](https://sap.github.io/SapMachine/jfrevents/21.html)
+* [JFR Event Collections](https://sap.github.io/SapMachine/jfrevents/24.html)
 * [Java Flight Recorder Events](https://bestsolution-at.github.io/jfr-doc/index.html)
 * [OpenJDK - JFR EventNames](https://github.com/openjdk/jdk/blob/master/test/lib/jdk/test/lib/jfr/EventNames.java)
-* [JFR Events Explorer by Chris Newland](https://chriswhocodes.com/jfr_jdk21.html)
 * [OpenJDK - JFR Profile Configs](https://github.com/openjdk/jdk/tree/master/src/jdk.jfr/share/conf/jfr)
 
 ### 2. Java Mission Control
@@ -165,9 +164,9 @@ $ open '/Applications/JDK Mission Control.app' --args -vm $JAVA_HOME/bin
   $ jfr print --events FinalizerStatistics dump.jfr
   ```
 
-* [Troubleshoot Perf Issues Using JFR](https://docs.oracle.com/en/java/javase/23/troubleshoot/troubleshoot-performance-issues-using-jfr.html)
-* [Flight Recorder Tool](https://docs.oracle.com/en/java/javase/23/troubleshoot/diagnostic-tools.html#GUID-D38849B6-61C7-4ED6-A395-EA4BC32A9FD6)
-* [Flight Recorder API Guide](https://docs.oracle.com/en/java/javase/23/jfapi/flight-recorder-configurations.html)
+* [Troubleshoot Perf Issues Using JFR](https://docs.oracle.com/en/java/javase/24/troubleshoot/troubleshoot-performance-issues-using-jfr.html)
+* [Flight Recorder Tool](https://docs.oracle.com/en/java/javase/24/troubleshoot/diagnostic-tools.html#GUID-D38849B6-61C7-4ED6-A395-EA4BC32A9FD6)
+* [Flight Recorder API Guide](https://docs.oracle.com/en/java/javase/24/jfapi/flight-recorder-configurations.html)
 
 ### 6.JFR Streaming
 

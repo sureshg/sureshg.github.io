@@ -24,7 +24,7 @@ $ docker pull cgr.dev/chainguard/jdk:latest
 
 # Openjdk
 # https://github.com/docker-library/openjdk
-$ docker pull openjdk:24-slim
+$ docker pull openjdk:25-slim
 
 # Eclipse Temurin
 # https://github.com/adoptium/containers#supported-images
@@ -40,8 +40,8 @@ $ docker pull container-registry.oracle.com/java/jdk:latest
 
 # Azul Zulu
 # https://github.com/zulu-openjdk/zulu-openjdk
-$ docker pull azul/zulu-openjdk-debian:23-jre
-$ docker pull azul/zulu-openjdk-alpine:23-jre
+$ docker pull azul/zulu-openjdk-debian:24-jre
+$ docker pull azul/zulu-openjdk-alpine:24-jre
 $ docker pull azul/prime-debian:latest
 
 # Amazon Corretto
@@ -100,7 +100,7 @@ $ brew install <name>
            --publish 8080:8080 \
            --name app \
            --mount type=bind,source=$PWD,destination=/app,readonly \
-           openjdk:24-slim       
+           openjdk:25-slim       
    ```
 
 * Docker Image Size
@@ -191,9 +191,9 @@ $ docker run \
         --mount type=bind,source=$(pwd),destination=/app,readonly \
         --mount type=bind,source=/,destination=/host,readonly \
         --name openjdk \
-        openjdk:24-slim \
+        openjdk:25-slim \
         java \
-        --source 24 --enable-preview \
+        --source 25 --enable-preview \
         -XX:+UnlockExperimentalVMOptions \
         -XX:+UnlockDiagnosticVMOptions \
         -XX:+PrintFlagsFinal \
@@ -213,7 +213,7 @@ $ docker run \
 
 ```bash
 # OpenJDK reverts to Serial GC when it detects < 2 CPUs or < 2GB RAM
-$ docker run -it --rm --cpus=1 --memory=1G openjdk:24-slim java -Xlog:gc --version
+$ docker run -it --rm --cpus=1 --memory=1G openjdk:25-slim java -Xlog:gc --version
   #[0.007s][info][gc] Using Serial
 ```
 
@@ -247,7 +247,7 @@ $ docker run \
          --mount type=bind,source=/usr/bin/docker,destination=/usr/bin/docker,readonly \
          --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
          --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-         openjdk:24-slim java --enable-preview src/App.java
+         openjdk:25-slim java --enable-preview src/App.java
          
 # --security-opt seccomp=my_sandbox
 # --cap-add=chown \
@@ -274,7 +274,7 @@ $ docker run \
      -it \
      --rm \
      --pull always \
-     openjdk:24-slim \
+     openjdk:25-slim \
      sh -c "cat /proc/self/cgroup | grep -i '/docker'"
 
 # Check if running on Kubernets
@@ -282,7 +282,7 @@ $  docker run \
      -it \
      --rm \
      --pull always \
-     openjdk:24-slim \
+     openjdk:25-slim \
      sh -c "printenv | grep SERVICE"
 ```
 

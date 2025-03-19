@@ -20,7 +20,7 @@ $ java  --enable-preview Foo
 ```
 
 - [JEP12](https://openjdk.java.net/jeps/12)
-- [Preview Features](https://docs.oracle.com/en/java/javase/23/language/preview-language-and-vm-features.html)
+- [Preview Features](https://docs.oracle.com/en/java/javase/24/language/preview-language-and-vm-features.html)
 - [Gradle - Enabling Java preview features](https://docs.gradle.org/current/userguide/building_java_projects.html#sec:feature_preview)
 
 ##### 3. Java Platform Module Systems (JPMS)
@@ -34,7 +34,7 @@ $ java --show-module-resolution java.base
 $ java --upgrade-module-path $DIR
 ```
 
-- [Java Compiler Upgradeable module]( https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/module-summary.html)
+- [Java Compiler Upgradeable module]( https://docs.oracle.com/en/java/javase/24/docs/api/java.compiler/module-summary.html)
 
 ##### 4. Disassembles a class
 
@@ -98,7 +98,7 @@ $ java -Xint             interpreted mode execution only (fast startup)
 $ java -Xmixed           mixed mode execution (default)
 ```
 
-- [Java Command Options*](https://docs.oracle.com/en/java/javase/23/docs/specs/man/java.html)
+- [Java Command Options*](https://docs.oracle.com/en/java/javase/24/docs/specs/man/java.html)
 - [VM Options](https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html)
 - [`class` file format major versions](https://docs.oracle.com/javase/specs/jvms/se20/html/jvms-4.html#jvms-4.1-200-B.2)
 
@@ -273,7 +273,7 @@ $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))'
 
 ### Networking & Security
 
-[🚨Security Developer’s Guide](https://docs.oracle.com/en/java/javase/23/security/index.html)
+[🚨Security Developer’s Guide](https://docs.oracle.com/en/java/javase/24/security/index.html)
 
 ##### 1. [Allow Unsafe Server Cert Change](https://github.com/openjdk/jdk/blob/6a905b6546e288e86322ae978a1f594266aa368a/src/java.base/share/classes/sun/security/ssl/ClientHandshakeContext.java#L35-L76)
 
@@ -285,8 +285,8 @@ $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))'
 
 ##### 2. Debugging TLS
 
-- https://docs.oracle.com/en/java/javase/23/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4D421910-C36D-40A2-8BA2-7D42CCBED3C6
-- https://docs.oracle.com/en/java/javase/23/security/java-secure-socket-extension-jsse-reference-guide.html
+- https://docs.oracle.com/en/java/javase/24/security/java-secure-socket-extension-jsse-reference-guide.html#GUID-4D421910-C36D-40A2-8BA2-7D42CCBED3C6
+- https://docs.oracle.com/en/java/javase/24/security/java-secure-socket-extension-jsse-reference-guide.html
 - https://github.com/sureshg/InstallCerts/blob/master/src/main/kotlin/io/github/sureshg/extn/Certs.kt
 
   ```bash
@@ -306,8 +306,8 @@ $ fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))'
 ##### 3. Java Networking Properties
 
 - http://htmlpreview.github.io/?https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/net/doc-files/net-properties.html
-- https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/net/doc-files/net-properties.html
-- [All Java Networking System Properties](https://docs.oracle.com/en/java/javase/23/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73)
+- https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/net/doc-files/net-properties.html
+- [All Java Networking System Properties](https://docs.oracle.com/en/java/javase/24/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73)
 - https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html
 
 | Config             | Description                                   |
