@@ -28,8 +28,8 @@ $ docker pull openjdk:25-slim
 
 # Eclipse Temurin
 # https://github.com/adoptium/containers#supported-images
-$ docker pull eclipse-temurin:23-jdk
-$ docker pull eclipse-temurin:23-alpine
+$ docker pull eclipse-temurin:24-jdk
+$ docker pull eclipse-temurin:24-alpine
 
 # Oracle OpenJDK
 $ docker pull container-registry.oracle.com/java/openjdk:latest
