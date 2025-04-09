@@ -24,6 +24,7 @@
         <!--<content-max-width>1000</content-max-width>-->
         <!--<search-endpoint>https://my.search/endpoint</search-endpoint>-->
         <ignore-problems>MRK056</ignore-problems>
+        <code-soft-wrap>true</code-soft-wrap>
     </variables>
 
     <icons>
