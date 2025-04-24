@@ -22,7 +22,7 @@ permissions:
 env:
   INSTANCE: 'Writerside/notes'
   ARTIFACT: 'webHelpNOTES2-all.zip'
-  DOCKER_VERSION: '2025.04.8412'
+  DOCKER_VERSION: 'latest'
   ALGOLIA_ARTIFACT: 'algolia-indexes-NOTES.zip'
   ALGOLIA_APP_NAME: 'QD1IR5ST5F'
   ALGOLIA_INDEX_NAME: 'suresh.dev.index'
