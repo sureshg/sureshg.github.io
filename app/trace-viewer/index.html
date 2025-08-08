@@ -5,6 +5,38 @@
     <title>Trace Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #fff8f6;
+            --border-primary: #d1d9e0;
+            --text-primary: #24292f;
+            --text-secondary: #656d76;
+            --accent-primary: #0969da;
+            --accent-success: #2da44e;
+            --accent-danger: #da3633;
+            --trace-selected: #dcfce7;
+            --trace-selected-border: #22c55e;
+            --trace-hover: #f3f4f6;
+            --trace-hover-border: #3b82f6;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-primary: #30363d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent-primary: #58a6ff;
+            --accent-success: #3fb950;
+            --accent-danger: #f85149;
+            --trace-selected: #1a2332;
+            --trace-selected-border: #3fb950;
+            --trace-hover: #21262d;
+            --trace-hover-border: #58a6ff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,35 +46,55 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             font-size: 14px;
-            color: #24292f;
-            background: #ffffff;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .header {
-            background: #f6f8fa;
-            border-bottom: 1px solid #d1d9e0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-primary);
             padding: 16px 24px;
             display: flex;
             align-items: center;
             gap: 16px;
             flex-shrink: 0;
+            position: relative;
         }
 
         .header h1 {
             font-size: 20px;
             font-weight: 600;
-            color: #0969da;
+            color: var(--accent-primary);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 6px 12px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--trace-hover);
+            color: var(--text-primary);
         }
 
         .btn {
-            background: #f6f8fa;
-            border: 1px solid #d1d9e0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
             border-radius: 6px;
-            color: #24292f;
+            color: var(--text-primary);
             cursor: pointer;
             font-size: 14px;
             padding: 6px 12px;
@@ -52,7 +104,7 @@
         }
 
         .btn:hover:not(:disabled) {
-            background: #f3f4f6;
+            background: var(--trace-hover);
         }
 
         .btn:disabled {
@@ -61,8 +113,8 @@
         }
 
         .btn-primary {
-            background: #2da44e;
-            border-color: #2da44e;
+            background: var(--accent-success);
+            border-color: var(--accent-success);
             color: #ffffff;
         }
 
@@ -70,24 +122,37 @@
             background: #2c974b;
         }
 
+        .demo-loaded {
+            background: var(--trace-selected) !important;
+            border-color: var(--trace-selected-border) !important;
+            color: var(--text-primary) !important;
+        }
+
+        .demo-loaded:hover:not(:disabled) {
+            background: var(--trace-selected) !important;
+        }
+
         .url-input {
             padding: 6px 12px;
-            border: 1px solid #d1d9e0;
+            border: 1px solid var(--border-primary);
             border-radius: 6px;
             font-size: 14px;
             width: 300px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
 
         .stats {
             margin-left: auto;
+            margin-right: 60px;
             display: flex;
             gap: 16px;
             font-size: 12px;
-            color: #656d76;
+            color: var(--text-secondary);
         }
 
         .loading {
-            color: #0969da;
+            color: var(--accent-primary);
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -97,8 +162,8 @@
         .spinner {
             width: 16px;
             height: 16px;
-            border: 2px solid #e1e4e8;
-            border-top: 2px solid #0969da;
+            border: 2px solid var(--border-primary);
+            border-top: 2px solid var(--accent-primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -117,7 +182,7 @@
             top: 0;
             left: 0;
             height: 100%;
-            background: linear-gradient(90deg, #2da44e, #26d045);
+            background: linear-gradient(90deg, var(--accent-success), #26d045);
             border-radius: 6px;
             transition: width 0.3s ease;
             opacity: 0.8;
@@ -151,23 +216,24 @@
 
         .sidebar {
             width: 320px;
-            border-right: 1px solid #d1d9e0;
-            background: #f6f8fa;
+            border-right: 1px solid var(--border-primary);
+            background: var(--bg-secondary);
             display: flex;
             flex-direction: column;
         }
 
         .sidebar-header {
             padding: 16px;
-            border-bottom: 1px solid #d1d9e0;
+            border-bottom: 1px solid var(--border-primary);
         }
 
         .search-input {
             width: 100%;
             padding: 8px 12px;
-            border: 1px solid #d1d9e0;
+            border: 1px solid var(--border-primary);
             border-radius: 6px;
-            background: #ffffff;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             font-size: 14px;
         }
 
@@ -178,8 +244,8 @@
         }
 
         .trace-item {
-            background: #ffffff;
-            border: 1px solid #d1d9e0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 8px;
@@ -189,12 +255,13 @@
         }
 
         .trace-item:hover {
-            border-color: #fd8c73;
+            background: var(--trace-hover);
+            border-color: var(--trace-hover-border);
         }
 
         .trace-item.selected {
-            border-color: #fd8c73;
-            background-color: #fff8f6;
+            border-color: var(--trace-selected-border);
+            background: var(--trace-selected);
         }
 
         .trace-close {
@@ -204,11 +271,11 @@
             width: 20px;
             height: 20px;
             border: none;
-            background: #f3f4f6;
+            background: var(--trace-hover);
             border-radius: 50%;
             cursor: pointer;
             font-size: 12px;
-            color: #656d76;
+            color: var(--text-secondary);
             display: none;
             align-items: center;
             justify-content: center;
@@ -219,14 +286,14 @@
         }
 
         .trace-close:hover {
-            background: #e1e4e8;
-            color: #24292f;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
         }
 
         .trace-id {
             font-family: monospace;
             font-size: 11px;
-            color: #656d76;
+            color: var(--text-secondary);
             margin-bottom: 4px;
             word-break: break-all;
             padding-right: 24px;
@@ -234,7 +301,7 @@
 
         .trace-name {
             font-weight: 600;
-            color: #0969da;
+            color: var(--accent-primary);
             margin-bottom: 4px;
             padding-right: 24px;
         }
@@ -243,12 +310,20 @@
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            color: #656d76;
+            color: var(--text-secondary);
         }
 
         .trace-duration {
             font-weight: 600;
-            color: #0969da;
+            color: var(--accent-primary);
+        }
+
+        .trace-timestamp {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-family: monospace;
+            padding-right: 24px;
         }
 
         .content {
@@ -260,8 +335,8 @@
 
         .content-header {
             padding: 16px 24px;
-            border-bottom: 1px solid #d1d9e0;
-            background: #f6f8fa;
+            border-bottom: 1px solid var(--border-primary);
+            background: var(--bg-secondary);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -283,7 +358,7 @@
 
         .trace-subtitle {
             font-size: 12px;
-            color: #656d76;
+            color: var(--text-secondary);
         }
 
         .trace-controls {
@@ -299,13 +374,13 @@
         .clear-all-btn {
             font-size: 12px;
             padding: 4px 8px;
-            background: #ff6b6b;
+            background: var(--accent-danger);
             color: white;
-            border-color: #ff6b6b;
+            border-color: var(--accent-danger);
         }
 
         .clear-all-btn:hover:not(:disabled) {
-            background: #ff5252;
+            background: #dc2626;
         }
 
         .timeline-container {
@@ -318,13 +393,13 @@
 
         .timeline-header {
             height: 40px;
-            background: #f6f8fa;
-            border-bottom: 1px solid #d1d9e0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-primary);
             display: grid;
             grid-template-columns: 400px 1fr;
             align-items: center;
             font-size: 12px;
-            color: #656d76;
+            color: var(--text-secondary);
             flex-shrink: 0;
         }
 
@@ -339,7 +414,7 @@
             top: 0;
             bottom: 0;
             width: 1px;
-            background: #e1e4e8;
+            background: var(--border-primary);
         }
 
         .axis-label {
@@ -359,13 +434,13 @@
             display: grid;
             grid-template-columns: 400px 1fr;
             min-height: 32px;
-            border-bottom: 1px solid #f6f8fa;
+            border-bottom: 1px solid var(--bg-secondary);
             cursor: pointer;
             user-select: none;
         }
 
         .span-row:hover {
-            background: #f6f8fa;
+            background: var(--bg-secondary);
         }
 
         .span-label {
@@ -373,8 +448,8 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            border-right: 1px solid #d1d9e0;
-            background: #ffffff;
+            border-right: 1px solid var(--border-primary);
+            background: var(--bg-primary);
         }
 
         .expand-btn {
@@ -383,8 +458,8 @@
             border: none;
             background: none;
             cursor: pointer;
-            color: #656d76;
-            font-size: 12px;
+            color: var(--text-secondary);
+            font-size: 14px;
             border-radius: 3px;
             display: flex;
             align-items: center;
@@ -392,7 +467,8 @@
         }
 
         .expand-btn:hover {
-            background: #f3f4f6;
+            background: var(--trace-hover);
+            color: var(--text-primary);
         }
 
         .span-info {
@@ -456,12 +532,13 @@
 
         .tooltip {
             position: absolute;
-            background: #24292f;
-            color: #ffffff;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
             padding: 12px;
             border-radius: 6px;
             font-size: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-primary);
             z-index: 1000;
             pointer-events: none;
             max-width: 350px;
@@ -485,7 +562,7 @@
 
         .tooltip-value {
             font-family: monospace;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--bg-secondary);
             padding: 1px 4px;
             border-radius: 3px;
         }
@@ -495,7 +572,7 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: #656d76;
+            color: var(--text-secondary);
             flex-direction: column;
             gap: 8px;
         }
@@ -556,7 +633,7 @@
             position: fixed;
             top: 80px;
             right: 20px;
-            background: #2da44e;
+            background: var(--accent-success);
             color: white;
             padding: 8px 16px;
             border-radius: 6px;
@@ -565,7 +642,7 @@
         }
 
         .notification.error {
-            background: #da3633;
+            background: var(--accent-danger);
         }
 
         @keyframes slideIn {
@@ -580,17 +657,17 @@
         }
 
         .footer {
-            background: #f6f8fa;
-            border-top: 1px solid #d1d9e0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-primary);
             padding: 8px 24px;
             font-size: 12px;
-            color: #656d76;
+            color: var(--text-secondary);
             text-align: center;
             flex-shrink: 0;
         }
 
         .footer a {
-            color: #0969da;
+            color: var(--accent-primary);
             text-decoration: none;
         }
 
@@ -612,7 +689,7 @@
 </head>
 <body>
 <div class="header">
-    <h1>🧭 Trace Viewer</h1>
+    <h1>⏱️ Trace Viewer</h1>
     <label for="file-input" class="btn btn-primary" id="upload-btn">
         <span id="upload-text">Upload JSONL</span>
         <div class="progress-bar hidden" id="progress-bar"></div>
@@ -629,6 +706,9 @@
         <span>📊 Traces: <span id="trace-count">0</span></span>
         <span>🔗 Spans: <span id="span-count">0</span></span>
     </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <span id="theme-icon">🌙</span>
+    </button>
 </div>
 
 <div class="main">
@@ -651,8 +731,8 @@
                 <div class="trace-subtitle" id="trace-subtitle"></div>
             </div>
             <div class="trace-controls">
-                <button class="btn expand-all-btn" id="expand-all-btn">🔻 Collapse All</button>
-                <button class="btn clear-all-btn" id="clear-all-btn">🧹 Clear All</button>
+                <button class="btn expand-all-btn" id="expand-all-btn">⬇️ Collapse All</button>
+                <button class="btn clear-all-btn" id="clear-all-btn">🗑️ Clear All</button>
             </div>
         </div>
         <div class="timeline-container">
@@ -671,9 +751,13 @@
 </div>
 
 <div class="footer">
-    Made for <a href="https://github.com/JetBrains/amper">Kotlin Amper</a> Build
-    Traces •
-    <a href="?url=https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw">🔗 Share via URL</a>
+    <div style="margin-bottom: 6px;">
+        Built with ❤️ for <a href="https://github.com/JetBrains/amper">Kotlin Amper</a> Build Traces • 
+        <a href="?url=https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw">🔗 Share via URL</a>
+    </div>
+    <div style="font-size: 13px; opacity: 0.8;">
+        <a href="https://suresh.dev" target="_blank" rel="noopener noreferrer">suresh.dev</a>
+    </div>
 </div>
 
 <div class="tooltip hidden" id="tooltip"></div>
@@ -688,7 +772,8 @@
         selectedTrace: null,
         allExpanded: true,
         hoveredSpan: null,
-        isProcessing: false
+        isProcessing: false,
+        demoLoaded: false
     };
 
     var elements = {
@@ -713,6 +798,38 @@
         spanCount: document.getElementById('span-count')
     };
 
+    function toggleTheme() {
+        var body = document.documentElement;
+        var themeIcon = document.getElementById('theme-icon');
+
+        if (body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            themeIcon.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    function updateDemoButtonState() {
+        if (state.demoLoaded) {
+            elements.demoBtn.classList.add('demo-loaded');
+            elements.demoBtn.textContent = '✓ Demo Loaded';
+        } else {
+            elements.demoBtn.classList.remove('demo-loaded');
+            elements.demoBtn.textContent = 'Demo';
+        }
+    }
+
+    // Initialize theme from localStorage
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-icon').textContent = '☀️';
+    }
+
     function formatDuration(nanos) {
         if (!nanos) return '0ms';
         var ms = nanos / 1000000;
@@ -724,6 +841,16 @@
 
     function formatTime(nanos) {
         return new Date(Math.floor(nanos / 1000000)).toLocaleString();
+    }
+
+    function formatShortTime(nanos) {
+        var date = new Date(Math.floor(nanos / 1000000));
+        return date.toLocaleString('en-US', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
     }
 
     function setLoadingState(loading) {
@@ -919,6 +1046,7 @@
                 '<button class="trace-close" onclick="removeTrace(event, \'' + trace.traceId + '\')">✕</button>' +
                 '<div class="trace-name">' + trace.name + '</div>' +
                 '<div class="trace-id">' + trace.traceId + '</div>' +
+                '<div class="trace-timestamp">📅 ' + formatShortTime(trace.startTime) + '</div>' +
                 '<div class="trace-info">' +
                 '<span>🔗 ' + trace.spans.length + ' spans</span>' +
                 '<span class="trace-duration">⏱️ ' + formatDuration(trace.duration) + '</span>' +
@@ -946,6 +1074,15 @@
             elements.timeline.innerHTML = '<div class="empty-state"><div>📈 No trace selected</div><small>Click a trace to view timeline</small></div>';
             elements.traceTitle.textContent = 'Select a trace';
             elements.traceSubtitle.textContent = '';
+        }
+
+        // Check if demo trace was removed
+        var hasDemoTrace = state.traces.some(function (t) {
+            return t.spans[0] && t.spans[0].source === 'Demo';
+        });
+        if (!hasDemoTrace) {
+            state.demoLoaded = false;
+            updateDemoButtonState();
         }
 
         updateStats();
@@ -1016,7 +1153,7 @@
             var widthPercent = Math.max(0.2, (span.duration / duration) * 100);
 
             var hasChildren = span.children.length > 0;
-            var toggle = hasChildren ? (span.expanded ? '▼' : '▶') : '•';
+            var toggle = hasChildren ? (span.expanded ? '▾' : '▸') : '●';
             var depthClass = span.depth <= 8 ? 'depth-' + span.depth : 'depth-default';
 
             var durationText = formatDuration(span.duration);
@@ -1080,7 +1217,7 @@
         if (!state.selectedTrace) return;
 
         state.allExpanded = !state.allExpanded;
-        elements.expandAllBtn.textContent = state.allExpanded ? '🔻 Collapse All' : '🔺 Expand All';
+        elements.expandAllBtn.textContent = state.allExpanded ? '⬇️ Collapse All' : '⬆️ Expand All';
 
         function setExpanded(spans, expanded) {
             spans.forEach(function (span) {
@@ -1155,27 +1292,24 @@
     }
 
     function clearAll() {
-        // Reset the file input completely
-        elements.fileInput.value = '';
-        elements.fileInput.type = '';
-        elements.fileInput.type = 'file';
-
         state.traces = [];
         state.selectedTrace = null;
         state.hoveredSpan = null;
         state.isProcessing = false;
+        state.demoLoaded = false;
 
         elements.urlInput.value = '';
         elements.searchInput.value = '';
 
         updateProgressBar(-1);
         updateStats();
+        updateDemoButtonState();
         renderTraceList();
 
         elements.timeline.innerHTML = '<div class="empty-state"><div>📈 No trace selected</div><small>Click a trace to view timeline</small></div>';
         elements.traceTitle.textContent = 'Select a trace';
         elements.traceSubtitle.textContent = '';
-        elements.expandAllBtn.textContent = '🔻 Collapse All';
+        elements.expandAllBtn.textContent = '⬇️ Collapse All';
         state.allExpanded = true;
 
         showNotification('🧹 All traces cleared');
@@ -1187,6 +1321,13 @@
         }, 0);
         elements.traceCount.textContent = state.traces.length;
         elements.spanCount.textContent = totalSpans;
+    }
+
+    function autoSelectFirstTrace() {
+        if (state.traces.length > 0 && !state.selectedTrace) {
+            state.selectedTrace = state.traces[0];
+            renderTimeline();
+        }
     }
 
     function loadFromUrl(url) {
@@ -1222,10 +1363,19 @@
                     return b.endTime - a.endTime;
                 });
 
-                // Auto-select first trace if none is selected
-                if (!state.selectedTrace && newTraces.length > 0) {
-                    state.selectedTrace = state.traces[0];
+                // Always auto-select the first NEW trace from URL/demo
+                if (newTraces.length > 0) {
+                    state.selectedTrace = newTraces[0];
                     renderTimeline();
+                } else {
+                    // Fallback to ensure we have a selected trace
+                    autoSelectFirstTrace();
+                }
+
+                // Update demo state if it was a demo load
+                if (url) {
+                    state.demoLoaded = true;
+                    updateDemoButtonState();
                 }
 
                 updateStats();
@@ -1241,6 +1391,10 @@
     }
 
     function loadDemo() {
+        if (state.demoLoaded) {
+            showNotification('✅ Demo already loaded!');
+            return;
+        }
         loadFromUrl(DEMO_URL);
     }
 
@@ -1282,9 +1436,9 @@
                             return b.endTime - a.endTime;
                         });
 
-                        // Auto-select first trace if none is selected
-                        if (!state.selectedTrace && newTraces.length > 0) {
-                            state.selectedTrace = state.traces[0];
+                        // Always auto-select the first NEW trace from the uploaded files
+                        if (newTraces.length > 0) {
+                            state.selectedTrace = newTraces[0];
                             renderTimeline();
                         }
 
@@ -1299,6 +1453,11 @@
 
             reader.readAsText(file);
         });
+    });
+
+    // Reset file input on click to allow re-uploading same files
+    elements.uploadBtn.addEventListener('click', function () {
+        elements.fileInput.value = '';
     });
 
     elements.searchInput.addEventListener('input', renderTraceList);
@@ -1338,6 +1497,7 @@
     });
 
     updateStats();
+    updateDemoButtonState();
 </script>
 </body>
 </html>
