@@ -685,6 +685,229 @@
             margin-left: 4px;
             vertical-align: baseline;
         }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            body {
+                height: 100vh;
+                height: 100dvh; /* For better mobile viewport handling */
+            }
+
+            .header {
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 10px 12px;
+            }
+
+            .header h1 {
+                font-size: 16px;
+                width: 100%;
+                margin-bottom: 6px;
+            }
+
+            .theme-toggle {
+                position: static;
+                order: -1;
+                margin-left: auto;
+                padding: 4px 8px;
+                font-size: 12px;
+            }
+
+            .btn {
+                padding: 6px 10px;
+                font-size: 12px;
+                min-height: 32px;
+                white-space: nowrap;
+            }
+
+            .url-input {
+                width: 150px;
+                min-width: 120px;
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            .stats {
+                margin: 0;
+                font-size: 10px;
+                width: 100%;
+                justify-content: center;
+                order: 10;
+                gap: 12px;
+            }
+
+            .main {
+                flex-direction: column;
+                min-height: 0;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 40vh;
+                border-right: none;
+                border-bottom: 1px solid var(--border-primary);
+                flex-shrink: 0;
+            }
+
+            .sidebar-header {
+                padding: 10px;
+            }
+
+            .search-input {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+
+            .trace-list {
+                padding: 6px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .trace-item {
+                padding: 10px;
+                margin-bottom: 6px;
+                font-size: 13px;
+            }
+
+            .trace-name {
+                font-size: 13px;
+                padding-right: 30px;
+            }
+
+            .trace-id {
+                font-size: 10px;
+                padding-right: 30px;
+            }
+
+            .trace-timestamp {
+                font-size: 9px;
+                padding-right: 30px;
+            }
+
+            .trace-info {
+                font-size: 11px;
+            }
+
+            .content {
+                flex: 1;
+                min-height: 0;
+            }
+
+            .content-header {
+                padding: 10px 12px;
+                flex-direction: column;
+                gap: 8px;
+                align-items: stretch;
+            }
+
+            .trace-details {
+                width: 100%;
+            }
+
+            .trace-title {
+                font-size: 14px;
+            }
+
+            .trace-subtitle {
+                font-size: 11px;
+            }
+
+            .trace-controls {
+                display: flex;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .expand-all-btn,
+            .clear-all-btn {
+                flex: 1;
+                font-size: 11px;
+                padding: 6px 8px;
+            }
+
+            .timeline-header {
+                grid-template-columns: 180px 1fr;
+                font-size: 10px;
+                height: 36px;
+            }
+
+            .timeline-body {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .span-row {
+                grid-template-columns: 180px 1fr;
+                min-height: 28px;
+            }
+
+            .span-label {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+
+            .span-name {
+                font-size: 11px;
+            }
+
+            .span-duration-label {
+                font-size: 9px;
+            }
+
+            .expand-btn {
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+            }
+
+            .footer {
+                padding: 8px 12px;
+                font-size: 10px;
+            }
+
+            .tooltip {
+                max-width: 280px;
+                font-size: 11px;
+                padding: 8px;
+                left: 10px !important;
+                right: 10px !important;
+                width: auto !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 8px 10px;
+            }
+
+            .btn {
+                font-size: 11px;
+                padding: 5px 8px;
+            }
+
+            .url-input {
+                width: 120px;
+                font-size: 11px;
+            }
+
+            .timeline-header {
+                grid-template-columns: 140px 1fr;
+            }
+
+            .span-row {
+                grid-template-columns: 140px 1fr;
+            }
+
+            .span-label {
+                padding: 3px 6px;
+            }
+
+            .expand-all-btn,
+            .clear-all-btn {
+                font-size: 10px;
+                padding: 5px 6px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -752,8 +975,9 @@
 
 <div class="footer">
     <div style="margin-bottom: 6px;">
-        Built with ❤️ for <a href="https://github.com/JetBrains/amper">Kotlin Amper</a> Build Traces • 
-        <a href="?url=https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw">🔗 Share via URL</a>
+        Built with ❤️ for <a href="https://github.com/JetBrains/amper">Kotlin Amper</a> Build Traces •
+        <a href="?url=https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw">🔗 Share via
+            URL</a>
     </div>
     <div style="font-size: 13px; opacity: 0.8;">
         <a href="https://suresh.dev" target="_blank" rel="noopener noreferrer">suresh.dev</a>
@@ -823,9 +1047,12 @@
         }
     }
 
-    // Initialize theme from localStorage
+    // Initialize theme from localStorage - default to dark theme
     var savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (savedTheme === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        document.getElementById('theme-icon').textContent = '🌙';
+    } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         document.getElementById('theme-icon').textContent = '☀️';
     }
