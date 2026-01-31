@@ -7,34 +7,64 @@
     <style>
         :root {
             --bg-primary: #ffffff;
-            --bg-secondary: #f6f8fa;
-            --bg-tertiary: #fff8f6;
-            --border-primary: #d1d9e0;
-            --text-primary: #24292f;
-            --text-secondary: #656d76;
-            --accent-primary: #0969da;
-            --accent-success: #2da44e;
-            --accent-danger: #da3633;
-            --trace-selected: #dcfce7;
-            --trace-selected-border: #22c55e;
-            --trace-hover: #f3f4f6;
-            --trace-hover-border: #3b82f6;
+            --bg-secondary: #fafbfc;
+            --bg-tertiary: #f6f8fa;
+            --bg-hover: #f0f2f5;
+            --bg-accent: #e7f2ff;
+            --border: #d0d7de;
+            --border-light: #e5e9ed;
+            --text-primary: #1f2328;
+            --text-secondary: #57606a;
+            --text-muted: #8c959f;
+            --accent: #0969da;
+            --accent-hover: #0550ae;
+            --success: #1a7f37;
+            --success-hover: #116329;
+            --danger: #cf222e;
+            --danger-hover: #a40e26;
+            --warning: #bf8700;
+            --purple: #8250df;
+            --pink: #d5168a;
+            --orange: #fb8500;
+            --teal: #00a67e;
+            --indigo: #5e60ce;
+            --selected: #ddf4ff;
+            --selected-border: #54aeff;
+            --highlight: #fff8c5;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
         }
 
         [data-theme="dark"] {
             --bg-primary: #0d1117;
             --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --border-primary: #30363d;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --accent-primary: #58a6ff;
-            --accent-success: #3fb950;
-            --accent-danger: #f85149;
-            --trace-selected: #1a2332;
-            --trace-selected-border: #3fb950;
-            --trace-hover: #21262d;
-            --trace-hover-border: #58a6ff;
+            --bg-tertiary: #1c2128;
+            --bg-hover: #21262d;
+            --bg-accent: #152642;
+            --border: #30363d;
+            --border-light: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8d96a0;
+            --text-muted: #636c76;
+            --accent: #4493f8;
+            --accent-hover: #539bf5;
+            --success: #3fb950;
+            --success-hover: #4ac65e;
+            --danger: #f85149;
+            --danger-hover: #ff6b6b;
+            --warning: #d29922;
+            --purple: #bc8cff;
+            --pink: #f778ba;
+            --orange: #fb8500;
+            --teal: #39d0aa;
+            --indigo: #7d8afa;
+            --selected: #1c2d41;
+            --selected-border: #4493f8;
+            --highlight: #4a3b11;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow: 0 2px 4px rgba(0,0,0,0.5);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.7);
         }
 
         * {
@@ -44,67 +74,61 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
             font-size: 14px;
+            line-height: 1.5;
             color: var(--text-primary);
             background: var(--bg-primary);
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.2s, color 0.2s;
         }
 
         .header {
             background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-primary);
-            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
             flex-shrink: 0;
-            position: relative;
+            flex-wrap: wrap;
         }
 
         .header h1 {
             font-size: 20px;
             font-weight: 600;
-            color: var(--accent-primary);
-        }
-
-        .theme-toggle {
-            position: absolute;
-            right: 24px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 6px 12px;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .theme-toggle:hover {
-            background: var(--trace-hover);
-            color: var(--text-primary);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
             border-radius: 6px;
             color: var(--text-primary);
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
             padding: 6px 12px;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.15s;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .btn:hover:not(:disabled) {
-            background: var(--trace-hover);
+            background: var(--bg-hover);
+            border-color: var(--accent);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: scale(0.98);
         }
 
         .btn:disabled {
@@ -113,99 +137,89 @@
         }
 
         .btn-primary {
-            background: var(--accent-success);
-            border-color: var(--accent-success);
-            color: #ffffff;
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: #2c974b;
+            background: var(--accent-hover);
         }
 
-        .demo-loaded {
-            background: var(--trace-selected) !important;
-            border-color: var(--trace-selected-border) !important;
-            color: var(--text-primary) !important;
+        .btn-success {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
         }
 
-        .demo-loaded:hover:not(:disabled) {
-            background: var(--trace-selected) !important;
+        .btn-danger {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+
+        .btn-sm {
+            font-size: 12px;
+            padding: 4px 10px;
+        }
+
+        .input {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.15s;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--bg-accent);
         }
 
         .url-input {
-            padding: 6px 12px;
-            border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            font-size: 14px;
-            width: 300px;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            flex: 1;
+            min-width: 200px;
+            max-width: 400px;
         }
 
         .stats {
-            margin-left: auto;
-            margin-right: 60px;
             display: flex;
-            gap: 16px;
-            font-size: 12px;
-            color: var(--text-secondary);
+            gap: 12px;
+            font-size: 13px;
+            margin-left: auto;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-weight: 500;
         }
 
         .loading {
-            color: var(--accent-primary);
-            font-weight: 500;
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--accent);
         }
 
         .spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--border-primary);
-            border-top: 2px solid var(--accent-primary);
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .progress-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-success), #26d045);
-            border-radius: 6px;
-            transition: width 0.3s ease;
-            opacity: 0.8;
-        }
-
-        .progress-text {
-            position: relative;
-            z-index: 1;
-            color: white;
-            font-weight: 500;
-        }
-
-        .pulse {
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
+            to { transform: rotate(360deg); }
         }
 
         .main {
@@ -215,115 +229,166 @@
         }
 
         .sidebar {
-            width: 320px;
-            border-right: 1px solid var(--border-primary);
+            width: 360px;
+            border-right: 1px solid var(--border);
             background: var(--bg-secondary);
             display: flex;
             flex-direction: column;
         }
 
         .sidebar-header {
-            padding: 16px;
-            border-bottom: 1px solid var(--border-primary);
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 6px;
         }
 
         .search-input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            flex: 1;
+            padding-left: 32px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23636c76" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>');
+            background-repeat: no-repeat;
+            background-position: 8px center;
+        }
+
+        .search-nav-btn {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
+        }
+
+        .search-info {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
         }
 
         .trace-list {
             flex: 1;
             overflow-y: auto;
-            padding: 8px;
+            padding: 4px;
         }
 
         .trace-item {
             background: var(--bg-primary);
-            border: 1px solid var(--border-primary);
+            border-left: 3px solid transparent;
             border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 8px;
+            padding: 10px 40px 10px 12px;
+            margin: 2px 4px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .trace-item:hover {
-            background: var(--trace-hover);
-            border-color: var(--trace-hover-border);
+            background: var(--bg-hover);
+            border-left-color: var(--accent);
         }
 
         .trace-item.selected {
-            border-color: var(--trace-selected-border);
-            background: var(--trace-selected);
+            border-left-color: var(--accent);
+            background: var(--selected);
+            font-weight: 600;
+        }
+
+        .trace-item.highlight {
+            background: var(--bg-accent);
+            border-left-color: var(--accent);
+        }
+
+        .trace-icon {
+            flex-shrink: 0;
+            width: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .trace-content {
+            flex: 1;
+            min-width: 0;
         }
 
         .trace-close {
-            position: absolute;
-            top: 8px;
-            right: 8px;
             width: 20px;
             height: 20px;
             border: none;
-            background: var(--trace-hover);
-            border-radius: 50%;
+            background: transparent;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
-            color: var(--text-secondary);
-            display: none;
+            color: var(--text-muted);
+            opacity: 0;
+            display: flex;
             align-items: center;
             justify-content: center;
+            transition: opacity 0.15s;
+            flex-shrink: 0;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .trace-item:hover .trace-close {
-            display: flex;
+            opacity: 1;
         }
 
         .trace-close:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        .trace-id {
-            font-family: monospace;
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            word-break: break-all;
-            padding-right: 24px;
+            background: var(--danger);
+            color: white;
         }
 
         .trace-name {
-            font-weight: 600;
-            color: var(--accent-primary);
-            margin-bottom: 4px;
-            padding-right: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+            font-size: 13px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        .trace-info {
+        .trace-item.selected .trace-name {
+            font-weight: 600;
+        }
+
+        .trace-id {
+            font-family: ui-monospace, "SF Mono", Monaco, monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .trace-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            align-items: center;
+            font-size: 11px;
             color: var(--text-secondary);
+            gap: 8px;
         }
 
         .trace-duration {
             font-weight: 600;
-            color: var(--accent-primary);
-        }
-
-        .trace-timestamp {
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-family: monospace;
-            padding-right: 24px;
+            color: var(--purple);
         }
 
         .content {
@@ -334,15 +399,16 @@
         }
 
         .content-header {
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--border-primary);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
             background: var(--bg-secondary);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
         }
 
-        .trace-details {
+        .trace-info {
             flex: 1;
             min-width: 0;
         }
@@ -359,28 +425,15 @@
         .trace-subtitle {
             font-size: 12px;
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .trace-controls {
+        .controls {
             display: flex;
             gap: 8px;
-        }
-
-        .expand-all-btn {
-            font-size: 12px;
-            padding: 4px 8px;
-        }
-
-        .clear-all-btn {
-            font-size: 12px;
-            padding: 4px 8px;
-            background: var(--accent-danger);
-            color: white;
-            border-color: var(--accent-danger);
-        }
-
-        .clear-all-btn:hover:not(:disabled) {
-            background: #dc2626;
         }
 
         .timeline-container {
@@ -388,19 +441,23 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            min-height: 0;
         }
 
         .timeline-header {
-            height: 40px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-primary);
+            height: 38px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 450px 1fr;
             align-items: center;
             font-size: 12px;
+            font-weight: 600;
             color: var(--text-secondary);
-            flex-shrink: 0;
+        }
+
+        .timeline-header-left {
+            padding: 0 12px;
+            border-right: 1px solid var(--border);
         }
 
         .timeline-axis {
@@ -414,7 +471,7 @@
             top: 0;
             bottom: 0;
             width: 1px;
-            background: var(--border-primary);
+            background: var(--border-light);
         }
 
         .axis-label {
@@ -422,53 +479,85 @@
             bottom: 8px;
             font-size: 10px;
             transform: translateX(-50%);
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .timeline-body {
             flex: 1;
             overflow-y: auto;
-            min-height: 0;
         }
 
         .span-row {
             display: grid;
-            grid-template-columns: 400px 1fr;
-            min-height: 32px;
-            border-bottom: 1px solid var(--bg-secondary);
-            cursor: pointer;
-            user-select: none;
+            grid-template-columns: 450px 1fr;
+            min-height: 40px;
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.1s;
         }
 
         .span-row:hover {
             background: var(--bg-secondary);
         }
 
+        .span-row.highlight {
+            background: var(--selected) !important;
+            border-left: 3px solid var(--selected-border);
+            box-shadow: inset 0 0 0 1px var(--selected-border);
+        }
+
+        @keyframes fadeHighlight {
+            0% { background: var(--accent); }
+            100% { background: transparent; }
+        }
+
+        .span-row.flash {
+            animation: fadeHighlight 1s ease-out;
+        }
+
         .span-label {
-            padding: 8px 16px;
+            padding: 8px 12px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 6px;
-            border-right: 1px solid var(--border-primary);
+            border-right: 1px solid var(--border);
             background: var(--bg-primary);
         }
 
+        .span-expand-area {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .span-main {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
+        }
+
         .expand-btn {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border: none;
             background: none;
             cursor: pointer;
             color: var(--text-secondary);
             font-size: 14px;
-            border-radius: 3px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.15s;
         }
 
         .expand-btn:hover {
-            background: var(--trace-hover);
-            color: var(--text-primary);
+            background: var(--bg-hover);
+            color: var(--accent);
         }
 
         .span-info {
@@ -477,6 +566,7 @@
             justify-content: space-between;
             align-items: center;
             min-width: 0;
+            gap: 8px;
         }
 
         .span-name {
@@ -484,71 +574,210 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             font-size: 13px;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+
+        .span-name:hover {
+            color: var(--accent);
+            text-decoration: underline;
         }
 
         .span-duration-label {
             font-size: 11px;
-            color: #7c3aed;
-            font-family: monospace;
+            font-family: ui-monospace, monospace;
             font-weight: 600;
-            margin-left: 8px;
+            color: var(--purple);
             flex-shrink: 0;
+        }
+
+        .span-attributes {
+            margin-left: 26px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-size: 11px;
+            border-left: 2px solid var(--border);
+        }
+
+        .attr-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 4px;
+            align-items: flex-start;
+        }
+
+        .attr-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .attr-key {
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 100px;
+            font-family: ui-monospace, monospace;
+        }
+
+        .attr-value {
+            color: var(--text-primary);
+            font-family: ui-monospace, monospace;
+            word-break: break-word;
         }
 
         .span-timeline {
             position: relative;
-            padding: 8px 16px;
-            min-width: 0;
+            padding: 10px 16px;
         }
 
         .span-bar {
-            height: 16px;
-            border-radius: 4px;
+            height: 20px;
+            border-radius: 6px;
             cursor: pointer;
             position: absolute;
-            top: 8px;
+            top: 10px;
             display: flex;
             align-items: center;
             color: white;
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             overflow: hidden;
-            transition: all 0.2s;
+            transition: all 0.15s;
             min-width: 2px;
+            box-shadow: var(--shadow-sm);
         }
 
         .span-bar:hover {
-            filter: brightness(1.1);
+            filter: brightness(1.2);
+            box-shadow: var(--shadow);
             z-index: 10;
+            transform: scaleY(1.1);
         }
 
-        .span-duration {
-            padding: 0 4px;
-            font-size: 9px;
-            opacity: 0.95;
+        .span-duration-text {
+            padding: 0 8px;
             white-space: nowrap;
-            overflow: hidden;
+            opacity: 0.95;
         }
 
         .tooltip {
-            position: absolute;
-            background: var(--bg-tertiary);
+            position: fixed;
+            background: var(--bg-secondary);
             color: var(--text-primary);
-            padding: 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-primary);
-            z-index: 1000;
-            pointer-events: none;
-            max-width: 350px;
-            line-height: 1.4;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            z-index: 2000;
+            pointer-events: auto;
+            width: 600px;
+            max-height: 85vh;
+            overflow: hidden;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            cursor: move;
+            resize: both;
+            min-width: 400px;
+            min-height: 300px;
+        }
+
+        .tooltip-tabs {
+            display: flex;
+            gap: 2px;
+            padding: 8px 8px 0 8px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-tertiary);
+        }
+
+        .tooltip-tab {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 6px 6px 0 0;
+            transition: all 0.15s;
+        }
+
+        .tooltip-tab:hover {
+            background: var(--bg-hover);
+        }
+
+        .tooltip-tab.active {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .tooltip-content {
+            padding: 12px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            flex: 1;
+            cursor: auto;
+        }
+
+        .attr-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding: 6px 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            transition: background 0.15s;
+        }
+
+        .attr-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .attr-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .attr-copy-btn {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+            transition: all 0.15s;
+        }
+
+        .attr-copy-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .tooltip-panel {
+            display: none;
+        }
+
+        .tooltip-panel.active {
+            display: block;
         }
 
         .tooltip-row {
-            margin-bottom: 4px;
             display: flex;
+            align-items: center;
             gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .tooltip-row svg {
+            flex-shrink: 0;
         }
 
         .tooltip-row:last-child {
@@ -557,14 +786,60 @@
 
         .tooltip-label {
             font-weight: 600;
-            min-width: 60px;
+            min-width: 80px;
+            color: var(--text-secondary);
         }
 
         .tooltip-value {
-            font-family: monospace;
+            font-family: ui-monospace, monospace;
             background: var(--bg-secondary);
-            padding: 1px 4px;
-            border-radius: 3px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+
+        .tooltip-hint {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-light);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .tooltip-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: var(--bg-hover);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .tooltip-close:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .attr-list {
+            margin-top: 8px;
+        }
+
+        .attr-header {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .empty-state {
@@ -572,94 +847,94 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: var(--text-secondary);
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .empty-hint {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         input[type="file"] {
             display: none;
         }
 
-        .depth-0 {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .depth-1 {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-        }
-
-        .depth-2 {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
-
-        .depth-3 {
-            background: linear-gradient(135deg, #43e97b, #38f9d7);
-        }
-
-        .depth-4 {
-            background: linear-gradient(135deg, #fa709a, #fee140);
-        }
-
-        .depth-5 {
-            background: linear-gradient(135deg, #a8edea, #fed6e3);
-            color: #24292f;
-        }
-
-        .depth-6 {
-            background: linear-gradient(135deg, #ffecd2, #fcb69f);
-            color: #24292f;
-        }
-
-        .depth-7 {
-            background: linear-gradient(135deg, #ff9a9e, #fecfef);
-            color: #24292f;
-        }
-
-        .depth-8 {
-            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-            color: #24292f;
-        }
-
-        .depth-default {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-        }
+        .depth-0 { background: #6366f1; }
+        .depth-1 { background: #ec4899; }
+        .depth-2 { background: #3b82f6; }
+        .depth-3 { background: #10b981; }
+        .depth-4 { background: #f59e0b; }
+        .depth-5 { background: #8b5cf6; }
+        .depth-6 { background: #06b6d4; }
+        .depth-7 { background: #f97316; }
+        .depth-8 { background: #a855f7; }
+        .depth-9 { background: #14b8a6; }
+        .depth-default { background: #6b7280; }
 
         .notification {
             position: fixed;
-            top: 80px;
+            bottom: 20px;
             right: 20px;
-            background: var(--accent-success);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 14px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 350px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .notification.success {
+            background: var(--success);
             color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            z-index: 1001;
-            animation: slideIn 0.3s ease-out;
+            border-color: var(--success);
         }
 
         .notification.error {
-            background: var(--accent-danger);
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
         }
 
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
-                transform: translateX(100%);
+                transform: translateY(calc(100% + 40px));
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
 
         .footer {
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-primary);
-            padding: 8px 24px;
+            border-top: 1px solid var(--border);
+            padding: 10px 20px;
             font-size: 12px;
             color: var(--text-secondary);
             text-align: center;
@@ -667,227 +942,100 @@
         }
 
         .footer a {
-            color: var(--accent-primary);
+            color: var(--accent);
             text-decoration: none;
+            font-weight: 500;
         }
 
         .footer a:hover {
             text-decoration: underline;
         }
 
-        .kotlin-logo {
-            background: linear-gradient(45deg, #7F52FF, #B146C2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            font-size: 14px;
-            margin-left: 4px;
-            vertical-align: baseline;
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* Mobile responsive styles */
-        @media (max-width: 768px) {
-            body {
-                height: 100vh;
-                height: 100dvh; /* For better mobile viewport handling */
+        @media (max-width: 1024px) {
+            .timeline-header {
+                grid-template-columns: 300px 1fr;
             }
+            .span-row {
+                grid-template-columns: 300px 1fr;
+            }
+        }
 
+        @media (max-width: 768px) {
             .header {
-                flex-wrap: wrap;
-                gap: 6px;
-                padding: 10px 12px;
+                padding: 10px;
+                gap: 8px;
             }
 
             .header h1 {
-                font-size: 16px;
+                font-size: 18px;
                 width: 100%;
-                margin-bottom: 6px;
-            }
-
-            .theme-toggle {
-                position: static;
-                order: -1;
-                margin-left: auto;
-                padding: 4px 8px;
-                font-size: 12px;
-            }
-
-            .btn {
-                padding: 6px 10px;
-                font-size: 12px;
-                min-height: 32px;
-                white-space: nowrap;
             }
 
             .url-input {
-                width: 150px;
-                min-width: 120px;
-                font-size: 12px;
-                padding: 6px 8px;
+                width: 100%;
+                max-width: 100%;
             }
 
             .stats {
-                margin: 0;
-                font-size: 10px;
                 width: 100%;
-                justify-content: center;
-                order: 10;
-                gap: 12px;
+                justify-content: space-around;
+                font-size: 12px;
+                margin-left: 0;
             }
 
             .main {
                 flex-direction: column;
-                min-height: 0;
             }
 
             .sidebar {
                 width: 100%;
                 max-height: 40vh;
                 border-right: none;
-                border-bottom: 1px solid var(--border-primary);
-                flex-shrink: 0;
-            }
-
-            .sidebar-header {
-                padding: 10px;
-            }
-
-            .search-input {
-                padding: 8px 10px;
-                font-size: 14px;
-            }
-
-            .trace-list {
-                padding: 6px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .trace-item {
-                padding: 10px;
-                margin-bottom: 6px;
-                font-size: 13px;
-            }
-
-            .trace-name {
-                font-size: 13px;
-                padding-right: 30px;
-            }
-
-            .trace-id {
-                font-size: 10px;
-                padding-right: 30px;
-            }
-
-            .trace-timestamp {
-                font-size: 9px;
-                padding-right: 30px;
-            }
-
-            .trace-info {
-                font-size: 11px;
-            }
-
-            .content {
-                flex: 1;
-                min-height: 0;
+                border-bottom: 1px solid var(--border);
             }
 
             .content-header {
-                padding: 10px 12px;
                 flex-direction: column;
-                gap: 8px;
                 align-items: stretch;
             }
 
-            .trace-details {
-                width: 100%;
-            }
-
-            .trace-title {
-                font-size: 14px;
-            }
-
-            .trace-subtitle {
-                font-size: 11px;
-            }
-
-            .trace-controls {
-                display: flex;
+            .controls {
                 justify-content: space-between;
-                gap: 8px;
-            }
-
-            .expand-all-btn,
-            .clear-all-btn {
-                flex: 1;
-                font-size: 11px;
-                padding: 6px 8px;
             }
 
             .timeline-header {
                 grid-template-columns: 180px 1fr;
-                font-size: 10px;
-                height: 36px;
-            }
-
-            .timeline-body {
-                -webkit-overflow-scrolling: touch;
             }
 
             .span-row {
                 grid-template-columns: 180px 1fr;
-                min-height: 28px;
+                min-height: 36px;
             }
 
-            .span-label {
-                padding: 4px 8px;
-                font-size: 11px;
+            .span-attributes {
+                margin-left: 10px;
+                padding: 6px 10px;
             }
 
-            .span-name {
-                font-size: 11px;
-            }
-
-            .span-duration-label {
-                font-size: 9px;
-            }
-
-            .expand-btn {
-                width: 20px;
-                height: 20px;
-                font-size: 12px;
-            }
-
-            .footer {
-                padding: 8px 12px;
-                font-size: 10px;
-            }
-
-            .tooltip {
-                max-width: 280px;
-                font-size: 11px;
-                padding: 8px;
-                left: 10px !important;
-                right: 10px !important;
-                width: auto !important;
+            .attr-key {
+                min-width: 80px;
             }
         }
 
         @media (max-width: 480px) {
-            .header {
-                padding: 8px 10px;
+            .header h1 {
+                font-size: 16px;
             }
 
             .btn {
-                font-size: 11px;
-                padding: 5px 8px;
-            }
-
-            .url-input {
-                width: 120px;
-                font-size: 11px;
+                font-size: 12px;
+                padding: 5px 10px;
             }
 
             .timeline-header {
@@ -896,77 +1044,164 @@
 
             .span-row {
                 grid-template-columns: 140px 1fr;
-            }
-
-            .span-label {
-                padding: 3px 6px;
-            }
-
-            .expand-all-btn,
-            .clear-all-btn {
-                font-size: 10px;
-                padding: 5px 6px;
             }
         }
     </style>
 </head>
 <body>
 <div class="header">
-    <h1>⏱️ Trace Viewer</h1>
-    <label for="file-input" class="btn btn-primary" id="upload-btn">
-        <span id="upload-text">Upload JSONL</span>
-        <div class="progress-bar hidden" id="progress-bar"></div>
+    <h1>
+        <span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+        </span>
+        <span>Trace Viewer</span>
+    </h1>
+    <label for="file-input" class="btn btn-primary">
+        <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+        </span>
+        <span>Upload</span>
     </label>
     <input type="file" id="file-input" accept=".jsonl,.json" multiple>
-    <button class="btn" id="demo-btn">Demo</button>
-    <input type="text" class="url-input" id="url-input" placeholder="GitHub Gist URL or direct JSONL URL">
-    <button class="btn" id="load-url-btn">Load URL</button>
+    <button class="btn" id="demo-btn">
+        <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        </span>
+        <span>Demo</span>
+    </button>
+    <input type="text" class="input url-input" id="url-input" placeholder="Enter URL or GitHub Gist...">
+    <button class="btn" id="load-url-btn">
+        <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+        </span>
+        <span>Load</span>
+    </button>
     <div class="stats">
         <span id="loading-status" class="loading hidden">
             <div class="spinner"></div>
-            Loading...
+            <span>Loading...</span>
         </span>
-        <span>📊 Traces: <span id="trace-count">0</span></span>
-        <span>🔗 Spans: <span id="span-count">0</span></span>
+        <div class="stat-item">
+            <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+            </span>
+            <span id="trace-count">0</span>
+        </div>
+        <div class="stat-item">
+            <span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+            </span>
+            <span id="span-count">0</span>
+        </div>
     </div>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-        <span id="theme-icon">🌙</span>
+    <button class="btn" onclick="toggleTheme()" title="Toggle theme">
+        <span id="theme-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
     </button>
 </div>
 
 <div class="main">
     <div class="sidebar">
         <div class="sidebar-header">
-            <input type="text" class="search-input" id="search" placeholder="🔍 Search traces and spans...">
+            <div class="search-box">
+                <input type="text" class="input search-input" id="search" placeholder="Search traces and spans...">
+                <button class="btn search-nav-btn" id="search-prev" title="Previous result">&lt;</button>
+                <button class="btn search-nav-btn" id="search-next" title="Next result">&gt;</button>
+            </div>
+            <div class="search-info" id="search-info"></div>
         </div>
         <div class="trace-list" id="trace-list">
             <div class="empty-state">
-                <div>✨ Upload JSONL files or try demo</div>
-                <small>Supports multiple file selection</small>
+                <div class="empty-icon">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                </div>
+                <div class="empty-text">No traces loaded</div>
+                <div class="empty-hint">Upload files, load URL, or try demo</div>
             </div>
         </div>
     </div>
 
     <div class="content">
         <div class="content-header">
-            <div class="trace-details">
+            <div class="trace-info">
                 <div class="trace-title" id="trace-title">Select a trace</div>
                 <div class="trace-subtitle" id="trace-subtitle"></div>
             </div>
-            <div class="trace-controls">
-                <button class="btn expand-all-btn" id="expand-all-btn">⬇️ Collapse All</button>
-                <button class="btn clear-all-btn" id="clear-all-btn">🗑️ Clear All</button>
+            <div class="controls">
+                <button class="btn btn-sm" id="expand-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <span>Collapse</span>
+                </button>
+                <button class="btn btn-sm" id="share-btn" title="Copy shareable link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    <span>Share</span>
+                </button>
+                <button class="btn btn-sm btn-danger" id="clear-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Clear</span>
+                </button>
             </div>
         </div>
         <div class="timeline-container">
             <div class="timeline-header">
-                <div style="padding: 0 16px; font-weight: 600;">📝 Span Name & Duration</div>
+                <div class="timeline-header-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                    Span Name & Duration
+                </div>
                 <div class="timeline-axis" id="timeline-axis"></div>
             </div>
             <div class="timeline-body" id="timeline">
                 <div class="empty-state">
-                    <div>📈 No trace selected</div>
-                    <small>Click a trace to view timeline</small>
+                    <div class="empty-icon">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="empty-text">No trace selected</div>
+                    <div class="empty-hint">Select a trace to view timeline</div>
                 </div>
             </div>
         </div>
@@ -974,44 +1209,44 @@
 </div>
 
 <div class="footer">
-    <div style="margin-bottom: 6px;">
-        Built with ❤️ for <a href="https://github.com/JetBrains/amper">Kotlin Amper</a> Build Traces •
-        <a href="?url=https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw">🔗 Share via
-            URL</a>
-    </div>
-    <div style="font-size: 13px; opacity: 0.8;">
-        <a href="https://suresh.dev" target="_blank" rel="noopener noreferrer">suresh.dev</a>
+    <div>
+        Built with
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align: middle; color: var(--danger);">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        for <a href="https://github.com/JetBrains/amper" target="_blank" rel="noopener">Kotlin Amper</a> Build Traces •
+        <a href="https://suresh.dev" target="_blank" rel="noopener">suresh.dev</a>
     </div>
 </div>
 
 <div class="tooltip hidden" id="tooltip"></div>
 
 <script>
-    'use strict';
+    const DEMO_URL = 'https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw';
 
-    var DEMO_URL = 'https://gist.githubusercontent.com/sureshg/c0f0abd0a96b663000b18ca11d657fe9/raw';
-
-    var state = {
+    const state = {
         traces: [],
-        selectedTrace: null,
-        allExpanded: true,
-        hoveredSpan: null,
-        isProcessing: false,
-        demoLoaded: false
+        selected: null,
+        expanded: true,
+        processing: false,
+        expandedSpans: new Set(),
+        searchResults: [],
+        searchIndex: 0
     };
 
-    var elements = {
+    const el = {
         fileInput: document.getElementById('file-input'),
-        uploadBtn: document.getElementById('upload-btn'),
-        uploadText: document.getElementById('upload-text'),
-        progressBar: document.getElementById('progress-bar'),
         demoBtn: document.getElementById('demo-btn'),
         urlInput: document.getElementById('url-input'),
         loadUrlBtn: document.getElementById('load-url-btn'),
         loadingStatus: document.getElementById('loading-status'),
-        expandAllBtn: document.getElementById('expand-all-btn'),
-        clearAllBtn: document.getElementById('clear-all-btn'),
-        searchInput: document.getElementById('search'),
+        expandBtn: document.getElementById('expand-btn'),
+        shareBtn: document.getElementById('share-btn'),
+        clearBtn: document.getElementById('clear-btn'),
+        search: document.getElementById('search'),
+        searchInfo: document.getElementById('search-info'),
+        searchPrev: document.getElementById('search-prev'),
+        searchNext: document.getElementById('search-next'),
         traceList: document.getElementById('trace-list'),
         traceTitle: document.getElementById('trace-title'),
         traceSubtitle: document.getElementById('trace-subtitle'),
@@ -1023,152 +1258,136 @@
     };
 
     function toggleTheme() {
-        var body = document.documentElement;
-        var themeIcon = document.getElementById('theme-icon');
+        const body = document.documentElement;
+        const icon = document.getElementById('theme-icon');
+        const isDark = body.getAttribute('data-theme') === 'dark';
 
-        if (body.getAttribute('data-theme') === 'dark') {
-            body.removeAttribute('data-theme');
-            themeIcon.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        } else {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
+        body.setAttribute('data-theme', isDark ? '' : 'dark');
+        icon.innerHTML = isDark
+            ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+               </svg>`
+            : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+               </svg>`;
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    function initTheme() {
+        const saved = localStorage.getItem('theme');
+        const theme = saved || 'dark';
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+        if (!saved) {
             localStorage.setItem('theme', 'dark');
         }
     }
 
-    function updateDemoButtonState() {
-        if (state.demoLoaded) {
-            elements.demoBtn.classList.add('demo-loaded');
-            elements.demoBtn.textContent = '✓ Demo Loaded';
-        } else {
-            elements.demoBtn.classList.remove('demo-loaded');
-            elements.demoBtn.textContent = 'Demo';
-        }
-    }
-
-    // Initialize theme from localStorage - default to dark theme
-    var savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.documentElement.removeAttribute('data-theme');
-        document.getElementById('theme-icon').textContent = '🌙';
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        document.getElementById('theme-icon').textContent = '☀️';
-    }
-
     function formatDuration(nanos) {
         if (!nanos) return '0ms';
-        var ms = nanos / 1000000;
-        if (ms < 1) return (nanos / 1000).toFixed(0) + 'μs';
-        if (ms < 1000) return ms.toFixed(0) + 'ms';
-        if (ms < 60000) return (ms / 1000).toFixed(1) + 's';
-        return Math.floor(ms / 60000) + 'm' + ((ms % 60000) / 1000).toFixed(0) + 's';
+        const ms = nanos / 1e6;
+        if (ms < 1) return `${(nanos / 1e3).toFixed(0)}μs`;
+        if (ms < 1000) return `${ms.toFixed(0)}ms`;
+        if (ms < 60000) return `${(ms / 1000).toFixed(2)}s`;
+        const m = Math.floor(ms / 60000);
+        const s = ((ms % 60000) / 1000).toFixed(0);
+        return `${m}m ${s}s`;
     }
 
     function formatTime(nanos) {
-        return new Date(Math.floor(nanos / 1000000)).toLocaleString();
+        return new Date(Math.floor(nanos / 1e6)).toLocaleString();
     }
 
-    function formatShortTime(nanos) {
-        var date = new Date(Math.floor(nanos / 1000000));
-        return date.toLocaleString('en-US', {
-            hour12: false,
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
+    function setLoading(loading) {
+        state.processing = loading;
+        el.loadingStatus.classList.toggle('hidden', !loading);
+        el.fileInput.disabled = loading;
+        el.demoBtn.disabled = loading;
+        el.loadUrlBtn.disabled = loading;
+        el.urlInput.disabled = loading;
     }
 
-    function setLoadingState(loading) {
-        state.isProcessing = loading;
-        elements.loadingStatus.classList.toggle('hidden', !loading);
-        elements.uploadBtn.disabled = loading;
-        elements.demoBtn.disabled = loading;
-        elements.loadUrlBtn.disabled = loading;
-        elements.urlInput.disabled = loading;
-        elements.fileInput.disabled = loading;
-    }
-
-    function updateProgressBar(progress, text) {
-        if (progress >= 0) {
-            elements.progressBar.style.width = progress + '%';
-            elements.progressBar.classList.remove('hidden');
-            elements.uploadText.textContent = text || 'Processing...';
-            elements.uploadText.classList.add('progress-text');
-        } else {
-            elements.progressBar.classList.add('hidden');
-            elements.uploadText.textContent = 'Upload JSONL';
-            elements.uploadText.classList.remove('progress-text');
-        }
-    }
-
-    function showNotification(message, isError) {
-        var notification = document.createElement('div');
-        notification.className = 'notification' + (isError ? ' error' : '');
-        notification.textContent = message;
+    function notify(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        const icon = type === 'success'
+            ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <polyline points="20 6 9 17 4 12"></polyline>
+               </svg>`
+            : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <circle cx="12" cy="12" r="10"></circle>
+                   <line x1="15" y1="9" x2="9" y2="15"></line>
+                   <line x1="9" y1="9" x2="15" y2="15"></line>
+               </svg>`;
+        notification.innerHTML = `${icon}<span>${message}</span>`;
         document.body.appendChild(notification);
-        setTimeout(function () {
-            notification.remove();
-        }, 3000);
+        setTimeout(() => notification.remove(), 3000);
     }
 
-    function generateTraceName(trace) {
-        var rootSpans = trace.rootSpans || [];
-        if (rootSpans.length > 0) {
-            var mainSpan = rootSpans[0];
-            var name = mainSpan.name;
-            if (name.indexOf('task :') === 0) return name;
-            return trace.service + ': ' + name;
-        }
-        return trace.service !== 'unknown' ? trace.service : 'Trace ' + trace.traceId.substring(0, 8) + '...';
-    }
+    function parseJSONL(text, source) {
+        const lines = text.trim().split('\n').filter(l => l.trim());
+        const spans = [];
 
-    function parseJSONL(text, filename) {
-        var lines = text.trim().split('\n').filter(function (line) {
-            return line.trim();
-        });
-        var spans = [];
-
-        lines.forEach(function (line, index) {
+        lines.forEach((line, i) => {
             try {
-                var data = JSON.parse(line);
-                if (data.resourceSpans) {
-                    data.resourceSpans.forEach(function (rs) {
-                        var service = 'unknown';
-                        if (rs.resource && rs.resource.attributes) {
-                            rs.resource.attributes.forEach(function (attr) {
-                                if (attr.key === 'service.name' && attr.value && attr.value.stringValue) {
-                                    service = attr.value.stringValue;
-                                }
-                            });
+                const data = JSON.parse(line);
+                if (!data.resourceSpans) return;
+
+                data.resourceSpans.forEach(rs => {
+                    let service = 'unknown';
+                    rs.resource?.attributes?.forEach(attr => {
+                        if (attr.key === 'service.name' && attr.value?.stringValue) {
+                            service = attr.value.stringValue;
                         }
+                    });
 
-                        (rs.scopeSpans || []).forEach(function (ss) {
-                            (ss.spans || []).forEach(function (span) {
-                                var startTime = parseInt(span.startTimeUnixNano || 0);
-                                var endTime = parseInt(span.endTimeUnixNano || 0);
+                    (rs.scopeSpans || []).forEach(ss => {
+                        (ss.spans || []).forEach(span => {
+                            const startTime = parseInt(span.startTimeUnixNano || 0);
+                            const endTime = parseInt(span.endTimeUnixNano || 0);
 
-                                spans.push({
-                                    traceId: span.traceId,
-                                    spanId: span.spanId,
-                                    parentSpanId: span.parentSpanId || null,
-                                    name: span.name || 'unnamed',
-                                    service: service,
-                                    startTime: startTime,
-                                    endTime: endTime,
-                                    duration: endTime - startTime,
-                                    children: [],
-                                    expanded: true,
-                                    depth: 0,
-                                    source: filename || 'unknown'
+                            const attributes = {};
+                            if (span.attributes) {
+                                span.attributes.forEach(attr => {
+                                    const value = attr.value?.stringValue ||
+                                                 attr.value?.intValue ||
+                                                 attr.value?.doubleValue ||
+                                                 attr.value?.boolValue ||
+                                                 JSON.stringify(attr.value);
+                                    attributes[attr.key] = value;
                                 });
+                            }
+
+                            spans.push({
+                                traceId: span.traceId,
+                                spanId: span.spanId,
+                                parentSpanId: span.parentSpanId || null,
+                                name: span.name || 'unnamed',
+                                service,
+                                startTime,
+                                endTime,
+                                duration: endTime - startTime,
+                                attributes,
+                                children: [],
+                                expanded: true,
+                                depth: 0,
+                                source
                             });
                         });
                     });
-                }
+                });
             } catch (e) {
-                console.warn('Parse error on line ' + (index + 1) + ':', e);
+                console.warn(`Parse error on line ${i + 1}:`, e);
             }
         });
 
@@ -1176,26 +1395,21 @@
     }
 
     function buildTraces(spans) {
-        var traceMap = {};
-
-        spans.forEach(function (span) {
-            if (!traceMap[span.traceId]) {
-                traceMap[span.traceId] = [];
-            }
+        const traceMap = {};
+        spans.forEach(span => {
+            if (!traceMap[span.traceId]) traceMap[span.traceId] = [];
             traceMap[span.traceId].push(span);
         });
 
-        var traces = [];
-        Object.keys(traceMap).forEach(function (traceId) {
-            var traceSpans = traceMap[traceId];
-            var spanMap = {};
-            var rootSpans = [];
+        const traces = [];
+        Object.keys(traceMap).forEach(traceId => {
+            const traceSpans = traceMap[traceId];
+            const spanMap = {};
+            const rootSpans = [];
 
-            traceSpans.forEach(function (span) {
-                spanMap[span.spanId] = span;
-            });
+            traceSpans.forEach(span => spanMap[span.spanId] = span);
 
-            traceSpans.forEach(function (span) {
+            traceSpans.forEach(span => {
                 if (span.parentSpanId && spanMap[span.parentSpanId]) {
                     spanMap[span.parentSpanId].children.push(span);
                 } else {
@@ -1203,113 +1417,270 @@
                 }
             });
 
-            function setDepthAndSort(spans, depth) {
-                spans.sort(function (a, b) {
-                    return a.startTime - b.startTime;
-                });
-                spans.forEach(function (span) {
+            function setDepth(spans, depth) {
+                spans.sort((a, b) => a.startTime - b.startTime);
+                spans.forEach(span => {
                     span.depth = depth;
-                    if (span.children.length > 0) {
-                        setDepthAndSort(span.children, depth + 1);
-                    }
+                    if (span.children.length > 0) setDepth(span.children, depth + 1);
                 });
             }
 
-            setDepthAndSort(rootSpans, 0);
+            setDepth(rootSpans, 0);
 
-            var startTime = Math.min.apply(Math, traceSpans.map(function (s) {
-                return s.startTime;
-            }));
-            var endTime = Math.max.apply(Math, traceSpans.map(function (s) {
-                return s.endTime;
-            }));
+            const startTime = Math.min(...traceSpans.map(s => s.startTime));
+            const endTime = Math.max(...traceSpans.map(s => s.endTime));
 
-            var trace = {
-                traceId: traceId,
+            const mainSpan = rootSpans[0];
+            const name = mainSpan
+                ? (mainSpan.name.startsWith('task :') ? mainSpan.name : `${traceSpans[0].service}: ${mainSpan.name}`)
+                : `Trace ${traceId.substring(0, 8)}`;
+
+            traces.push({
+                traceId,
                 spans: traceSpans,
-                rootSpans: rootSpans,
-                startTime: startTime,
-                endTime: endTime,
+                rootSpans,
+                startTime,
+                endTime,
                 duration: endTime - startTime,
-                service: traceSpans[0] ? traceSpans[0].service : 'unknown'
-            };
-
-            trace.name = generateTraceName(trace);
-            traces.push(trace);
+                service: traceSpans[0]?.service || 'unknown',
+                name,
+                source: traceSpans[0]?.source
+            });
         });
 
-        traces.sort(function (a, b) {
-            return b.endTime - a.endTime;
-        });
+        traces.sort((a, b) => b.endTime - a.endTime);
         return traces;
     }
 
-    function matchesSearch(trace, searchTerm) {
-        if (!searchTerm) return true;
-        searchTerm = searchTerm.toLowerCase();
+    function performSearch(term) {
+        if (!term) {
+            state.searchResults = [];
+            state.searchIndex = 0;
+            el.searchInfo.textContent = '';
+            el.searchPrev.disabled = true;
+            el.searchNext.disabled = true;
+            return;
+        }
 
-        return trace.traceId.toLowerCase().indexOf(searchTerm) !== -1 ||
-            trace.name.toLowerCase().indexOf(searchTerm) !== -1 ||
-            trace.service.toLowerCase().indexOf(searchTerm) !== -1 ||
-            trace.spans.some(function (span) {
-                return span.name.toLowerCase().indexOf(searchTerm) !== -1;
+        const results = [];
+
+        // Depth-first search through traces and spans
+        function searchSpansDepthFirst(spans, trace) {
+            spans.forEach(span => {
+                const spanMatches = span.name.toLowerCase().includes(term) ||
+                                   span.spanId.toLowerCase().includes(term) ||
+                                   Object.values(span.attributes).some(v =>
+                                       String(v).toLowerCase().includes(term));
+
+                if (spanMatches) {
+                    results.push({ trace, span });
+                }
+
+                // Recursively search children (depth-first)
+                if (span.children && span.children.length > 0) {
+                    searchSpansDepthFirst(span.children, trace);
+                }
             });
+        }
+
+        state.traces.forEach(trace => {
+            const traceMatches = trace.name.toLowerCase().includes(term) ||
+                                trace.traceId.toLowerCase().includes(term);
+
+            if (traceMatches) {
+                results.push({ trace, span: null });
+            }
+
+            // Search through root spans depth-first
+            searchSpansDepthFirst(trace.rootSpans, trace);
+        });
+
+        state.searchResults = results;
+        state.searchIndex = 0;
+        updateSearchInfo();
+
+        return results;
+    }
+
+    function updateSearchInfo() {
+        const total = state.searchResults.length;
+        if (total === 0) {
+            el.searchInfo.textContent = 'No results found';
+            el.searchPrev.disabled = true;
+            el.searchNext.disabled = true;
+        } else {
+            el.searchInfo.textContent = `${state.searchIndex + 1} of ${total} result${total > 1 ? 's' : ''}`;
+            el.searchPrev.disabled = state.searchIndex === 0;
+            el.searchNext.disabled = state.searchIndex >= total - 1;
+        }
+    }
+
+    function navigateSearch(direction) {
+        if (state.searchResults.length === 0) return;
+
+        // Clear highlights immediately before changing index
+        document.querySelectorAll('.span-row').forEach(row => {
+            row.classList.remove('highlight');
+        });
+
+        const newIndex = state.searchIndex + direction;
+        if (newIndex < 0 || newIndex >= state.searchResults.length) return;
+
+        state.searchIndex = newIndex;
+        const result = state.searchResults[state.searchIndex];
+
+        if (result.trace.traceId !== state.selected?.traceId) {
+            selectTrace(result.trace.traceId);
+            if (result.span) {
+                setTimeout(() => {
+                    scrollToSpan(result.span.spanId, false, false);
+                    highlightSearchResults();
+                }, 100);
+            }
+        } else if (result.span) {
+            scrollToSpan(result.span.spanId, false, false);
+            highlightSearchResults();
+        }
+
+        updateSearchInfo();
+    }
+
+    function highlightSearchResults() {
+        const term = el.search.value.toLowerCase().trim();
+
+        document.querySelectorAll('.trace-item').forEach(item => {
+            item.classList.remove('highlight');
+        });
+
+        document.querySelectorAll('.span-row').forEach(row => {
+            row.classList.remove('highlight');
+        });
+
+        if (!term || state.searchResults.length === 0) return;
+
+        // Only highlight the current search result
+        const currentResult = state.searchResults[state.searchIndex];
+        if (currentResult && currentResult.trace.traceId === state.selected?.traceId && currentResult.span) {
+            const spanRow = document.querySelector(`[data-span-id="${currentResult.span.spanId}"]`);
+            if (spanRow) {
+                spanRow.classList.add('highlight');
+            }
+        }
+    }
+
+    function scrollToSpan(spanId, updateUrl = false, flash = true) {
+        // Clear all flash animations first
+        document.querySelectorAll('.span-row').forEach(row => {
+            row.classList.remove('flash');
+        });
+
+        const spanRow = document.querySelector(`[data-span-id="${spanId}"]`);
+        if (spanRow) {
+            spanRow.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+
+            if (flash) {
+                // Use setTimeout to ensure the class is removed before re-adding
+                setTimeout(() => {
+                    spanRow.classList.add('flash');
+                    setTimeout(() => spanRow.classList.remove('flash'), 1200);
+                }, 50);
+            }
+            if (updateUrl) updateURL(spanId);
+        }
     }
 
     function renderTraceList() {
         if (state.traces.length === 0) {
-            elements.traceList.innerHTML = '<div class="empty-state"><div>✨ No traces loaded</div><small>Upload files, load URL, or try demo</small></div>';
+            el.traceList.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        </svg>
+                    </div>
+                    <div class="empty-text">No traces loaded</div>
+                    <div class="empty-hint">Upload files, load URL, or try demo</div>
+                </div>`;
             return;
         }
 
-        var searchTerm = elements.searchInput.value.trim();
-        var filtered = state.traces.filter(function (trace) {
-            return matchesSearch(trace, searchTerm);
-        });
+        const term = el.search.value.toLowerCase().trim();
+        let filtered = state.traces;
 
-        elements.traceList.innerHTML = filtered.map(function (trace) {
-            var isSelected = state.selectedTrace && state.selectedTrace.traceId === trace.traceId;
-            return '<div class="trace-item ' + (isSelected ? 'selected' : '') + '" onclick="selectTrace(\'' + trace.traceId + '\')">' +
-                '<button class="trace-close" onclick="removeTrace(event, \'' + trace.traceId + '\')">✕</button>' +
-                '<div class="trace-name">' + trace.name + '</div>' +
-                '<div class="trace-id">' + trace.traceId + '</div>' +
-                '<div class="trace-timestamp">📅 ' + formatShortTime(trace.startTime) + '</div>' +
-                '<div class="trace-info">' +
-                '<span>🔗 ' + trace.spans.length + ' spans</span>' +
-                '<span class="trace-duration">⏱️ ' + formatDuration(trace.duration) + '</span>' +
-                '</div>' +
-                '</div>';
+        if (term) {
+            const results = performSearch(term);
+            const traceIds = new Set(results.map(r => r.trace.traceId));
+            filtered = state.traces.filter(t => traceIds.has(t.traceId));
+        }
+
+        el.traceList.innerHTML = filtered.map(trace => {
+            const selected = state.selected?.traceId === trace.traceId;
+            const hasResults = term && state.searchResults.some(r => r.trace.traceId === trace.traceId);
+            return `
+                <div class="trace-item ${selected ? 'selected' : ''} ${hasResults && !selected ? 'highlight' : ''}"
+                     onclick="selectTrace('${trace.traceId}')">
+                    <div class="trace-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        </svg>
+                    </div>
+                    <div class="trace-content">
+                        <div class="trace-name">${trace.name}</div>
+                        <div class="trace-id">${trace.traceId}</div>
+                        <div class="trace-meta">
+                            <span>
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 2px;">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                                ${trace.spans.length}
+                            </span>
+                            <span class="trace-duration">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 2px;">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                ${formatDuration(trace.duration)}
+                            </span>
+                        </div>
+                    </div>
+                    <button class="trace-close" onclick="removeTrace(event, '${trace.traceId}')">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>`;
         }).join('');
     }
 
     function selectTrace(traceId) {
-        state.selectedTrace = state.traces.find(function (t) {
-            return t.traceId === traceId;
-        });
+        state.selected = state.traces.find(t => t.traceId === traceId);
+        updateURL();
         renderTraceList();
         renderTimeline();
+        highlightSearchResults();
     }
 
     function removeTrace(event, traceId) {
         event.stopPropagation();
-        state.traces = state.traces.filter(function (t) {
-            return t.traceId !== traceId;
-        });
+        state.traces = state.traces.filter(t => t.traceId !== traceId);
 
-        if (state.selectedTrace && state.selectedTrace.traceId === traceId) {
-            state.selectedTrace = null;
-            elements.timeline.innerHTML = '<div class="empty-state"><div>📈 No trace selected</div><small>Click a trace to view timeline</small></div>';
-            elements.traceTitle.textContent = 'Select a trace';
-            elements.traceSubtitle.textContent = '';
-        }
-
-        // Check if demo trace was removed
-        var hasDemoTrace = state.traces.some(function (t) {
-            return t.spans[0] && t.spans[0].source === 'Demo';
-        });
-        if (!hasDemoTrace) {
-            state.demoLoaded = false;
-            updateDemoButtonState();
+        if (state.selected?.traceId === traceId) {
+            state.selected = null;
+            updateURL();
+            el.timeline.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="empty-text">No trace selected</div>
+                    <div class="empty-hint">Select a trace to view timeline</div>
+                </div>`;
+            el.traceTitle.textContent = 'Select a trace';
+            el.traceSubtitle.textContent = '';
         }
 
         updateStats();
@@ -1317,137 +1688,177 @@
     }
 
     function flattenSpans(spans) {
-        var result = [];
-
+        const result = [];
         function traverse(spans) {
-            spans.forEach(function (span) {
+            spans.forEach(span => {
                 result.push(span);
                 if (span.expanded && span.children.length > 0) {
                     traverse(span.children);
                 }
             });
         }
-
         traverse(spans);
         return result;
     }
 
     function renderTimelineAxis() {
-        if (!state.selectedTrace) return;
+        if (!state.selected) return;
 
-        elements.timelineAxis.innerHTML = '';
-        var duration = state.selectedTrace.duration;
-        var containerWidth = elements.timelineAxis.offsetWidth - 32;
+        el.timelineAxis.innerHTML = '';
+        const duration = state.selected.duration;
+        const width = el.timelineAxis.offsetWidth - 32;
 
-        for (var i = 0; i <= 6; i++) {
-            var position = (i / 6) * containerWidth;
-            var time = (i / 6) * duration;
+        for (let i = 0; i <= 6; i++) {
+            const pos = (i / 6) * width;
+            const time = (i / 6) * duration;
 
-            var tick = document.createElement('div');
+            const tick = document.createElement('div');
             tick.className = 'axis-tick';
-            tick.style.left = (16 + position) + 'px';
+            tick.style.left = `${16 + pos}px`;
 
-            var label = document.createElement('div');
+            const label = document.createElement('div');
             label.className = 'axis-label';
-            label.style.left = (16 + position) + 'px';
+            label.style.left = `${16 + pos}px`;
             label.textContent = formatDuration(time);
 
-            elements.timelineAxis.appendChild(tick);
-            elements.timelineAxis.appendChild(label);
+            el.timelineAxis.appendChild(tick);
+            el.timelineAxis.appendChild(label);
         }
+    }
+
+    function findSpanById(spans, spanId) {
+        for (const span of spans) {
+            if (span.spanId === spanId) return span;
+            const found = findSpanById(span.children, spanId);
+            if (found) return found;
+        }
+        return null;
     }
 
     function renderTimeline() {
-        if (!state.selectedTrace) {
-            elements.timeline.innerHTML = '<div class="empty-state"><div>📈 No trace selected</div><small>Click a trace to view timeline</small></div>';
+        if (!state.selected) {
+            el.timeline.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="empty-text">No trace selected</div>
+                    <div class="empty-hint">Select a trace to view timeline</div>
+                </div>`;
             return;
         }
 
-        elements.traceTitle.textContent = state.selectedTrace.name;
-        elements.traceSubtitle.textContent = '🔗 ' + state.selectedTrace.spans.length + ' spans • ⏱️ ' +
-            formatDuration(state.selectedTrace.duration) + ' • 📅 ' +
-            formatTime(state.selectedTrace.startTime);
+        el.traceTitle.textContent = state.selected.name;
+        el.traceSubtitle.innerHTML = `
+            <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+                ${state.selected.spans.length} spans
+            </span>
+            <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                ${formatDuration(state.selected.duration)}
+            </span>
+            <span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                ${formatTime(state.selected.startTime)}
+            </span>
+        `;
 
         renderTimelineAxis();
 
-        var flatSpans = flattenSpans(state.selectedTrace.rootSpans);
-        var duration = state.selectedTrace.duration || 1;
-        var startTime = state.selectedTrace.startTime;
+        const flat = flattenSpans(state.selected.rootSpans);
+        const duration = state.selected.duration || 1;
+        const start = state.selected.startTime;
 
-        elements.timeline.innerHTML = flatSpans.map(function (span) {
-            var relativeStart = span.startTime - startTime;
-            var leftPercent = Math.max(0, (relativeStart / duration) * 100);
-            var widthPercent = Math.max(0.2, (span.duration / duration) * 100);
+        el.timeline.innerHTML = flat.map(span => {
+            const relStart = span.startTime - start;
+            const left = Math.max(0, (relStart / duration) * 100);
+            const width = Math.max(0.2, (span.duration / duration) * 100);
 
-            var hasChildren = span.children.length > 0;
-            var toggle = hasChildren ? (span.expanded ? '▾' : '▸') : '●';
-            var depthClass = span.depth <= 8 ? 'depth-' + span.depth : 'depth-default';
+            const hasChildren = span.children.length > 0;
+            const icon = hasChildren ? (span.expanded ? '▾' : '▸') : '●';
+            const depthClass = span.depth <= 9 ? `depth-${span.depth}` : 'depth-default';
+            const durationText = formatDuration(span.duration);
+            const showDuration = width > 8;
 
-            var durationText = formatDuration(span.duration);
-            var showDuration = widthPercent > 8;
+            let html = `
+                <div class="span-row" data-span-id="${span.spanId}">
+                    <div class="span-label" style="padding-left: ${12 + span.depth * 16}px">
+                        <div class="span-expand-area">
+                            <div class="span-main">
+                                <button class="expand-btn" onclick="toggleSpan(event, '${span.spanId}')"
+                                        ${!hasChildren ? 'style="opacity:0.3"' : ''}>${icon}</button>
+                                <div class="span-info">
+                                    <div class="span-name" title="${span.name}" onclick="copySpanLink('${span.spanId}')">${span.name}</div>
+                                    <div class="span-duration-label">${durationText}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span-timeline">
+                        <div class="span-bar ${depthClass}"
+                             style="left: ${left}%; width: ${width}%"
+                             onmouseenter="showTooltip(event, '${span.spanId}')"
+                             onclick="copySpanLink('${span.spanId}')"
+                             ondblclick="copySpan('${span.spanId}')">
+                            ${showDuration ? `<span class="span-duration-text">${durationText}</span>` : ''}
+                        </div>
+                    </div>
+                </div>`;
 
-            return '<div class="span-row" ondblclick="copySpanOnDoubleClick(\'' + span.spanId + '\')">' +
-                '<div class="span-label" style="padding-left: ' + (16 + span.depth * 16) + 'px">' +
-                '<button class="expand-btn" onclick="toggleSpan(event, \'' + span.spanId + '\')" ' +
-                (!hasChildren ? 'style="opacity: 0.3"' : '') + '>' + toggle + '</button>' +
-                '<div class="span-info">' +
-                '<div class="span-name" title="' + span.name + '">' + span.name + '</div>' +
-                '<div class="span-duration-label">⏱️ ' + durationText + '</div>' +
-                '</div>' +
-                '</div>' +
-                '<div class="span-timeline">' +
-                '<div class="span-bar ' + depthClass + '" style="left: ' + leftPercent + '%; width: ' + widthPercent + '%;" ' +
-                'onmouseenter="showTooltip(event, \'' + span.spanId + '\')" onmouseleave="hideTooltip()">' +
-                (showDuration ? '<span class="span-duration">' + durationText + '</span>' : '') +
-                '</div>' +
-                '</div>' +
-                '</div>';
+            return html;
         }).join('');
-    }
 
-    function copySpanOnDoubleClick(spanId) {
-        if (!state.selectedTrace) return;
-
-        var span = state.selectedTrace.spans.find(function (s) {
-            return s.spanId === spanId;
-        });
-
-        if (!span) return;
-
-        copySpanData(span);
+        highlightSearchResults();
     }
 
     function toggleSpan(event, spanId) {
         event.stopPropagation();
 
-        function findSpan(spans) {
-            for (var i = 0; i < spans.length; i++) {
-                var span = spans[i];
+        function find(spans) {
+            for (const span of spans) {
                 if (span.spanId === spanId) {
-                    if (span.children.length > 0) {
-                        span.expanded = !span.expanded;
-                    }
+                    if (span.children.length > 0) span.expanded = !span.expanded;
                     return true;
                 }
-                if (findSpan(span.children)) return true;
+                if (find(span.children)) return true;
             }
             return false;
         }
 
-        if (state.selectedTrace) {
-            findSpan(state.selectedTrace.rootSpans);
+        if (state.selected) {
+            find(state.selected.rootSpans);
             renderTimeline();
         }
     }
 
     function toggleExpandAll() {
-        if (!state.selectedTrace) return;
+        if (!state.selected) return;
 
-        state.allExpanded = !state.allExpanded;
-        elements.expandAllBtn.textContent = state.allExpanded ? '⬇️ Collapse All' : '⬆️ Expand All';
+        state.expanded = !state.expanded;
+        el.expandBtn.innerHTML = state.expanded
+            ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <polyline points="6 9 12 15 18 9"></polyline>
+               </svg><span>Collapse</span>`
+            : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <polyline points="18 15 12 9 6 15"></polyline>
+               </svg><span>Expand</span>`;
 
         function setExpanded(spans, expanded) {
-            spans.forEach(function (span) {
+            spans.forEach(span => {
                 if (span.children.length > 0) {
                     span.expanded = expanded;
                     setExpanded(span.children, expanded);
@@ -1455,276 +1866,502 @@
             });
         }
 
-        setExpanded(state.selectedTrace.rootSpans, state.allExpanded);
+        setExpanded(state.selected.rootSpans, state.expanded);
         renderTimeline();
     }
 
-    function showTooltip(event, spanId) {
-        if (!state.selectedTrace) return;
+    let tooltipTimeout = null;
+    let tooltipVisible = false;
+    let currentTooltipTab = 'info';
 
-        var span = state.selectedTrace.spans.find(function (s) {
-            return s.spanId === spanId;
-        });
+    function switchTooltipTab(tab) {
+        currentTooltipTab = tab;
+        document.querySelectorAll('.tooltip-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tooltip-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector(`.tooltip-tab[data-tab="${tab}"]`)?.classList.add('active');
+        document.querySelector(`.tooltip-panel[data-panel="${tab}"]`)?.classList.add('active');
+    }
+
+    function showTooltip(event, spanId) {
+        if (!state.selected) return;
+
+        const span = state.selected.spans.find(s => s.spanId === spanId);
         if (!span) return;
 
-        state.hoveredSpan = span;
-        var relativeStart = span.startTime - state.selectedTrace.startTime;
+        clearTimeout(tooltipTimeout);
+        tooltipVisible = true;
 
-        elements.tooltip.innerHTML =
-            '<div class="tooltip-row"><span class="tooltip-label">📝 Name:</span><span class="tooltip-value">' + span.name + '</span></div>' +
-            '<div class="tooltip-row"><span class="tooltip-label">⏱️ Duration:</span><span class="tooltip-value">' + formatDuration(span.duration) + '</span></div>' +
-            '<div class="tooltip-row"><span class="tooltip-label">🚀 Start:</span><span class="tooltip-value">+' + formatDuration(relativeStart) + '</span></div>' +
-            '<div class="tooltip-row"><span class="tooltip-label">🏢 Service:</span><span class="tooltip-value">' + span.service + '</span></div>' +
-            '<div class="tooltip-row"><span class="tooltip-label">🔗 Span:</span><span class="tooltip-value">' + span.spanId.substring(0, 16) + '...</span></div>' +
-            '<div style="margin-top: 8px; font-size: 11px; opacity: 0.8;">💡 Double-click to copy</div>';
+        const relStart = span.startTime - state.selected.startTime;
+        const attrs = Object.entries(span.attributes);
+        const hasAttrs = attrs.length > 0;
 
-        var left = event.pageX + 10;
-        var top = event.pageY + 10;
+        let html = `
+            <div class="tooltip-tabs">
+                <button class="tooltip-tab ${currentTooltipTab === 'info' ? 'active' : ''}" data-tab="info" onclick="switchTooltipTab('info')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Info
+                </button>
+                ${hasAttrs ? `<button class="tooltip-tab ${currentTooltipTab === 'attrs' ? 'active' : ''}" data-tab="attrs" onclick="switchTooltipTab('attrs')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                    Attributes (${attrs.length})
+                </button>` : ''}
+                <button class="tooltip-close" onclick="hideTooltip()" style="margin-left: auto;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="tooltip-content">
+                <div class="tooltip-panel ${currentTooltipTab === 'info' ? 'active' : ''}" data-panel="info">
+                    <div class="tooltip-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        <span class="tooltip-label">Name:</span><span class="tooltip-value">${span.name}</span>
+                    </div>
+                    <div class="tooltip-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span class="tooltip-label">Duration:</span><span class="tooltip-value">${formatDuration(span.duration)}</span>
+                    </div>
+                    <div class="tooltip-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                            <polyline points="9 11 12 14 22 4"></polyline>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                        <span class="tooltip-label">Start:</span><span class="tooltip-value">+${formatDuration(relStart)}</span>
+                    </div>
+                    <div class="tooltip-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="tooltip-label">Service:</span><span class="tooltip-value">${span.service}</span>
+                    </div>
+                    <div class="tooltip-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        <span class="tooltip-label">Span ID:</span><span class="tooltip-value">${span.spanId}</span>
+                    </div>
+                    <div class="tooltip-hint">Click span name to copy link • ESC or click outside to close</div>
+                </div>`;
 
-        elements.tooltip.style.left = left + 'px';
-        elements.tooltip.style.top = top + 'px';
-        elements.tooltip.classList.remove('hidden');
+        if (hasAttrs) {
+            html += `<div class="tooltip-panel ${currentTooltipTab === 'attrs' ? 'active' : ''}" data-panel="attrs">`;
+            attrs.forEach(([key, value]) => {
+                const valueStr = String(value);
+                const attrId = `attr-${Math.random().toString(36).substr(2, 9)}`;
+                html += `<div class="attr-item">
+                    <div class="attr-item-content">
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">${key}:</span>
+                            <span class="tooltip-value" id="${attrId}" data-key="${key.replace(/"/g, '&quot;')}">${valueStr}</span>
+                        </div>
+                    </div>
+                    <button class="attr-copy-btn" data-attr-id="${attrId}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>`;
+            });
+            html += `</div>`;
+        }
+
+        html += `</div>`;
+
+        el.tooltip.innerHTML = html;
+
+        const x = Math.min(event.pageX + 12, window.innerWidth - 620);
+        const y = Math.min(event.pageY + 12, window.innerHeight - 300);
+
+        el.tooltip.style.left = `${x}px`;
+        el.tooltip.style.top = `${y}px`;
+        el.tooltip.classList.remove('hidden');
+
+        // Add event listeners to copy buttons
+        setTimeout(() => {
+            document.querySelectorAll('.attr-copy-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const attrId = this.getAttribute('data-attr-id');
+                    const attrEl = document.getElementById(attrId);
+                    if (attrEl) {
+                        const key = attrEl.getAttribute('data-key');
+                        const value = attrEl.textContent;
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(value)
+                                .then(() => notify(`Copied: ${key}`, 'success'))
+                                .catch(() => notify('Failed to copy', 'error'));
+                        } else {
+                            notify('Clipboard not available', 'error');
+                        }
+                    }
+                });
+            });
+        }, 10);
     }
 
     function hideTooltip() {
-        elements.tooltip.classList.add('hidden');
+        tooltipVisible = false;
+        clearTimeout(tooltipTimeout);
+        tooltipTimeout = setTimeout(() => {
+            if (!tooltipVisible) {
+                el.tooltip.classList.add('hidden');
+            }
+        }, 100);
     }
 
-    function copySpanData(span) {
-        if (!span) {
-            if (!state.hoveredSpan) {
-                showNotification('❌ No span data to copy. Hover over a span first.', true);
+    function keepTooltipVisible() {
+        tooltipVisible = true;
+        clearTimeout(tooltipTimeout);
+    }
+
+    window.copyAttrValue = function(key, value) {
+        if (!navigator.clipboard) {
+            notify('Clipboard not available', 'error');
+            return;
+        }
+        navigator.clipboard.writeText(value)
+            .then(() => notify(`Attribute value copied: ${key}`, 'success'))
+            .catch(err => {
+                console.error('Copy failed:', err);
+                notify('Failed to copy attribute', 'error');
+            });
+    };
+
+    // Make tooltip draggable
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let tooltipStartX = 0;
+    let tooltipStartY = 0;
+
+    function makeDraggable() {
+        el.tooltip.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.tooltip-content') || e.target.closest('.tooltip-tab') || e.target.closest('.tooltip-close')) {
                 return;
             }
-            span = state.hoveredSpan;
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            const rect = el.tooltip.getBoundingClientRect();
+            tooltipStartX = rect.left;
+            tooltipStartY = rect.top;
+            el.tooltip.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - dragStartX;
+            const dy = e.clientY - dragStartY;
+            el.tooltip.style.left = `${tooltipStartX + dx}px`;
+            el.tooltip.style.top = `${tooltipStartY + dy}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                el.tooltip.style.cursor = 'move';
+            }
+        });
+    }
+
+    function copySpanLink(spanId) {
+        if (!state.selected) return;
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('trace', state.selected.traceId);
+        url.hash = `span-${spanId}`;
+
+        navigator.clipboard?.writeText(url.toString())
+            .then(() => notify('Span link copied!', 'success'))
+            .catch(() => notify('Failed to copy link', 'error'));
+    }
+
+    function copySpan(spanId) {
+        if (!state.selected) return;
+
+        const span = state.selected.spans.find(s => s.spanId === spanId);
+        if (!span) return;
+
+        const relStart = span.startTime - state.selected.startTime;
+        let text = `Name: ${span.name}\nDuration: ${formatDuration(span.duration)}\nStart: +${formatDuration(relStart)}\nService: ${span.service}\nSpan ID: ${span.spanId}\nTrace ID: ${span.traceId}`;
+
+        if (Object.keys(span.attributes).length > 0) {
+            text += '\n\nAttributes:\n' + Object.entries(span.attributes)
+                .map(([k, v]) => `  ${k}: ${v}`)
+                .join('\n');
         }
 
-        var relativeStart = span.startTime - state.selectedTrace.startTime;
-        var text = '📝 Name: ' + span.name +
-            '\n⏱️ Duration: ' + formatDuration(span.duration) +
-            '\n🚀 Start: +' + formatDuration(relativeStart) +
-            '\n🏢 Service: ' + span.service +
-            '\n🔗 Span ID: ' + span.spanId +
-            '\n📊 Trace ID: ' + span.traceId;
+        navigator.clipboard?.writeText(text)
+            .then(() => notify(`Copied span info`, 'success'))
+            .catch(() => notify('Failed to copy', 'error'));
+    }
 
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(function () {
-                showNotification('📋 Span "' + span.spanId.substring(0, 8) + '..." copied to clipboard!');
-            }).catch(function () {
-                showNotification('❌ Failed to copy to clipboard', true);
-            });
+    function shareTrace() {
+        if (!state.selected) {
+            notify('Select a trace first', 'error');
+            return;
+        }
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('trace', state.selected.traceId);
+
+        navigator.clipboard?.writeText(url.toString())
+            .then(() => notify('Shareable link copied!', 'success'))
+            .catch(() => notify('Failed to copy link', 'error'));
+    }
+
+    function updateURL(spanId = null) {
+        const url = new URL(window.location.href);
+        if (state.selected) {
+            url.searchParams.set('trace', state.selected.traceId);
+            if (spanId) {
+                url.hash = `span-${spanId}`;
+            } else {
+                url.hash = '';
+            }
         } else {
-            showNotification('❌ Clipboard not supported', true);
+            url.searchParams.delete('trace');
+            url.hash = '';
         }
+        window.history.replaceState({}, '', url.toString());
     }
 
     function clearAll() {
         state.traces = [];
-        state.selectedTrace = null;
-        state.hoveredSpan = null;
-        state.isProcessing = false;
-        state.demoLoaded = false;
-
-        elements.urlInput.value = '';
-        elements.searchInput.value = '';
-
-        updateProgressBar(-1);
+        state.selected = null;
+        state.expanded = true;
+        state.searchResults = [];
+        el.urlInput.value = '';
+        el.search.value = '';
+        el.searchInfo.textContent = '';
+        el.searchPrev.disabled = true;
+        el.searchNext.disabled = true;
+        updateURL();
         updateStats();
-        updateDemoButtonState();
         renderTraceList();
-
-        elements.timeline.innerHTML = '<div class="empty-state"><div>📈 No trace selected</div><small>Click a trace to view timeline</small></div>';
-        elements.traceTitle.textContent = 'Select a trace';
-        elements.traceSubtitle.textContent = '';
-        elements.expandAllBtn.textContent = '⬇️ Collapse All';
-        state.allExpanded = true;
-
-        showNotification('🧹 All traces cleared');
+        el.timeline.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">📈</div>
+                <div class="empty-text">No trace selected</div>
+                <div class="empty-hint">Select a trace to view timeline</div>
+            </div>`;
+        el.traceTitle.textContent = 'Select a trace';
+        el.traceSubtitle.textContent = '';
+        notify('All traces cleared', 'success');
     }
 
     function updateStats() {
-        var totalSpans = state.traces.reduce(function (sum, trace) {
-            return sum + trace.spans.length;
-        }, 0);
-        elements.traceCount.textContent = state.traces.length;
-        elements.spanCount.textContent = totalSpans;
-    }
-
-    function autoSelectFirstTrace() {
-        if (state.traces.length > 0 && !state.selectedTrace) {
-            state.selectedTrace = state.traces[0];
-            renderTimeline();
-        }
+        const totalSpans = state.traces.reduce((sum, t) => sum + t.spans.length, 0);
+        el.traceCount.textContent = state.traces.length;
+        el.spanCount.textContent = totalSpans;
     }
 
     function loadFromUrl(url) {
-        var targetUrl = url || elements.urlInput.value.trim();
-        if (!targetUrl) {
-            showNotification('❌ Please enter a URL', true);
-            return;
+        const target = url || el.urlInput.value.trim();
+        if (!target) {
+            notify('Please enter a URL', 'error');
+            return Promise.reject();
         }
 
-        var fetchUrl = targetUrl;
-        if (targetUrl.indexOf('gist.github.com') !== -1) {
-            var match = targetUrl.match(/gist\.github\.com\/(?:[\w-]+\/)?([a-f0-9]+)/);
-            if (match) {
-                fetchUrl = 'https://gist.githubusercontent.com/' + match[1] + '/raw/';
+        const isDemo = url === DEMO_URL;
+
+        // Check if demo already loaded
+        if (isDemo) {
+            const hasDemoTraces = state.traces.some(t => t.source === 'Demo');
+            if (hasDemoTraces) {
+                notify('Demo already loaded', 'error');
+                return Promise.resolve();
             }
         }
 
-        setLoadingState(true);
-        fetch(fetchUrl)
-            .then(function (response) {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
+        let fetchUrl = target;
+        const gistMatch = target.match(/gist\.github\.com\/(?:[\w-]+\/)?([a-f0-9]+)/);
+        if (gistMatch) {
+            fetchUrl = `https://gist.githubusercontent.com/${gistMatch[1]}/raw/`;
+        }
+
+        setLoading(true);
+        return fetch(fetchUrl)
+            .then(r => {
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                return r.text();
             })
-            .then(function (text) {
-                var newTraces = parseJSONL(text, url ? 'Demo' : 'URL: ' + targetUrl);
+            .then(text => {
+                const newTraces = parseJSONL(text, isDemo ? 'Demo' : 'URL');
                 if (newTraces.length === 0) {
-                    showNotification('❌ No valid traces found in the URL', true);
+                    notify('No valid traces found', 'error');
                     return;
                 }
 
                 state.traces = state.traces.concat(newTraces);
-                state.traces.sort(function (a, b) {
-                    return b.endTime - a.endTime;
-                });
+                state.traces.sort((a, b) => b.endTime - a.endTime);
 
-                // Always auto-select the first NEW trace from URL/demo
-                if (newTraces.length > 0) {
-                    state.selectedTrace = newTraces[0];
+                if (newTraces.length > 0 && !state.selected) {
+                    state.selected = newTraces[0];
+                    updateURL();
                     renderTimeline();
-                } else {
-                    // Fallback to ensure we have a selected trace
-                    autoSelectFirstTrace();
-                }
-
-                // Update demo state if it was a demo load
-                if (url) {
-                    state.demoLoaded = true;
-                    updateDemoButtonState();
                 }
 
                 updateStats();
                 renderTraceList();
-                showNotification('✅ Loaded ' + newTraces.length + ' traces' + (url ? ' from demo' : ' from URL'));
+                notify(`Loaded ${newTraces.length} trace${newTraces.length > 1 ? 's' : ''}`, 'success');
             })
-            .catch(function (error) {
-                showNotification('❌ Failed to load' + (url ? ' demo' : ' from URL') + ': ' + error.message, true);
+            .catch(err => {
+                notify(`Failed to load: ${err.message}`, 'error');
+                throw err;
             })
-            .finally(function () {
-                setLoadingState(false);
-            });
+            .finally(() => setLoading(false));
     }
 
-    function loadDemo() {
-        if (state.demoLoaded) {
-            showNotification('✅ Demo already loaded!');
-            return;
-        }
-        loadFromUrl(DEMO_URL);
-    }
+    el.fileInput.addEventListener('change', e => {
+        const files = Array.from(e.target.files);
+        if (files.length === 0 || state.processing) return;
 
-    // Event listeners
-    elements.fileInput.addEventListener('change', function (e) {
-        var files = Array.from(e.target.files);
-        if (files.length === 0 || state.isProcessing) return;
+        setLoading(true);
+        let newTraces = [];
+        let processed = 0;
 
-        setLoadingState(true);
-        updateProgressBar(0, 'Starting...');
-
-        var processed = 0;
-        var newTraces = [];
-        var totalFiles = files.length;
-
-        files.forEach(function (file, index) {
-            var reader = new FileReader();
-
-            reader.onprogress = function (e) {
-                if (e.lengthComputable) {
-                    var fileProgress = (e.loaded / e.total) * 100;
-                    var overallProgress = ((processed * 100) + fileProgress) / totalFiles;
-                    updateProgressBar(overallProgress, 'Processing ' + file.name + '...');
-                }
-            };
-
-            reader.onload = function (e) {
-                var traces = parseJSONL(e.target.result, file.name);
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const traces = parseJSONL(e.target.result, file.name);
                 newTraces = newTraces.concat(traces);
                 processed++;
 
-                var progress = (processed / totalFiles) * 100;
-                updateProgressBar(progress, processed === totalFiles ? 'Completing...' : 'Processing file ' + (processed + 1) + '...');
-
-                if (processed === totalFiles) {
-                    setTimeout(function () {
+                if (processed === files.length) {
+                    setTimeout(() => {
                         state.traces = state.traces.concat(newTraces);
-                        state.traces.sort(function (a, b) {
-                            return b.endTime - a.endTime;
-                        });
+                        state.traces.sort((a, b) => b.endTime - a.endTime);
 
-                        // Always auto-select the first NEW trace from the uploaded files
-                        if (newTraces.length > 0) {
-                            state.selectedTrace = newTraces[0];
+                        if (newTraces.length > 0 && !state.selected) {
+                            state.selected = newTraces[0];
+                            updateURL();
                             renderTimeline();
                         }
 
                         updateStats();
                         renderTraceList();
-                        showNotification('✅ Loaded ' + newTraces.length + ' traces from ' + files.length + ' files');
-                        updateProgressBar(-1);
-                        setLoadingState(false);
-                    }, 200);
+                        notify(`Loaded ${newTraces.length} trace${newTraces.length > 1 ? 's' : ''} from ${files.length} file${files.length > 1 ? 's' : ''}`, 'success');
+                        setLoading(false);
+                    }, 100);
                 }
             };
-
             reader.readAsText(file);
         });
     });
 
-    // Reset file input on click to allow re-uploading same files
-    elements.uploadBtn.addEventListener('click', function () {
-        elements.fileInput.value = '';
-    });
-
-    elements.searchInput.addEventListener('input', renderTraceList);
-    elements.expandAllBtn.addEventListener('click', toggleExpandAll);
-    elements.clearAllBtn.addEventListener('click', clearAll);
-    elements.loadUrlBtn.addEventListener('click', function () {
-        loadFromUrl();
-    });
-    elements.demoBtn.addEventListener('click', loadDemo);
-
-    elements.urlInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            loadFromUrl();
+    el.search.addEventListener('input', () => {
+        const term = el.search.value.toLowerCase().trim();
+        if (term) {
+            const results = performSearch(term);
+            if (results.length > 0) {
+                const firstResult = results[0];
+                if (firstResult.trace.traceId !== state.selected?.traceId) {
+                    selectTrace(firstResult.trace.traceId);
+                    if (firstResult.span) {
+                        setTimeout(() => scrollToSpan(firstResult.span.spanId, false, true), 300);
+                    }
+                } else if (firstResult.span) {
+                    scrollToSpan(firstResult.span.spanId, false, true);
+                }
+            }
+        } else {
+            performSearch('');
+        }
+        renderTraceList();
+        if (state.selected) {
+            renderTimeline();
         }
     });
 
-    // Keyboard shortcuts
-    document.addEventListener('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'c' && state.hoveredSpan) {
-            e.preventDefault();
-            copySpanData();
+    el.searchPrev.addEventListener('click', () => navigateSearch(-1));
+    el.searchNext.addEventListener('click', () => navigateSearch(1));
+
+    el.expandBtn.addEventListener('click', toggleExpandAll);
+    el.shareBtn.addEventListener('click', shareTrace);
+    el.clearBtn.addEventListener('click', clearAll);
+    el.loadUrlBtn.addEventListener('click', () => loadFromUrl());
+    el.demoBtn.addEventListener('click', () => loadFromUrl(DEMO_URL));
+    el.urlInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') loadFromUrl();
+    });
+
+    window.addEventListener('resize', () => {
+        if (state.selected) setTimeout(renderTimelineAxis, 100);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hideTooltip();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!el.tooltip.classList.contains('hidden') &&
+            !el.tooltip.contains(e.target) &&
+            !e.target.closest('.span-bar')) {
+            hideTooltip();
         }
     });
 
-    // Check for URL parameter on load
-    var urlParams = new URLSearchParams(window.location.search);
-    var urlParam = urlParams.get('url');
+    el.tooltip.addEventListener('mouseenter', keepTooltipVisible);
+    el.tooltip.addEventListener('mouseleave', hideTooltip);
+
+    // Handle deep linking
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlParam = urlParams.get('url');
+    const traceParam = urlParams.get('trace');
+    const spanHash = window.location.hash.match(/^#span-(.+)$/);
+    const spanParam = spanHash ? spanHash[1] : null;
+
     if (urlParam) {
-        elements.urlInput.value = urlParam;
-        loadFromUrl();
+        el.urlInput.value = urlParam;
+        loadFromUrl().then(() => {
+            if (traceParam && state.traces.length > 0) {
+                const trace = state.traces.find(t => t.traceId === traceParam);
+                if (trace) {
+                    selectTrace(trace.traceId);
+                    if (spanParam) {
+                        setTimeout(() => {
+                            scrollToSpan(spanParam, false, true);
+                        }, 300);
+                    }
+                }
+            }
+        });
+    } else if (traceParam) {
+        loadFromUrl(DEMO_URL).then(() => {
+            const trace = state.traces.find(t => t.traceId === traceParam);
+            if (trace) {
+                selectTrace(trace.traceId);
+                if (spanParam) {
+                    setTimeout(() => {
+                        scrollToSpan(spanParam, false, true);
+                    }, 300);
+                }
+            }
+        });
     }
 
-    window.addEventListener('resize', function () {
-        if (state.selectedTrace) {
-            setTimeout(renderTimelineAxis, 100);
-        }
-    });
-
+    initTheme();
     updateStats();
-    updateDemoButtonState();
+    makeDraggable();
 </script>
 </body>
 </html>
