@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>hn/search — Hacker News search</title>
+    <link rel="icon"
+          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1E24'/%3E%3Cpath d='M27 12a15 15 0 1 0 10.6 25.6L49 49' fill='none' stroke='%2372C69A' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
           rel="stylesheet">
@@ -15,6 +17,8 @@
             --muted: #676C78;
             --line: #E2E4E8;
             --accent: #3654D9;
+            --run-accent: #72C69A;
+            --run-accent-hover: #8BD7AA;
             --error-bg: #FDECEA;
             --error-line: #F3B9AC;
             --error-text: #92341C;
@@ -40,12 +44,45 @@
             padding: 40px 20px 80px;
         }
 
-        .brand {
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .brand, .hn-home {
             font-family: var(--mono);
             font-size: 13px;
             letter-spacing: .04em;
             color: var(--muted);
-            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .brand-icon {
+            width: 17px;
+            height: 17px;
+            fill: var(--run-accent);
+            flex: none;
+        }
+
+        .brand:hover, .hn-home:hover {
+            color: var(--ink);
+        }
+
+        .hn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            letter-spacing: 0;
         }
 
         .brand b {
@@ -66,8 +103,20 @@
             gap: 10px 6px;
         }
 
+        .bar-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            min-width: 0;
+            white-space: nowrap;
+        }
+
+        .terms-option {
+            flex: 1 1 300px;
+        }
+
         .bar .sym {
-            color: var(--accent);
+            color: var(--run-accent);
         }
 
         .bar .flag {
@@ -84,6 +133,7 @@
             padding: 3px 2px;
             width: 280px;
             max-width: 60vw;
+            min-width: 0;
         }
 
         .bar input[type=text]:focus {
@@ -111,17 +161,27 @@
             font-family: var(--mono);
             font-size: 13px;
             font-weight: 500;
-            background: var(--accent);
-            color: #fff;
+            background: var(--run-accent);
+            color: var(--ink);
             border: none;
             border-radius: 2px;
             padding: 6px 12px;
             cursor: pointer;
             margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .bar button:hover {
-            filter: brightness(1.1);
+            background: var(--run-accent-hover);
+        }
+
+        .run-icon {
+            width: 13px;
+            height: 13px;
+            fill: currentColor;
         }
 
         .bar button:focus-visible {
@@ -435,13 +495,52 @@
             color: var(--muted);
         }
 
-        @media (max-width: 520px) {
+        @media (max-width: 700px) {
+            .wrap {
+                padding: 28px 16px 56px;
+            }
+
+            form.bar {
+                align-items: stretch;
+            }
+
+            .terms-option {
+                flex-basis: 100%;
+            }
+
             .bar input[type=text] {
-                width: 100%;
+                flex: 1;
+                width: auto;
+                max-width: none;
             }
 
             .bar button {
                 margin-left: 0;
+            }
+        }
+
+        @media (max-width: 420px) {
+            form.bar {
+                gap: 8px 4px;
+                padding: 12px;
+            }
+
+            .bar-option:not(.terms-option) {
+                flex: 1 1 100%;
+            }
+
+            .bar select {
+                min-height: 32px;
+                max-width: 100%;
+            }
+
+            .bar button {
+                flex: 1 1 100%;
+                min-height: 34px;
+            }
+
+            .site-header {
+                align-items: flex-start;
             }
         }
     </style>
@@ -449,38 +548,53 @@
 <body>
 <div class="wrap">
 
-    <div class="brand"><b>hn</b>/search</div>
+    <header class="site-header">
+        <a class="brand" href="./" aria-label="hn/search home">
+            <svg class="brand-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                <path d="M8.2 2.8a5.4 5.4 0 1 0 3.8 9.2l3.5 3.5 1.1-1.1-3.5-3.5a5.4 5.4 0 0 0-4.9-8.1Zm0 1.6a3.8 3.8 0 1 1 0 7.6 3.8 3.8 0 0 1 0-7.6Z"/>
+            </svg>
+            <span><b>hn</b>/search</span>
+        </a>
+        <a class="hn-home" href="https://news.ycombinator.com/" target="_blank" rel="noopener">Hacker News <span
+                aria-hidden="true">↗</span></a>
+    </header>
 
     <form class="bar" id="bar">
         <span class="sym">$</span>
-        <span class="flag">--terms=</span><input type="text" id="terms" value="java, jvm, openjdk"
-                                                 aria-label="search terms, comma separated">
-        <span class="flag">--type=</span><select id="type" aria-label="result type">
+        <span class="bar-option terms-option"><span class="flag">--terms=</span><input type="text" id="terms"
+                                                                                       value="java, jvm, openjdk"
+                                                                                       aria-label="search terms, comma separated"></span>
+        <span class="bar-option"><span class="flag">--type=</span><select id="type" aria-label="result type">
         <option value="all">all</option>
         <option value="story" selected>stories</option>
         <option value="comment">comments</option>
         <option value="job">jobs</option>
         <option value="poll">polls</option>
-    </select>
-        <span class="flag">--since=</span><select id="since" aria-label="date range">
+    </select></span>
+        <span class="bar-option"><span class="flag">--since=</span><select id="since" aria-label="date range">
         <option value="7">7d</option>
         <option value="30" selected>30d</option>
         <option value="90">90d</option>
         <option value="365">365d</option>
         <option value="0">all</option>
-    </select>
-        <span class="flag">--sort=</span><select id="sortby" aria-label="sort by">
+    </select></span>
+        <span class="bar-option"><span class="flag">--sort=</span><select id="sortby" aria-label="sort by">
         <option value="points" selected>points</option>
         <option value="comments">comments</option>
         <option value="date">recent</option>
-    </select>
-        <button type="submit" id="run">run ⏎</button>
+    </select></span>
+        <button type="submit" id="run"><span>run</span>
+            <svg class="run-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M5.25 3.25a.75.75 0 0 0-1.14.64v8.22a.75.75 0 0 0 1.14.64l6.1-4.11a.78.78 0 0 0 0-1.28l-6.1-4.11Z"/>
+            </svg>
+        </button>
     </form>
 
     <div class="presets" id="presets">
         <span class="label">presets:</span>
     </div>
-    <div class="hint">comma-separate multiple terms · "all" type mixes in comments, jobs and polls, not just stories
+    <div class="hint">comma-separate multiple terms · "all" type mixes in comments, jobs and polls, not just stories ·
+        URL is shareable
     </div>
 
     <div class="legend" id="legend"></div>
@@ -504,6 +618,9 @@
     const TERM_COLORS = {java: '#B5502C', jvm: '#2F7A63', openjdk: '#3B5A8C', kotlin: '#6E4FB8'};
     const FALLBACK_PALETTE = ['#9C7A1E', '#B23A5E', '#3C7A9C', '#6B8C3A'];
     const PRESETS = ['java', 'jvm', 'openjdk', 'kotlin', 'java, jvm, openjdk', 'java, jvm, openjdk, kotlin'];
+    const VALID_TYPES = new Set(['all', 'story', 'comment', 'job', 'poll']);
+    const VALID_RANGES = new Set(['7', '30', '90', '365', '0']);
+    const VALID_SORTS = new Set(['points', 'comments', 'date']);
 
     const $ = (id) => document.getElementById(id);
     const bar = $('bar'), termsInput = $('terms'), typeSelect = $('type'), sinceSelect = $('since'),
@@ -515,8 +632,15 @@
     const activeTerms = new Set();
     let hits = new Map();     // objectID -> normalized hit
     let requestSeq = 0;       // guards against stale responses when re-run overlaps
+    let activeController = null;
+    const commentCache = new Map();
 
-    const escapeHtml = (str) => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const escapeHtml = (str) => String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     const htmlToText = (html) => {
         const d = document.createElement('div');
         d.innerHTML = html || '';
@@ -536,6 +660,62 @@
         }
     };
     const parseTerms = (raw) => [...new Set(raw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean))];
+    const rowId = (id) => `item-${String(id).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+    const safeUrl = (value, fallback) => {
+        try {
+            const url = new URL(value || fallback, location.href);
+            return ['http:', 'https:'].includes(url.protocol) ? url.href : fallback;
+        } catch {
+            return fallback;
+        }
+    };
+
+    function readUrlState() {
+        const params = new URLSearchParams(location.search);
+        const type = params.get('type');
+        const since = params.get('since');
+        const sort = params.get('sort');
+        return {
+            terms: params.get('terms') ?? termsInput.value,
+            type: VALID_TYPES.has(type) ? type : typeSelect.value,
+            since: VALID_RANGES.has(since) ? since : sinceSelect.value,
+            sort: VALID_SORTS.has(sort) ? sort : sortSelect.value,
+        };
+    }
+
+    function syncUrl({push = false, hash = location.hash} = {}) {
+        const url = new URL(location.href);
+        url.search = new URLSearchParams({
+            terms: parseTerms(termsInput.value).join(', '),
+            type: typeSelect.value,
+            since: sinceSelect.value,
+            sort: sortSelect.value,
+        }).toString();
+        url.hash = hash || '';
+        history[push ? 'pushState' : 'replaceState']({}, '', url);
+    }
+
+    function applyUrlState() {
+        const state = readUrlState();
+        termsInput.value = state.terms;
+        typeSelect.value = state.type;
+        sinceSelect.value = state.since;
+        sortSelect.value = state.sort;
+    }
+
+    function focusHashResult() {
+        let id;
+        try {
+            id = decodeURIComponent(location.hash.slice(1));
+        } catch {
+            return;
+        }
+        if (!id.startsWith('item-')) return;
+        const result = document.getElementById(id);
+        if (!result) return;
+        result.open = true;
+        result.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
 
     function colorForTerm(key, seenSoFar) {
         if (TERM_COLORS[key]) return TERM_COLORS[key];
@@ -551,7 +731,7 @@
             b.dataset.preset = preset;
             b.addEventListener('click', () => {
                 termsInput.value = preset;
-                loadAll();
+                loadAll({push: true});
             });
             presetsEl.appendChild(b);
         });
@@ -579,15 +759,17 @@
         });
     }
 
-    const tagsParam = (type) => (type === 'all' ? '' : `&tags=${type}`);
-
-    async function fetchTerm(term, type, sinceTs) {
+    async function fetchTerm(term, type, sinceTs, signal) {
         // queryType=prefixNone turns off Algolia's default prefix matching (which
         // treats "java" as a prefix of "javascript") so results match HN's own
         // prefix=false behavior instead of flooding with unrelated JS stories.
-        let url = `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(term)}${tagsParam(type)}&queryType=prefixNone&hitsPerPage=100`;
-        if (sinceTs) url += `&numericFilters=created_at_i%3E${sinceTs}`;
-        const res = await fetch(url);
+        const url = new URL('https://hn.algolia.com/api/v1/search');
+        url.searchParams.set('query', term);
+        url.searchParams.set('queryType', 'prefixNone');
+        url.searchParams.set('hitsPerPage', '100');
+        if (type !== 'all') url.searchParams.set('tags', type);
+        if (sinceTs) url.searchParams.set('numericFilters', `created_at_i>${sinceTs}`);
+        const res = await fetch(url, {signal});
         if (!res.ok) throw new Error(`${res.status}`);
         return (await res.json()).hits;
     }
@@ -608,16 +790,21 @@
         };
     }
 
-    async function loadAll() {
+    async function loadAll({push = false, updateUrl = true, clearHash = true} = {}) {
         const seq = ++requestSeq;
+        activeController?.abort();
+        const controller = new AbortController();
+        activeController = controller;
         const terms = parseTerms(termsInput.value);
         banner.classList.remove('show');
         markActivePreset();
 
         if (terms.length === 0) {
+            runBtn.disabled = false;
             statsEl.textContent = 'enter at least one term.';
             return;
         }
+        if (updateUrl) syncUrl({push, hash: clearHash ? '' : location.hash});
 
         termMeta = [];
         terms.forEach(key => termMeta.push({key, color: colorForTerm(key, terms.slice(0, terms.indexOf(key)))}));
@@ -634,8 +821,9 @@
         const days = parseInt(sinceSelect.value, 10);
         const sinceTs = days > 0 ? Math.floor(Date.now() / 1000) - days * 86400 : null;
 
-        const outcomes = await Promise.allSettled(terms.map(t => fetchTerm(t, type, sinceTs)));
+        const outcomes = await Promise.allSettled(terms.map(t => fetchTerm(t, type, sinceTs, controller.signal)));
         if (seq !== requestSeq) return; // a newer search started before this one finished
+        activeController = null;
 
         const failed = [];
         outcomes.forEach((outcome, i) => {
@@ -686,7 +874,10 @@
             listEl.innerHTML = `<p style="font-family:var(--mono);font-size:13px;color:var(--muted);padding:20px 4px;">${msg}</p>`;
             return;
         }
-        rows.forEach(s => listEl.appendChild(buildRow(s)));
+        const fragment = document.createDocumentFragment();
+        rows.forEach(s => fragment.appendChild(buildRow(s)));
+        listEl.appendChild(fragment);
+        focusHashResult();
     }
 
     const dotColorFor = (s) => termMeta.find(t => s.matched.has(t.key))?.color || '#999';
@@ -694,25 +885,32 @@
     function buildRow(s) {
         const det = document.createElement('details');
         det.className = 'row';
-        const hnUrl = `https://news.ycombinator.com/item?id=${s.id}`;
-        const userUrl = `https://news.ycombinator.com/user?id=${encodeURIComponent(s.author)}`;
+        det.id = rowId(s.id);
+        const hnUrl = new URL('https://news.ycombinator.com/item');
+        hnUrl.searchParams.set('id', String(s.id));
+        const userUrl = new URL('https://news.ycombinator.com/user');
+        userUrl.searchParams.set('id', s.author);
+        const permalink = new URL(location.href);
+        permalink.hash = det.id;
+        const resultUrl = escapeHtml(permalink.href);
 
         let titleHtml, snippetHtml = '';
         if (s.isComment) {
             const text = htmlToText(s.commentText);
-            titleHtml = `<span class="kind">comment on</span> <a class="storylink" href="${hnUrl}" target="_blank" rel="noopener">${escapeHtml(s.title || 'untitled thread')}</a>`;
+            titleHtml = `<span class="kind">comment on</span> <a class="storylink" href="${escapeHtml(hnUrl.href)}" target="_blank" rel="noopener">${escapeHtml(s.title || 'untitled thread')}</a>`;
             snippetHtml = `<div class="snippet">${escapeHtml(text.length > 220 ? text.slice(0, 220) + '…' : text)}</div>`;
         } else {
             const dom = domainOf(s.url);
-            titleHtml = `<a class="storylink" href="${s.url || hnUrl}" target="_blank" rel="noopener">${escapeHtml(s.title || 'untitled')}</a>` +
+            titleHtml = `<a class="storylink" href="${escapeHtml(safeUrl(s.url, hnUrl))}" target="_blank" rel="noopener">${escapeHtml(s.title || 'untitled')}</a>` +
                 (dom ? ` <span class="domain">(${escapeHtml(dom)})</span>` : '');
         }
 
         const metaParts = [];
-        if (s.points !== null) metaParts.push(`<a href="${hnUrl}" target="_blank" rel="noopener">${s.points} points</a>`);
-        metaParts.push(`<a href="${userUrl}" target="_blank" rel="noopener">${escapeHtml(s.author)}</a>`);
+        if (s.points !== null) metaParts.push(`<a href="${escapeHtml(hnUrl.href)}" target="_blank" rel="noopener">${s.points} points</a>`);
+        metaParts.push(`<a href="${escapeHtml(userUrl.href)}" target="_blank" rel="noopener">${escapeHtml(s.author)}</a>`);
         metaParts.push(`${relTime(s.created_at_i)} ago`);
-        if (s.numComments !== null) metaParts.push(`<a href="${hnUrl}" target="_blank" rel="noopener">${s.numComments} comments</a>`);
+        if (s.numComments !== null) metaParts.push(`<a href="${escapeHtml(hnUrl.href)}" target="_blank" rel="noopener">${s.numComments} comments</a>`);
+        metaParts.push(`<a class="permalink" href="${resultUrl}" aria-label="link to this result">#</a>`);
 
         det.innerHTML = `
     <summary>
@@ -728,6 +926,7 @@
   `;
 
         const commentsBox = det.querySelector('.comments');
+        det.querySelector('.permalink').addEventListener('click', (event) => event.stopPropagation());
         let loaded = false;
         det.addEventListener('toggle', async () => {
             det.querySelector('.expand-caret').textContent = det.open ? '▾' : '▸';
@@ -735,8 +934,15 @@
             loaded = true;
 
             if (s.isComment) {
-                commentsBox.innerHTML = `<div class="comment"><div class="ctext">${escapeHtml(htmlToText(s.commentText))}</div></div>
-        <a class="viewall" href="${hnUrl}" target="_blank" rel="noopener">view thread on HN →</a>`;
+                const commentHtml = `<div class="comment"><div class="ctext">${escapeHtml(htmlToText(s.commentText))}</div></div>
+        <a class="viewall" href="${escapeHtml(hnUrl.href)}" target="_blank" rel="noopener">view thread on HN →</a>`;
+                commentsBox.innerHTML = commentHtml;
+                return;
+            }
+
+            const cached = commentCache.get(s.id);
+            if (cached) {
+                commentsBox.innerHTML = cached;
                 return;
             }
 
@@ -746,14 +952,16 @@
                 if (!res.ok) throw new Error(`${res.status}`);
                 const data = await res.json();
                 const top = (data.children || []).filter(c => c?.text).slice(0, 3);
-                commentsBox.innerHTML = top.length === 0
+                const commentHtml = top.length === 0
                     ? '<div class="empty">no comments yet.</div>'
                     : top.map(c => {
                     const text = htmlToText(c.text);
                     return `<div class="comment"><div class="cauthor">${escapeHtml(c.author || 'unknown')}</div><div class="ctext">${escapeHtml(text.length > 320 ? text.slice(0, 320) + '…' : text)}</div></div>`;
-                }).join('') + `<a class="viewall" href="${hnUrl}" target="_blank" rel="noopener">view all ${s.numComments ?? ''} comments on HN →</a>`;
+                }).join('') + `<a class="viewall" href="${escapeHtml(hnUrl.href)}" target="_blank" rel="noopener">view all ${s.numComments ?? ''} comments on HN →</a>`;
+                commentCache.set(s.id, commentHtml);
+                commentsBox.innerHTML = commentHtml;
             } catch {
-                commentsBox.innerHTML = `<div class="empty">couldn't load comments. <a href="${hnUrl}" target="_blank" rel="noopener">open on HN</a></div>`;
+                commentsBox.innerHTML = `<div class="empty">couldn't load comments. <a href="${escapeHtml(hnUrl.href)}" target="_blank" rel="noopener">open on HN</a></div>`;
             }
         });
 
@@ -762,12 +970,23 @@
 
     bar.addEventListener('submit', (e) => {
         e.preventDefault();
-        loadAll();
+        loadAll({push: true});
     });
-    sortSelect.addEventListener('change', render);
-    retryBtn.addEventListener('click', loadAll);
+    typeSelect.addEventListener('change', () => loadAll({push: true}));
+    sinceSelect.addEventListener('change', () => loadAll({push: true}));
+    sortSelect.addEventListener('change', () => {
+        syncUrl({push: true});
+        render();
+    });
+    retryBtn.addEventListener('click', () => loadAll({clearHash: false}));
+    window.addEventListener('popstate', () => {
+        applyUrlState();
+        loadAll({updateUrl: false, clearHash: false});
+    });
+    window.addEventListener('hashchange', focusHashResult);
     buildPresets();
-    loadAll();
+    applyUrlState();
+    loadAll({updateUrl: true, clearHash: false});
 </script>
 </body>
 </html>
