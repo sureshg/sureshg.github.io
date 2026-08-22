@@ -1,0 +1,6 @@
+{% component mermaid() %}
+<script src={{ get_url(path="js/mermaid.js" ) }}></script>
+<pre class="mermaid">
+{{ body | safe }}
+</pre>
+{% endcomponent mermaid %}

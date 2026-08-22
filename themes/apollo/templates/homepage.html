@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% component home_page(section: map) %}
+<main>
+    <article>
+        <section class="body">
+            {% if section.title %}
+                {{<post.page_header title={section.title} />}}
+            {% endif %}
+            {{ section.content | safe }}
+        </section>
+    </article>
+</main>
+{% endcomponent home_page %}
+
+{% block main_content %}
+    {{<home_page section={section} />}}
+{% endblock main_content %}

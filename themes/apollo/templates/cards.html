@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+
+{% component cards_posts(pages: array, section: map) %}
+{% set media_height = section.extra?.card_media_height or 200 %}
+{% set columns = section.extra?.cards_columns or 2 %}
+<div class="cards"
+     style="--columns: {{ columns }};
+            --media-height: {{ media_height }}px">
+
+    {#
+            Create reordered indices array for column-balanced layout
+
+            If we have 6 items, they would be inserted into the left column first, which will put
+            the item 4 in the right column. This looks unbalanced. Instead, we want to reorder the items
+            so that they are inserted in a column-balanced way (e.g. 135246 for 6 items in 2 columns).
+        #}
+    {%- set items_per_column = (pages | length / columns) | round(method="ceil") | int -%}
+    {%- for col in range(end=columns | int) -%}
+        {%- for row in range(end=items_per_column) -%}
+            {%- set idx = row * columns + col -%}
+            {%- if idx < pages | length %}
+                {%- set page = pages[idx] -%}
+                <div class="card">
+                    {% if page.extra?.local_image or page.extra?.remote_image or page.extra?.local_video or page.extra?.remote_video %}
+                        <div class="card-media">
+                            {% if page.extra?.local_image %}
+                                {% set path = page.extra.local_image %}
+                                {% if path is not starting_with(pat="/") %}
+                                    {% set path = section.path ~ "/" ~ page.extra.local_image %}
+                                {% endif %}
+                                {% set image = resize_image(path=path, height=media_height, op="fit_height", format="webp") %}
+                                <img class="card-image" alt="{{ page.title }}" src="{{ image.url }}" />
+                            {% elif page.extra?.remote_image %}
+                                <img class="card-image"
+                                     alt="{{ page.title }}"
+                                     src="{{ page.extra.remote_image }}" />
+                            {% elif page.extra?.local_video %}
+                                {% set video_path = page.extra.local_video %}
+                                {% if video_path is not starting_with(pat="/") %}
+                                    {% set video_path = section.path ~ "/" ~ page.extra.local_video %}
+                                {% endif %}
+                                <video class="card-video" controls loop muted>
+                                    <source src="{{ video_path | safe }}" />
+                                </video>
+                            {% elif page.extra?.remote_video %}
+                                <video class="card-video" controls loop muted>
+                                    <source src="{{ page.extra.remote_video | safe }}" />
+                                </video>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="card-content">
+                        <h1 class="card-title">
+                            {% if page.extra?.link_to %}
+                                <a href={{ page.extra.link_to }}>{{ page.title }}</a>
+                            {% elif page.content %}
+                                <a href={{ page.permalink | safe }}>{{ page.title }}</a>
+                            {% else %}
+                                {{ page.title }}
+                            {% endif %}
+                        </h1>
+
+                        {% if page.description %}
+                            <p class="card-tagline">
+                                {{ page.description }}
+                            </p>
+                        {% endif %}
+
+                        {%- set has_card_links = page.extra?.card_links or page.extra?.github or page.extra?.demo -%}
+                        {% if has_card_links or page.extra?.tags %}
+                            <div class="card-footer">
+                                {% if has_card_links %}
+                                    <div class="card-links">
+                                        {% if page.extra?.github %}
+                                            {{<ui.icon_button href={page.extra.github} text="GitHub" icon="github" />}}
+                                        {% endif %}
+                                        {% if page.extra?.demo %}
+                                            {{<ui.icon_button href={page.extra.demo} text="Demo" icon="globe" />}}
+                                        {% endif %}
+                                        {%- for card_link in page.extra?.card_links or [] -%}
+                                            {{<ui.icon_button href={card_link.url} text={card_link.text} icon={card_link.icon or ""} />}}
+                                        {%- endfor -%}
+                                    </div>
+                                {% endif %}
+
+                                {% if page.extra?.tags %}
+                                    <div class="card-tags">
+                                        {%- for tag in page.extra.tags | sort -%}
+                                            {% if loop.index <= 4 %}
+                                                <span class="card-tag">#{{ tag }}</span>
+                                            {% endif %}
+                                        {%- endfor -%}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif -%}
+        {% endfor -%}
+    {% endfor -%}
+</div>
+{% endcomponent cards_posts %}
+
+{% block main_content %}
+    {% if section.extra?.section_path -%}
+        {% set section = get_section(path=section.extra.section_path) %}
+    {% endif -%}
+
+    {% if section.title %}
+        {{<post.page_header title={section.title} />}}
+    {% endif %}
+
+    {% if section.content %}
+        <div class="section-content">
+            {{ section.content | safe }}
+        </div>
+    {% endif %}
+
+    <main>
+        {%- if paginator %}
+            {%- set show_pages = paginator.pages -%}
+        {% else %}
+            {%- set show_pages = section.pages -%}
+        {% endif -%}
+
+        {{<cards_posts pages={show_pages} section={section} />}}
+    </main>
+
+    {% if paginator %}
+        <ul class="pagination">
+            {% if paginator.previous %}
+                <span class="page-item page-prev">
+                    <a href={{ paginator.previous }} class="page-link" aria-label="Previous"><span aria-hidden="true">← Prev</span></a>
+                </span>
+            {% endif %}
+
+            {% if paginator.next %}
+                <span class="page-item page-next">
+                    <a href={{ paginator.next }} class="page-link" aria-label="Next"><span aria-hidden="true">Next →</span></a>
+                </span>
+            {% endif %}
+        </ul>
+    {% endif %}
+{% endblock main_content %}

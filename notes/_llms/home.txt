@@ -1,6 +1,0 @@
-# Home
-
-Tech Notes
-
-Curated technical insights: Notes, links, and commands.
-
