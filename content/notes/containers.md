@@ -406,5 +406,3 @@ ENV NO_PROXY="*.test1.com,*.test2.com,127.0.0.1,localhost"
 * https://github.com/google/cadvisor
 * https://github.com/google/go-containerregistry/tree/main/cmd/crane
 * [CoSign - Container Signing](https://github.com/sigstore/cosign)
-
-> **Warning:** Download the latest version.

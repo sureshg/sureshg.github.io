@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 130" width="220" height="130" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="A blog post being drafted">
+  <style>
+    .bd-line { transform-box: fill-box; transform-origin: left center; animation: bd-grow 3.6s ease-in-out infinite; }
+    .bd-line2 { animation-delay: 0.45s; }
+    .bd-line3 { animation-delay: 0.9s; }
+    .bd-cursor { animation: bd-blink 0.9s steps(1) infinite; }
+    @keyframes bd-grow {
+      0% { transform: scaleX(0); opacity: 0; }
+      12% { opacity: 1; }
+      28%, 82% { transform: scaleX(1); opacity: 1; }
+      100% { transform: scaleX(0); opacity: 0; }
+    }
+    @keyframes bd-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bd-line { animation: none; opacity: 1; transform: scaleX(1); }
+      .bd-cursor { animation: none; opacity: 1; }
+    }
+  </style>
+
+  <rect x="10" y="10" width="200" height="110" rx="14" opacity="0.8"/>
+  <circle cx="34" cy="34" r="4" fill="currentColor" stroke="none" opacity="0.4"/>
+  <circle cx="50" cy="34" r="4" fill="currentColor" stroke="none" opacity="0.4"/>
+  <circle cx="66" cy="34" r="4" fill="currentColor" stroke="none" opacity="0.4"/>
+
+  <rect class="bd-line bd-line1" x="30" y="58" width="160" height="8" rx="4" fill="currentColor" stroke="none"/>
+  <rect class="bd-line bd-line2" x="30" y="78" width="130" height="8" rx="4" fill="currentColor" stroke="none"/>
+  <rect class="bd-line bd-line3" x="30" y="98" width="70" height="8" rx="4" fill="currentColor" stroke="none"/>
+  <rect class="bd-cursor" x="106" y="96" width="3" height="12" fill="currentColor" stroke="none"/>
+</svg>
