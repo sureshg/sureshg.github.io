@@ -1,4 +1,4 @@
-# :herb: My Home Page
+# 🌐 suresh.dev
 
 [![GitHub Workflow Status][gha_badge]][gha_url]
 
@@ -31,10 +31,7 @@ Post content goes here.
 
 ## Deployment
 
-Pushing to `main` triggers [`.github/workflows/deploy.yml`][gha_url], which uses [`getzola/github-pages`][zola_action]
-to build the site and upload it as a pages artifact, then `actions/deploy-pages` publishes it.
+Pushes to `main` are built with Zola and deployed to GitHub Pages by [GitHub Actions][gha_url].
 
 [gha_url]: https://github.com/sureshg/sureshg.github.io/actions/workflows/deploy.yml
 [gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/sureshg.github.io/deploy.yml?branch=main&color=green&label=Build&logo=Github-Actions&logoColor=green
-[zola_action]: https://github.com/getzola/github-pages
-[zola_docs]: https://www.getzola.org/documentation/deployment/github-pages/
