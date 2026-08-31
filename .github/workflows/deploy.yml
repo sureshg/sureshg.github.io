@@ -22,10 +22,18 @@ jobs:
       - name: 🛎️ Checkout repository
         uses: actions/checkout@v7
 
-      - name: 🏗️ Build with Zola + upload Pages artifact
-        uses: getzola/github-pages@435a833fd3f1edcb28d70576c89e30a6365cd8f7 # master, 2026-01-11
+      - name: 🏗️ Build with Zola
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -w /workspace \
+            ghcr.io/getzola/zola:v0.23.4 build
+
+      - name: 📦 Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
-          zola_version: v0.23.4
+          path: public
+          include-hidden-files: true
 
   deploy:
     needs: build
