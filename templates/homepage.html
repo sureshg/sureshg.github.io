@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<link rel="stylesheet" href="{{ get_url(path='home.css') }}">
+<main class="home">
+    <header class="hero">
+        {% if section.extra.photo %}
+            <img class="hero-photo" src="{{ section.extra.photo }}" alt="{{ section.title }}" width="72" height="72">
+        {% endif %}
+        <div>
+            <h1 class="hero-name">{{ section.title }}</h1>
+            {% if section.extra.tagline %}
+                <p class="hero-tagline">{{ section.extra.tagline }}</p>
+            {% endif %}
+        </div>
+    </header>
+
+    {% for group in section.extra.sections | default(value=[]) %}
+    <section class="home-section">
+        <div class="home-section-header">
+            <h2>{{ group.title }}</h2>
+            {% if group.label %}<span>{{ group.label }}</span>{% endif %}
+        </div>
+        <div class="home-cards">
+            {% for item in group.items %}
+                {% set external = "://" in item.url %}
+                <a class="home-card" href="{{ item.url }}"{% if external %} target="_blank" rel="noopener"{% endif %}>
+                    <div class="home-card-head">
+                        <h3>
+                            {% if item.icon %}<span class="home-card-icon" aria-hidden="true">{{ load_data(path="static/icons/" ~ item.icon ~ ".svg") | safe }}</span>{% endif %}
+                            {{ item.name }}
+                        </h3>
+                        <span class="home-card-arrow" aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>
+                    </div>
+                    <p>{{ item.desc }}</p>
+                    {% if item.meta %}<span class="home-card-meta">{{ item.meta }}</span>{% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+
+    {% if section.content %}
+    <section class="body">{{ section.content | safe }}</section>
+    {% endif %}
+</main>
+{% endblock main_content %}
